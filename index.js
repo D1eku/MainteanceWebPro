@@ -24,7 +24,6 @@ app.use(require('/routes/index'))
 app.listen(port, function() {
   console.log('Servidor web escuchando en el puerto 3000');
 });
-app.use(express.static(__dirname + '/public/'));
 
 
 //Middlewares
