@@ -7,7 +7,7 @@
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/login-styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <!--Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -27,51 +27,64 @@
     <section id="title">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="index.html">MainteanceWebPro</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="registro.html">Registro</a>
+                            <a class="nav-link active" href="index.html">Login</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </section>
-    <!-- Navbar -->
     <!-- Log In - Section -->
     <section id="login-form">
         <div class="container-fluid login-space">
-            <div class="ico-user-login-space">
-                <i class="fas fa-user fa-lg"></i>
+            <div class=row>
+                <div class=col>
+                    <div class="white-box-transparent-login">
+                        <!-- Icono Login -->
+                        <div class="element-white-box-login col-lg-12 col-md-12 col-sm-12">
+                            <i class="fas fa-user fa-lg fa-5x"></i>
+                        </div>
+                        <!-- Datos de Ingreso - Form -->
+                        <div class="element-white-box-login col-lg-12 col-md-12 col-sm-12">
+                            <form action="/try-login" method="post">
+                                <div class="form-row">
+                                    <div class="col-12">
+                                        <div class="input-group flex-nowrap login-space-item">
+                                            <span class="input-group-text" id="addon-wrapping">Email</span>
+                                            <input name="login-email-user" id="email-user" type="email"
+                                                class="form-control" placeholder="Email" aria-label="Email"
+                                                aria-describedby="addon-wrapping">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group flex-nowrap login-space-item">
+                                            <span class="input-group-text" id="addon-wrapping">Password</span>
+                                            <input name="login-password-user" id="pass-user" type="password"
+                                                class="form-control" placeholder="Password" aria-label="Password"
+                                                aria-describedby="addon-wrapping">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Boton de Enviar -->
+                        <div class="element-white-box-login col-lg-12 col-md-12 col-sm-12">
+                            <button type="submit" class="btn btn-primary login-space-item">Conectarse</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form action="/try-login" method="post">
-                <div class="input-group flex-nowrap login-space-item">
-                    <span class="input-group-text" id="addon-wrapping">Email</span>
-                    <input name="login-email-user" id="email-user" type="email" class="form-control" placeholder="Email" aria-label="Email"
-                        aria-describedby="addon-wrapping">
-                </div>
-                <div class="input-group flex-nowrap login-space-item">
-                    <span class="input-group-text" id="addon-wrapping">Password</span>
-                    <input name="login-password-user" id="pass-user" type="password" class="form-control" placeholder="Password" aria-label="Password"
-                        aria-describedby="addon-wrapping">
-                </div>
-                <button type="submit" class="btn btn-light login-space-item">Submit</button>
-            </form>
         </div>
     </section>
-    <!-- Log In - Section -->
 </body>
 
 </html>

@@ -7,7 +7,7 @@
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/admin-menu-styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <!--Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -20,6 +20,9 @@
     </script>
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/d82979872c.js" crossorigin="anonymous"></script>
+    <!-- Font Google 1 Squada One -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -34,13 +37,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Gestionar
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Gestionar
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Pautas</a></li>
@@ -48,7 +52,7 @@
                                 <li><a class="dropdown-item" href="#">Equipos</a></li>
                                 <li><a class="dropdown-item" href="#">Empresas</a></li>
                             </ul>
-                          </li>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">Cerrar Sesion</a>
                         </li>
@@ -58,37 +62,61 @@
         </nav>
     </section>
     <!-- Navbar -->
-    <!-- Nombre Administrador -->
-    <div class="admin-name name-viewer-home">
-        <h3>Bienvenido:</h3>
-        <h4>JUANITO PEREZ MANRIQUEZ MOLINA HERRARERA TAPIA</h4>
-        <br>
-        <h2>Menu de Gestion</h2>
-    </div>
+    <section id="content">
+        <div class="container-fluid">
+            <div class="row white-box-transparent">
+                <div class="col-12">
+                    <!-- Nombre Administrador -->
+                    <div class="row name-viewer-home">
+                        <div class="col-6">
+                            <h3>Bienvenido:</h3>
+                        </div>
+                        <div class="col-6 text-left">
+                            <h4>JUANITO PEREZ MANRIQUEZ MOLINA HERRARERA TAPIA</h4>
+                        </div>
+                        <div class="col-12">
+                            <h3>Menu de Gestion</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Opciones disponibles -->
+                <div class="col-12 text-center pauta-botones-disponibles">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-file-alt menu-admin-options-ico"></i>
+                                    Pautas
+                                </button>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-users menu-admin-options-ico"></i>
+                                    Usuarios
+                                </button>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-warehouse menu-admin-options-ico "></i>
+                                    Equipos
+                                </button>
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-building menu-admin-options-ico"></i>
+                                    Empresas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Nombre Administrador -->
     <!-- Menu Options - Section -->
-    <center>
-        <section id="menu-options-admin">
-            <div class="btn-group-vertical btn-group-lg">
-                <button type="button" class="btn btn-primary">
-                    <i class="fas fa-file-alt menu-admin-options-ico"></i>
-                    Pautas
-                </button>
-                <button type="button" class="btn btn-primary">
-                    <i class="fas fa-users menu-admin-options-ico"></i>
-                    Usuarios
-                </button>
-                <button type="button" class="btn btn-primary">
-                    <i class="fas fa-warehouse menu-admin-options-ico "></i>
-                    Equipos
-                </button>
-                <button type="button" class="btn btn-primary">
-                    <i class="fas fa-building menu-admin-options-ico"></i>
-                    Empresas
-                </button>
-            </div>
-        </section>
-    </center>
     <!--Menu Options - Section -->
 </body>
 
