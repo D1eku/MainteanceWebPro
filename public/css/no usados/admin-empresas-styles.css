@@ -1,0 +1,52 @@
+html,
+body {
+  height: 100%;
+}
+
+body{
+  background-image: url("http://img.interempresas.net/fotos/1307483.jpeg"); 
+  
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-space {
+  padding-top: 5%;
+  height: 300px;
+  width: 400px;
+  text-align: center;
+}
+
+.ico-user-login-space {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.name-viewer-home {
+  padding: 3%;
+  font-size: 10px;
+}
+
+.menu-options-admin {
+  font-size: 100px;
+}
+
+.top-pauta-info {
+  padding:0%;
+  margin-bottom: 15px;
+}
+
+.top-pauta-info h3{
+  font-family: 'Squada One', cursive;
+  color: white;
+}
+
+.table-responsive {
+  margin-top:0;
+  margin-bottom: 15px;
+}
