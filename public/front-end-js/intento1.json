@@ -1,0 +1,36 @@
+{
+    "nombrePauta": "Pauta 1",
+    "equipo": "Equipo 1",
+    "tipoPeriodicidad":"Diaria",
+    "cantidadPeriodo": 10,
+    "Empresa": "Empresa 1",
+    "Clase": "Clase 1",
+    "listaItem": [
+        {
+            "nombreItem": "Componentes Jigsaw",
+            "subItem": [
+                "HUB UHP LP O HP",
+                "Pantalla",
+                "Antenas",
+                "Timer"
+            ]
+        },
+        {
+            "nombreItem": "Cableado",
+            "subItem": [
+                "Cableado Cobre",
+                "Cableado Oro",
+                "Cableado Trenzado"
+            ]
+        },
+        {
+            "nombreItem": "Soportes",
+            "subItem": [
+                "Soporte Superior",
+                "Soporte Lateral",
+                "Soporte Inferior",
+                "Soporte Base"
+            ]
+        }
+    ]
+}
