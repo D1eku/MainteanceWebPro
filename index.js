@@ -9,10 +9,12 @@ app.set('view engine', 'ejs');
 
 //middleware
 app.use(morgan('dev'));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     const data = [{ name: 'john' }, { name: 'wily' }];
-    res.render('index.ejs', { people: data });
+    //res.render('index.html', { people: data });
+    res.sendFile('index.html')
 })
 
 app.get('/hello', (req, res) => {

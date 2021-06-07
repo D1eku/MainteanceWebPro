@@ -1,0 +1,107 @@
+#tittle {
+    padding: 7% 15%;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-image: url("http://img.interempresas.net/fotos/1307483.jpeg");
+
+    /* Full height */
+    height: 100%;
+    bottom: 0px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Login */
+
+.login-space {
+    padding-top: 5%;
+    height: 300px;
+    width: 400px;
+    text-align: center;
+}
+
+.white-box-transparent-login {
+    background: rgba(245, 245, 245, 0.60);
+    border-radius: 7%;
+    margin: 0;
+    padding: 1%;
+    padding-bottom: 50px;
+}
+
+.element-white-box-login {
+    padding-bottom: 15px;
+}
+
+.element-white-box-login i {
+    padding-top: 50px;
+    padding-bottom: 15px;
+}
+
+.element-white-box-login form {
+    padding-bottom: 15px;
+}
+
+/* Menu Admin */
+.name-viewer-home {
+    padding: 3%;
+    font-size: 10px;
+    font-family: 'Squada One', cursive;
+}
+
+.pauta-botones-disponibles button{
+    width: 160px;
+     margin-bottom: 15px;
+}
+
+/* Menu pauta Admin */
+
+.white-box-transparent {
+    border-radius: 1%;
+    margin: 1%;
+    padding: 2%;
+    background: rgba(245, 245, 245, 0.6);
+}
+
+.top-pauta-info {
+    padding: 0%;
+    margin-bottom: 15px;
+}
+
+.top-pauta-info h3 {
+    font-family: 'Squada One', cursive;
+    color: white;
+}
+
+.pagination-pautas-admin-nav {
+    margin-top: 15px;
+}
+
+/* Agregar pautas - admin  */
+
+.top-pauta-info-add {
+    font-family: 'Squada One', cursive;
+    color: white;
+}
+
+.gray-box {
+    margin: 5%;
+    padding: 5%;
+    background-color: darkgray;
+}
+
+.button-edit-pauta {
+    margin-bottom: 15px;
+}
+
+.button-warning-collapse {
+    margin-bottom: 15px;
+}
