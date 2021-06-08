@@ -1,3 +1,10 @@
+const { Pool } = require('pg');
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.DATABASE_URL ? true : false
+});
+
+/*
 const { Client } = require('pg');
 
 const client = new Client({
@@ -14,7 +21,6 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
     }
     client.end();
 });
-/*
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -27,5 +33,5 @@ const pool = new Pool({
 */
 
 module.exports = {
-    client
+    pool
 }
