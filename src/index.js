@@ -7,7 +7,6 @@ const app = express();
 //settings
 app.set('appName', 'MainteanceWebPro');
 app.set('port', 3000);
-app.set('view engine', 'ejs');
 
 //middleware
 app.use(morgan('dev'));
@@ -15,12 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(require('./routes/users'));
+app.use(express.static('public'));
 
 
 app.get('/', (req, res) => {
-    const data = [{ name: 'john' }, { name: 'wily' }];
-    res.render('index.ejs', { people: data });
-})
+    res.sendFile('index.html');
+});
 
 app.get('/hello', (req, res) => {
     res.send('Hello World!');
@@ -29,8 +28,6 @@ app.get('/hello', (req, res) => {
 app.post('/hola', (req, res) => {
     res.send('about');
 });
-
-app.use(express.static('public'));
 
 app.listen(app.get('port'), () => {
     console.log(app.get('appName'));
