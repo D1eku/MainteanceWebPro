@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Gestion de Usuarios</title>
+    <title>LogIn Page</title>
 
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -30,7 +30,7 @@
     <section id="title">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">MainteanceWebPro - Admin </a>
+                <a class="navbar-brand" href="#">Planificador</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="administrador.html">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -47,52 +47,35 @@
                                 Gestionar
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="admin-pautas-menu.html">Pautas</a></li>
-                                <li><a class="dropdown-item" href="admin-usuarios-menu.html">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="admin-equipos-menu.html">Equipos</a></li>
-                                <li><a class="dropdown-item" href="admin-empresas-menu.html">Empresas</a></li>
+                                <li><a class="dropdown-item" href="#">Pautas</a></li>
+                                <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="#">Equipos</a></li>
+                                <li><a class="dropdown-item" href="#">Empresas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Cerrar Sesion</a><!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
+                            <a class="nav-link" href="login.html">Cerrar Sesion</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </section>
-    <!-- Gestion Usuarios - Section -->
-    <br>
-    <section id="gestion-usuarios">
+    <!-- Menu Mantenedor -->
+    <section id="content">
         <div class="container-fluid">
-            <div class="row">
-                <!-- Titulo  -->
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="top-pauta-info">
-                        <h3>Usuarios</h3>
-                    </div>
-                </div>
-                <!-- Boton Agregar Nuevo usuario -->
-                <div class="col-lg-6 col-md-6 col-sm-6 text-right">
-                    <div class="top-pauta-info">
-                        <button type="button" class="btn btn-primary">
-                            <i class="fas fa-plus"></i>
-                            Agregar Nuevo Usuario
-                        </button>
-                    </div>
-                </div>
-                <!-- Tabla de usuarios -->
+            <div class="row white-box-transparent">
                 <div class="col-12">
-                    <div class="container-fluid">
-                        <div class="white-box-transparent">
-                            Dolore sint accusantium voluptatem id voluptas libero. Et rerum et dolorem. Aut omnis sunt quisquam est a tempore tempora. Provident laudantium voluptate ad voluptatum. Iure placeat fugit sunt corporis. Id et esse assumenda consectetur nesciunt.
+                    <!-- Nombre Administrador -->
+                    <div class="row name-viewer-home">
+                        <div class="col-6">
+                            <h1>Planificador</h1>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--Menu Options - Section -->
 </body>
 
 </html>

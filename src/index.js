@@ -6,7 +6,7 @@ const app = express();
 
 //settings
 app.set('appName', 'MainteanceWebPro');
-app.set('port', 3000);
+app.set('port', process.env.PORT || 3000);
 
 //middleware
 app.use(morgan('dev'));
@@ -20,6 +20,13 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.sendFile('index.html');
 });
+
+app.get('/admin', (req, res) => {
+    console.log(__dirname + '/public/administrador.html')
+    res.sendFile(__dirname +'/public/administrador.html');
+});
+
+
 
 app.get('/hello', (req, res) => {
     res.send('Hello World!');
