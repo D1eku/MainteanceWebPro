@@ -106,6 +106,9 @@ body {
     margin-bottom: 15px;
 }
 
+/* Agregar empresas - admin */
+
+
 /* Probando Modal */
 
 .bg-modal {
@@ -138,6 +141,8 @@ body {
     text-align: center;
     padding: 20px;
     position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .modal-content2 .col-12{
