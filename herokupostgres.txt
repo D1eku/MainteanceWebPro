@@ -1,0 +1,8 @@
+//Conectarse a la base de datos por heroku en powershell, "setearla" como la BD actual:
+heroku git:remote -a nombreapp
+
+heroku addons //para ver las BD de tus apps
+heroku pg:psql //para conectarse a la BD desde el powershell y probar consultas
+    (mainteance-web-pro-test::DATABASE=>)
+    \dt //mostrar tablas
+    -- consultas sql requieren usar mayusculas (SELECT, INSERT, UPDATE, etc)
