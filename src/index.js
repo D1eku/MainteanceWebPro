@@ -14,16 +14,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(require('./routes/users'));
-app.use(express.static('public'));
+app.use(express.static('src/public'));
 
 
 app.get('/', (req, res) => {
-    res.sendFile('index.html');
+    console.log(__dirname);
+    res.render(__dirname+'/public/index.ejs');
 });
 
 app.get('/admin', (req, res) => {
-    console.log(__dirname + '/public/administrador.html')
-    res.sendFile(__dirname +'/public/administrador.html');
+    res.render(__dirname +'/public/administrador.ejs');
 });
 
 
