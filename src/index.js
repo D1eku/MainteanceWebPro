@@ -27,6 +27,7 @@ app.use(session({
 app.use(require('./routes/login'));
 app.use(require('./routes/admin'));
 
+
 app.listen(app.get('port'), () => {
     console.log(app.get('appName'));
     console.log("Servidor en http://localhost:" + app.get('port'));

@@ -3,7 +3,8 @@
 
 <head>
     <title>Gestion de Pautas</title>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -31,30 +32,28 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">MainteanceWebPro - Admin </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="administrador.html">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/administrador">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Gestionar
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="admin-pautas-menu.html">Pautas</a></li>
-                                <li><a class="dropdown-item" href="admin-usuarios-menu.html">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="admin-equipos-menu.html">Equipos</a></li>
-                                <li><a class="dropdown-item" href="admin-empresas-menu.html">Empresas</a></li>
+                                <li><a class="dropdown-item" href="/admin-pautas-menu">Pautas</a></li>
+                                <li><a class="dropdown-item" href="/admin-usuarios-menu">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="/admin-equipos-menu">Equipos</a></li>
+                                <li><a class="dropdown-item" href="/admin-empresas-menu">Empresas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Cerrar Sesion</a><!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
+                            <a class="nav-link" href="/">Cerrar Sesion</a>
+                            <!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
                         </li>
                     </ul>
                 </div>

@@ -91,11 +91,10 @@ router.post('/getpassw', function (req, res) {
 
 const logging = (req, res) => {
     try {
-        var user = req.body.emailuser;
+        var user = req.body.rutuser;
         var pass = req.body.passuser;
         console.log(req.body)
         if (user) {
-
             pool.query('select * from usuario u inner join administrador a on u.rut = a.rut where u.rut = $1', [user], async function(err, results, fields) {
                 if (results.rows[0] == undefined) {
                     res.send('El usuario no existe');

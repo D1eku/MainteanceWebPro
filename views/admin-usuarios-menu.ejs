@@ -3,7 +3,8 @@
 
 <head>
     <title>Gestion de Usuarios</title>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
@@ -33,21 +34,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="administrador.html">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/administrador">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Gestionar
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="admin-pautas-menu.html">Pautas</a></li>
-                                <li><a class="dropdown-item" href="admin-usuarios-menu.html">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="admin-equipos-menu.html">Equipos</a></li>
-                                <li><a class="dropdown-item" href="admin-empresas-menu.html">Empresas</a></li>
+                                <li><a class="dropdown-item" href="/admin-pautas-menu">Pautas</a></li>
+                                <li><a class="dropdown-item" href="/admin-usuarios-menu">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="/admin-equipos-menu">Equipos</a></li>
+                                <li><a class="dropdown-item" href="/admin-empresas-menu">Empresas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Cerrar Sesion</a>
+                            <a class="nav-link" href="/">Cerrar Sesion</a>
                             <!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
                         </li>
                     </ul>
@@ -68,7 +69,7 @@
                 </div>
                 <!-- Boton Agregar Nuevo usuario -->
                 <div class="col-lg-6 col-md-6 col-sm-6 text-right">
-                    <div class="top-pauta-info">
+                    <div id="add-new-usuario-button" class="top-pauta-info">
                         <button type="button" class="btn btn-primary">
                             <i class="fas fa-plus"></i>
                             Agregar Nuevo Usuario
@@ -78,8 +79,23 @@
                 <!-- Tabla de usuarios -->
                 <div class="col-12">
                     <div class="container-fluid">
-                        <div class="white-box-transparent">
-                            Dolore sint accusantium voluptatem id voluptas libero. Et rerum et dolorem. Aut omnis sunt quisquam est a tempore tempora. Provident laudantium voluptate ad voluptatum. Iure placeat fugit sunt corporis. Id et esse assumenda consectetur nesciunt.
+                        <div class="row white-box-transparent">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="tabla-usuarios" class="table table-light table-bordered table-hover table-striped">
+                                        <thead class="bg-dark text-white">
+                                            <th scope="row">Editar</th>
+                                            <th scope="row">RUT</th>
+                                            <th scope="row">Nombre</th>
+                                            <th scope="row">Correo</th>
+                                            <th scope="row">Area Trabajo</th>
+                                            <th scope="row">Estado</th><!-- El estado representa si el usuario esta activo o no-->
+                                        </thead>
+                                        <tbody id="tbody-tabla-usuarios">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,6 +103,142 @@
         </div>
     </section>
     <!--Menu Options - Section -->
+    <!-- Agregar nuevo usuario Form oculto -->
+    <div class="bg-modal2">
+        <div class="modal-content2">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        <div id="text-action-title-popup">
+                            Nuevo Usuario
+                        </div>
+                    </h3>
+                </div>
+                <div class="col-12">
+                    <form action="/add-new-usuario-admin" method="post">
+                        <div class="row">
+                            <!-- RUT nuevo usuario -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">RUT</span>
+                                    <input id=rut_usuario_input_popup  name="code_new_usuario" type="text" class="form-control" placeholder="RUT usuario"
+                                        aria-label="rut_usuario_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Nombre nuevo Usuario -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Nombre</span>
+                                    <input id=nombre_usuario_input_popup name="nombre_new_usuario" type="text" class="form-control" placeholder="Nombre Usuario"
+                                        aria-label="nombre_usuario_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Correo nuevo usuario -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Correo</span>
+                                    <input id=correo_usuario_input_popup name="correo_new_usuario" type="email" class="form-control" placeholder="Correo usuario"
+                                        aria-label="email_usuario_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Contraseña nuevo usuario -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Contraseña</span>
+                                    <input id=password_usuario_input_popup name="password_new_usuario" type="password" class="form-control" placeholder="Contraseña"
+                                        aria-label="Contraseña Usuario" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Estado nuevo usuario -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Estado</span>
+                                    <select name="estado_new_usuario" id="estado_usuario_input_popup" class="form-select" aria-label="Estado activacion">
+                                        <option selected>Activado</option>
+                                        <option value="1">Desactivado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Tipo de nuevo usuario (admin, mantenedor, planificador)-->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Tipo Usuario</span>
+                                    <select name="tipo_new_usuario" id="tipo_usuario_input_popup" class="form-select" aria-label="Estado activacion">
+                                        <option selected>Mantenedor</option>
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Planificador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Esto solo aparece si es un mantenedor y se tiene que seleccionar la empresa segun el nombre ? o codigo ?
+                            Podemos organizar los datos como se ve abajo y mandar una string -->
+                            <div class="col-12">
+                                <div class="new_user_empresa_select input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Empresa</span>
+                                    <select id=empresa_mantenedor_usuario_input_popup name="empresa_mantenedor_new_usuario" id="empresa_mantenedor_usuario_input_popup" class="form-select" aria-label="Empresa">
+                                        <!--    Codigo Empresa:Nombre Empresa  -->
+                                        <option selected>E1:Empresa 1</option>
+                                        <option value="1">E2:Empresa 2</option>
+                                        <option value="2">E3:Empresa 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" id="add-usuario-button-popup" class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Agregar Usuario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="close2">+</div>
+        </div>
+    </div>
+
+    <script>
+
+        //Los datos que se tienen que entregar a esta pagina son
+        // Una lista completa de los usuarios que existen
+        // El usuario que esta trabajando
+        // y Una lista completa de las empresas activas
+
+        var dataPage = <%= dataPage %>
+        
+        document.getElementById('tipo_usuario_input_popup').addEventListener('click', 
+            function () {
+                if(document.getElementById("tipo_usuario_input_popup").value == "Mantenedor"){
+                    document.querySelector('.new_user_empresa_select').style.display="flex"; 
+                }else{
+                    document.querySelector('.new_user_empresa_select').style.display="none"; 
+                }
+
+                
+            });
+
+            
+        //Al hacer click en el boton agregar nuevo usuario muestra el panel oculto
+        document.getElementById("add-new-usuario-button").addEventListener('click',
+            function () {
+                document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel 
+            });
+        //AL hacer click en la X desactiva el panel y vacia sus campos
+        document.querySelector(".close2").addEventListener("click",
+        function () {
+            document.querySelector('.bg-modal2').style.display = "none";//Desactiva el panel y vacia los campos
+            document.getElementById("rut_usuario_input_popup").value = ""
+            document.getElementById("nombre_usuario_input_popup").value = ""
+            document.getElementById("correo_usuario_input_popup").value = ""
+            document.getElementById("password_usuario_input_popup").value = ""
+            document.getElementById("estado_usuario_input_popup").value = "Activado"
+            document.getElementById("tipo_usuario_input_popup").value = "Mantenedor"
+            document.querySelector('.new_user_empresa_select').style.display="flex"; 
+            document.getElementById("empresa_mantenedor_usuario_input_popup").value = "E1:Empresa 1"
+        });
+
+
+    </script>
 </body>
 
 </html>

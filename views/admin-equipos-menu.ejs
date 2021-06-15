@@ -3,7 +3,8 @@
 
 <head>
     <title>Gestion de Equipos</title>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -31,30 +32,27 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">MainteanceWebPro - Admin </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="administrador.html">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/administrador">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Gestionar
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="admin-pautas-menu.html">Pautas</a></li>
-                                <li><a class="dropdown-item" href="admin-usuarios-menu.html">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="admin-equipos-menu.html">Equipos</a></li>
-                                <li><a class="dropdown-item" href="admin-empresas-menu.html">Empresas</a></li>
+                                <li><a class="dropdown-item" href="/admin-pautas-menu">Pautas</a></li>
+                                <li><a class="dropdown-item" href="/admin-usuarios-menu">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="/admin-equipos-menu">Equipos</a></li>
+                                <li><a class="dropdown-item" href="/admin-empresas-menu">Empresas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Cerrar Sesion</a>
+                            <a class="nav-link" href="/">Cerrar Sesion</a>
                             <!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
                         </li>
                     </ul>
@@ -76,7 +74,7 @@
                 <!-- Boton Agregar Nueva Pauta -->
                 <div class="col-lg-6 col-md-6 col-sm-6 text-right">
                     <div class="top-pauta-info">
-                        <button type="button" class="btn btn-primary">
+                        <button id=add-new-equipo-button type="button" class="btn btn-primary">
                             <i class="fas fa-plus"></i>
                             Agregar Nuevo Equipo
                         </button>
@@ -85,15 +83,125 @@
                 <!-- Tabla de equipos -->
                 <div class="col-12">
                     <div class="container-fluid">
-                        <div class="white-box-transparent">
-                            Dolore sint accusantium voluptatem id voluptas libero. Et rerum et dolorem. Aut omnis sunt quisquam est a tempore tempora. Provident laudantium voluptate ad voluptatum. Iure placeat fugit sunt corporis. Id et esse assumenda consectetur nesciunt.
+                        <div class="row white-box-transparent">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="tabla-equipos" class="table table-light table-bordered table-hover table-striped">
+                                        <thead class="bg-dark text-white">
+                                            <th scope="row">Editar</th>
+                                            <th scope="row">Codigo</th>
+                                            <th scope="row">Nombre</th>
+                                            <th scope="row">Clase</th>
+                                            <th scope="row">Ubicacion</th>
+                                            <th scope="row">Descripcion</th>
+                                            <th scope="row">Estado</th><!-- El estado representa si el equipo esta activo o no-->
+                                        </thead>
+                                        <tbody id="tbody-tabla-equipos">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--Menu Options - Section -->
+    <!-- Agregar nuevo equipo Form oculto -->
+    <div class="bg-modal2">
+        <div class="modal-content2">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        <div id="text-action-title-popup">
+                            Nuevo Equipo
+                        </div>
+                    </h3>
+                </div>
+                <div class="col-12">
+                    <form action="/add-new-equipo-admin" method="post">
+                        <div class="row">
+                            <!-- Codigo nuevo equipo -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Codigo</span>
+                                    <input id=codigo_equipo_input_popup  name="code_new_equipo" type="text" class="form-control" placeholder="Codigo Equipo"
+                                        aria-label="codigo_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Nombre nuevo equipo -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Nombre</span>
+                                    <input id=nombre_equipo_input_popup name="nombre_new_equipo" type="text" class="form-control" placeholder="Nombre Equipo"
+                                        aria-label="nombre_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Clase nuevo equipo -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Clase</span>
+                                    <input id=clase_equipo_input_popup name="clase_new_equipo" type="text" class="form-control" placeholder="Clase Equipo"
+                                        aria-label="clase_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Descripcion nuevo equipo -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Descripcion</span>
+                                    <input id=desc_equipo_input_popup name="desc_new_equipo" type="text" class="form-control" placeholder="Descripcion Equipo"
+                                        aria-label="desc_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Estado nuevo equipo -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Estado</span>
+                                    <select name="estado_new_equipo" id="estado_equipo_add" class="form-select" aria-label="Default select example">
+                                        <option selected>Activado</option>
+                                        <option value="1">Desactivado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Ubicacion nuevo equipo -->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Ubicacion</span>
+                                    <input id=ubicacion_equipo_input_popup name="ubicacion_new_equipo" type="text" class="form-control" placeholder="Ubicacion Equipo"
+                                        aria-label="ubicacion_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" id="add-equipo-button-popup" class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Agregar Empresa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="close2">+</div>
+        </div>
+    </div>
+
+    <script>
+
+        var dataPage = <%= dataPage %>
+
+        document.getElementById("add-new-equipo-button").addEventListener('click',
+            function () {
+                document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel 
+            });
+
+        document.querySelector(".close2").addEventListener("click",
+        function () {
+            document.querySelector('.bg-modal2').style.display = "none";
+
+        });
+
+
+    </script>
 </body>
 
 </html>

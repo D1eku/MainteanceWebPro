@@ -3,7 +3,8 @@
 
 <head>
     <title>Gestion de Empresas</title>
-    <meta name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -31,30 +32,28 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">MainteanceWebPro - Admin </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="administrador.html">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/administrador">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Gestionar
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="admin-pautas-menu.html">Pautas</a></li>
-                                <li><a class="dropdown-item" href="admin-usuarios-menu.html">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="admin-equipos-menu.html">Equipos</a></li>
-                                <li><a class="dropdown-item" href="admin-empresas-menu.html">Empresas</a></li>
+                                <li><a class="dropdown-item" href="/admin-pautas-menu">Pautas</a></li>
+                                <li><a class="dropdown-item" href="/admin-usuarios-menu">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="/admin-equipos-menu">Equipos</a></li>
+                                <li><a class="dropdown-item" href="/admin-empresas-menu">Empresas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Cerrar Sesion</a><!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
+                            <a class="nav-link" href="/">Cerrar Sesion</a>
+                            <!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
                         </li>
                     </ul>
                 </div>
@@ -90,8 +89,8 @@
                                     <table id="tabla-empresas" class="table table-light table-bordered table-hover table-striped">
                                         <thead class="bg-dark text-white">
                                             <th scope="row">Editar</th>
-                                            <th scope="row">Codigo Empresa</th>
-                                            <th scope="row">Nombre Empresa</th>
+                                            <th scope="row">Codigo</th>
+                                            <th scope="row">Nombre</th>
                                             <th scope="row">Eliminar</th>
                                         </thead>
                                         <tbody id="tbody-tabla-empresas">
@@ -128,99 +127,85 @@
                     </h3>
                 </div>
                 <div class="col-12">
-                    <form>
+                    <form action="/add-new-empresa-admin" method="post">
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Codigo Empresa</span>
-                                    <input id="cod_empresa_input_popup" type="text" class="form-control" placeholder="Codigo Empresa"
+                                    <input id=cod_empresa_input_popup  name="code_new_empresa" type="text" class="form-control" placeholder="Codigo Empresa"
                                         aria-label="cod_empre_add" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Nombre Empresa</span>
-                                    <input id="name_empresa_input_popup" type="text" class="form-control" placeholder="Nombre Empresa"
+                                    <input id=name_empresa_input_popup name="name_new_empresa" type="text" class="form-control" placeholder="Nombre Empresa"
                                         aria-label="nombre_empre_add" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="col-12">
-                    <button type="button" id="add-empresa-button-popup" class="btn btn-primary">
-                        <div id="contentButton-addEmpresa-popup">
-                            <i class="fas fa-plus"></i>
-                            Agregar Empresa
+                        <div class="col-12">
+                            <button type="submit" id="add-empresa-button-popup" class="btn btn-primary">
+                                <div id="contentButton-addEmpresa-popup">
+                                    <i class="fas fa-plus"></i>
+                                    Agregar Empresa
+                                </div>
+                            </button>
                         </div>
-                    </button>
+                    </form>
                 </div>
             </div>
             <div class="close2">+</div>
         </div>
     </div>
-    
+
+    <!-- ventana oculta (pop up) que nos permite editar una pauta -->
+    <div class="bg-modal">
+        <div class="modal-content2">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        <div id="text-action-title-popup">
+                            Editar Empresa
+                        </div>
+                    </h3>
+                </div>
+                <div class="col-12">
+                    <form action="/editar-empresa-admin" method="post">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Codigo Empresa</span>
+                                    <input id="edit_cod_empresa_input_popup" name="code_new_empresa" type="text" class="form-control" placeholder="Codigo Empresa"
+                                        aria-label="cod_empre_add" aria-describedby="addon-wrapping" readonly>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Nombre Empresa</span>
+                                    <input id="edit_name_empresa_input_popup" name="name_new_empresa" type="text" class="form-control" placeholder="Nombre Empresa"
+                                        aria-label="nombre_empre_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" id="adit-empresa-button" class="btn btn-primary">
+                                <div id="contentButton-addEmpresa-popup">
+                                    <i class="far fa-save"></i> 
+                                    Guardar Cambios
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="close">+</div>
+        </div>
+    </div>
 
 
 
     <script>
-        //Data Page ?
-        var dataPage = [
-                {
-                "codigo_empresa": "E1",
-                "nombre_empresa": "Empresa 1",
-                },
-                {
-                "codigo_empresa": "E2",
-                "nombre_empresa": "Empresa 2",
-                },
-                {
-                "codigo_empresa": "E3",
-                "nombre_empresa": "Empresa 3",
-                },
-                {
-                "codigo_empresa": "E4",
-                "nombre_empresa": "Empresa 4",
-                },
-                {
-                "codigo_empresa": "E3",
-                "nombre_empresa": "Empresa 3",
-                },
-                {
-                "codigo_empresa": "E3",
-                "nombre_empresa": "Empresa 3",
-                },
-                {
-                "codigo_empresa": "E3",
-                "nombre_empresa": "Empresa 3",
-                },
-                {
-                "codigo_empresa": "E3",
-                "nombre_empresa": "Empresa 3",
-                },
-                {
-                "codigo_empresa": "E3",
-                "nombre_empresa": "Empresa 3",
-                },
-            ];
-            
-        //Load Popup editar.
-        function loadEditPopupElement(x1){
-            var x2 = x1.split("-")
-            document.getElementById("text-action-title-popup").innerHTML = "Editar Empresa"
-            document.getElementById("contentButton-addEmpresa-popup").innerHTML = '<i class="far fa-save"></i> Guardar Cambios'
-            document.getElementById('name_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].nombre_empresa;
-            document.getElementById('cod_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].codigo_empresa;
-            document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel
-
-            //console.log("Hola")
-            //console.log(x1)
-            //console.log(x2)
-            //console.log(dataPage[(parseInt(x2[2]))])
-            //console.log("Nombre Empresa: ", dataPage[(parseInt(x2[2]))].nombre_empresa)
-            //console.log("Codigo Empresa: ", dataPage[(parseInt(x2[2]))].codigo_empresa)
-        }
-
         //Al cargar el documento se rellenara la tabla empresas con la siguiente funcion. ? Que debe recibir un json.
         function FillPageTableWithJSON(dataPage ) {
             let tBodyEmpresa = document.getElementById("tbody-tabla-empresas"); //Obten la tabla
@@ -254,14 +239,9 @@
             }
         }
 
+        //Data Page Si
+        var dataPage = <%-JSON.stringify(dataPage)%>
         FillPageTableWithJSON(dataPage);
-
-        //Esta funcion no la estas usando XD
-        function addRowToList(data) {
-            if (data != null) {
-                console.log("TEST FUNCTION")
-            }
-        }
 
         //Funcion que ejecuta el boton agregar subitem al agregar un subitem a un respectivo item
         /* 
@@ -271,17 +251,37 @@
         //Cuando se haga click al boton agregar en nueva empresa
         document.getElementById("add-new-empresa-button").addEventListener('click',
             function () {
-                document.getElementById("text-action-title-popup").innerHTML = "Agregar Nueva Empresa"
-            document.getElementById("contentButton-addEmpresa-popup").innerHTML = '<i class="fas fa-plus"></i> Agregar Empresa'
                 document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel 
             });
-        //Al hacer click en close2 se cerrara el modal y se vaciaran los campos que contiene este.
+        //Al hacer click en close2 se cerrara el modal2 y se vaciaran los campos que contiene este.
         document.querySelector(".close2").addEventListener("click",
             function () {
                 document.querySelector('.bg-modal2').style.display = "none";
                 document.getElementById('name_empresa_input_popup').value = "";
                 document.getElementById('cod_empresa_input_popup').value = "";
             });
+
+
+
+
+
+        //Cuando se haga click al boton-i esimo de editar --> Load Popup editar.
+        function loadEditPopupElement(x1){
+            var x2 = x1.split("-")//Split al id
+            //document.getElementById("text-action-title-popup").innerHTML = "Editar Empresa"
+            //document.getElementById("contentButton-addEmpresa-popup").innerHTML = '<i class="far fa-save"></i> Guardar Cambios'
+            document.getElementById('edit_name_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].nombre_empresa;
+            document.getElementById('edit_cod_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].codigo_empresa;
+            document.querySelector(".bg-modal").style.display = "flex";//En otras palabras activa el panel
+        }
+        
+        //Al hacer click en close1 se cerrara el modal correspondiente a editar empresa.
+        document.querySelector(".close").addEventListener("click",
+        function () {
+            document.querySelector('.bg-modal').style.display = "none";
+            //document.getElementById('name_empresa_input_popup').value = "";
+            //document.getElementById('cod_empresa_input_popup').value = "";
+        });
     </script>
 </body>
 

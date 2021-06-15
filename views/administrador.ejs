@@ -3,7 +3,8 @@
 
 <head>
     <title> Menu Administrador</title>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
@@ -33,21 +34,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="administrador.html">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/administrador">Inicio</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Gestionar
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="admin-pautas-menu.html">Pautas</a></li>
-                                <li><a class="dropdown-item" href="admin-usuarios-menu.html">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="admin-equipos-menu.html">Equipos</a></li>
-                                <li><a class="dropdown-item" href="admin-empresas-menu.html">Empresas</a></li>
+                                <li><a class="dropdown-item" href="/admin-pautas-menu">Pautas</a></li>
+                                <li><a class="dropdown-item" href="/admin-usuarios-menu">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="/admin-equipos-menu">Equipos</a></li>
+                                <li><a class="dropdown-item" href="/admin-empresas-menu">Empresas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Cerrar Sesion</a>
+                            <a class="nav-link" href="/">Cerrar Sesion</a>
                             <!-- Ademas se debe ejecutar el metodo para desconectar la sesion-->
                         </li>
                     </ul>
@@ -68,7 +69,6 @@
                         <div class="col-6 text-left">
                             <h4>
                                 <div class="nombre-usuario" id="nombreuser">
-
                                 </div>
                                 <script>
                                     document.getElementById("nombreuser").innerHTML = "<%=nombre%>";
@@ -83,16 +83,16 @@
                 <!-- Opciones disponibles -->
                 <div class="col-12 text-center pauta-botones-disponibles">
                     <div class="d-grid gap-2 d-md-block">
-                        <a class="btn btn-primary btn-lg button-a" href="admin-pautas-menu.html" role="button">
+                        <a class="btn btn-primary btn-lg button-a" href="/admin-pautas-menu" role="button">
                             <i class="fas fa-file-alt menu-admin-options-ico"></i> Pautas
                         </a>
-                        <a class="btn btn-primary btn-lg button-a" href="admin-usuarios-menu.html" role="button">
+                        <a class="btn btn-primary btn-lg button-a" href="/admin-usuarios-menu" role="button">
                             <i class="fas fa-users menu-admin-options-ico"></i> Usuarios
                         </a>
-                        <a class="btn btn-primary btn-lg button-a" href="admin-equipos-menu.html" role="button">
+                        <a class="btn btn-primary btn-lg button-a" href="/admin-equipos-menu" role="button">
                             <i class="fas fa-warehouse menu-admin-options-ico "></i> Equipos
                         </a>
-                        <a class="btn btn-primary btn-lg button-a" href="admin-empresas-menu.html" role="button">
+                        <a class="btn btn-primary btn-lg button-a" href="/admin-empresas-menu" role="button">
                             <i class="fas fa-building menu-admin-options-ico"></i> Empresas
                         </a>
                     </div>

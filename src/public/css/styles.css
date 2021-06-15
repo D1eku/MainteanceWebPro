@@ -8,8 +8,8 @@ body {
 }
 
 body {
-    background-image: url("http://img.interempresas.net/fotos/1307483.jpeg");
-
+    /*background-image: url("http://img.interempresas.net/fotos/1307483.jpeg");*/
+    background-color: teal;
     /* Full height */
     height: 100%;
     bottom: 0px;
@@ -24,17 +24,24 @@ body {
 
 .login-space {
     padding-top: 5%;
-    height: 300px;
-    width: 400px;
+    /*height: 300px;*/
+    /*width: 400px;*/
     text-align: center;
 }
 
 .white-box-transparent-login {
     background: rgba(245, 245, 245, 0.60);
+    /*
     border-radius: 7%;
     margin: 0;
     padding: 1%;
     padding-bottom: 50px;
+
+    background-color: white;*/
+    border-radius: 4px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
 }
 
 .element-white-box-login {
@@ -65,7 +72,7 @@ body {
 /* Menu pauta Admin */
 
 .white-box-transparent {
-    border-radius: 1%;
+    border-radius: 2%;
     margin: 1%;
     padding: 2%;
     background: rgba(245, 245, 245, 0.6);
@@ -161,6 +168,11 @@ body {
     position: relative;
 }
 
+.modal-content .col-12{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 .close {
     position: absolute;
     top: 0;
@@ -177,4 +189,11 @@ body {
     font-size: 42px;
     transform: rotate(45deg);
     cursor: pointer;
+}
+
+
+
+/* ADMIN - USUARIOS MENU  */
+.new_user_empresa_select {
+    display: flex;
 }
