@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+const session = require('express-session');
+const flash = require('express-flash');
 
 //const { pool } = require('./js/dbconnect')
 
@@ -9,32 +11,21 @@ app.set('appName', 'MainteanceWebPro');
 app.set('port', process.env.PORT || 3000);
 
 //middleware
+app.set('view engine', 'ejs');
 app.use(morgan('dev'));
-app.use(express.json());
+app.use(express.static('src/public'));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static('src/public'));
-app.set('view engine', 'ejs');
+app.use(session({
+    name: "",
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}));
 
-
-app.get('/', (req, res) => {
-    console.log(__dirname);
-    res.render('index');
-});
-
-app.get('/admin', (req, res) => {
-    res.render(__dirname + '/public/administrador.ejs');
-});
-
-
-
-app.get('/hello', (req, res) => {
-    res.send('Hello World!');
-});
-
-app.post('/hola', (req, res) => {
-    res.send('about');
-});
+//routes
+app.use(require('./routes/login'));
+app.use(require('./routes/admin'));
 
 app.listen(app.get('port'), () => {
     console.log(app.get('appName'));
