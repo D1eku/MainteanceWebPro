@@ -15,6 +15,66 @@ router.get('/admin-pautas-menu', (req, res) => {
     res.render('admin-pautas-menu', { nombre: req.session.nombre, dataPage });
 });
 
+router.get('/admin-pautas-menu-agregar-pauta', (req, res) => {
+    var dataPage = [
+
+    ]
+
+    res.render('admin-pautas-menu-agregar-pauta', { nombre: req.session.nombre, dataPage });
+});
+
+router.post('/add-new-pauta-admin', (req, res) => {
+    // Hola mauro o belen soy el dieku
+    // necesito que me hagan una query con los datos de las empresas
+    // Estos datos se tienen que estructurar en un JSON como se ve abajo 
+    // En la variable dataPage
+    // Esta parte de la pagina para cargar la tabla ta "casi lista"
+    // Asi que eso jeje
+    console.log(req.body)
+    //Generar query correspondiente para agregar y saber si se logro o no agregar
+
+    //Retornar pagina con las nuevas empresas.
+    var dataPage = [
+        {
+        "codigo_empresa": "E1",
+        "nombre_empresa": "Empresa 1",
+        },
+        {
+        "codigo_empresa": "E2",
+        "nombre_empresa": "Empresa 2",
+        },
+        {
+        "codigo_empresa": "E3",
+        "nombre_empresa": "Empresa 3",
+        },
+        {
+        "codigo_empresa": "E4",
+        "nombre_empresa": "Empresa 4",
+        },
+        {
+        "codigo_empresa": "E3",
+        "nombre_empresa": "Empresa 3",
+        },
+        {
+        "codigo_empresa": "E3",
+        "nombre_empresa": "Empresa 3",
+        },
+        {
+        "codigo_empresa": "E3",
+        "nombre_empresa": "Empresa 3",
+        },
+        {
+        "codigo_empresa": "E3",
+        "nombre_empresa": "Empresa 3",
+        },
+        {
+        "codigo_empresa": "E3",
+        "nombre_empresa": "Empresa 3",
+        },
+    ];
+    res.render('admin-pautas-menu-agregar-pauta', { nombre: req.session.nombre, dataPage });
+});
+
 router.get('/admin-equipos-menu', (req, res) => {
     
     var dataPage = [  

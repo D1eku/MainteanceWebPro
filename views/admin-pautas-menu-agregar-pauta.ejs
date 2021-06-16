@@ -62,6 +62,76 @@
     </section>
     <!-- Gestion Pauta - Section -->
     <br>
+    <script>
+        /*var dataItemTable = {
+            "codigoPauta": "0001",
+            "nombrePauta": "Motocierras",
+            "clasePauta": "Clase",
+            "fechaCreacionPauta": "01-01-2020",
+            "empresaPauta": "Empresas Valdez LTDA",
+            "codigoEquipoPauta": "UZUMYMW",
+            "versionPauta": "0.5",
+            "itemsPauta": 
+            [
+            {
+                "nombreItemPauta":"Componentes Jigsaw",
+                "cantidadSubitemsItemPauta":4,
+                "subitemsItemPauta": [
+                    {
+                        "nombreSubitem": "HUB UHP LP o HP"
+                    },
+                    {
+                        "nombreSubitem": "Pantalla"
+                    },
+                    {
+                        "nombreSubitem": "Antenas"
+                    },
+                    {
+                        "nombreSubitem": "Timer"
+                    }
+                ]
+            },
+            {
+                "nombreItemPauta":"Cableado",
+                "cantidadSubitemsItemPauta":3,
+                "subitemsItemPauta": [
+                    {
+                        "nombreSubitem": "HUB UHP LP o HP"
+                    },
+                    {
+                        "nombreSubitem": "Pantalla"
+                    },
+                    {
+                        "nombreSubitem": "Antenas"
+                    }
+                ]
+            },
+            {
+                "nombreItemPauta":"Soportes",
+                "cantidadSubitemsItemPauta":5,
+                "subitemsItemPauta": [
+                    {
+                        "nombreSubitem": "Soporte A"
+                    },
+                    {
+                        "nombreSubitem": "Soporte B"
+                    },
+                    {
+                        "nombreSubitem": "Soporte C"
+                    },
+                    {
+                        "nombreSubitem": "Soporte D"
+                    },
+                    {
+                        "nombreSubitem": "Soporte E"
+                    }
+                ]
+            }
+            ]
+        }
+        console.log(dataPage)*/
+        var dataPautaItems = {}
+    </script>
     <section id="agregar-pauta">
         <div class="container-fluid">
             <div class="row">
@@ -72,20 +142,20 @@
                     <div class=white-box-transparent>
                         <div class="form-top-test">
                             <div class="container-fluid">
-                                <form>
+                                <form action="/add-new-pauta-admin" method="post">
                                     <div class="form-row">
                                         <!-- Nombre pauta -->
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-12" >
                                             <div class="form-group">
                                                 <label for="nombre"> Nombre </label>
-                                                <input type="text" class="form-control" id="pauta-nombre">
+                                                <input name=nombre_pauta type="text" class="form-control" id="pauta-nombre">
                                             </div>
                                         </div>
                                         <!-- Equipo pauta -->
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-12" >
                                             <div class="form-group">
                                                 <label for="Equipo"> Equipo </label>
-                                                <select class="form-control" type="text" id="pauta-equipo">
+                                                <select name="equipo_pauta"class="form-control" type="text" id="pauta-equipo">
                                                     <option>Equipo 1</option>
                                                     <option>Equipo 2</option>
                                                     <option>Equipo 3</option>
@@ -98,7 +168,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="tipo-periodo"> Tipo de Periodicidad </label>
-                                                <select class="form-control" type="text" id="pauta-tipo-periodo">
+                                                <select name="tipo_periodicidad_pauta" class="form-control" type="text" id="pauta-tipo-periodo">
                                                     <option>Diaria</option>
                                                     <option>Semanal</option>
                                                     <option>Mensual</option>
@@ -111,14 +181,14 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="cantidad-periodo"> Cantidad Periodo </label>
-                                                <input type="text" class="form-control" id="pauta-cantidad-periodo">
+                                                <input name="cantidad_periodo_pauta" type="text" class="form-control" id="pauta-cantidad-periodo">
                                             </div>
                                         </div>
                                         <!-- Empresa pauta -->
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="empresa"> Empresa </label>
-                                                <select class="form-control" type="text" id="pauta-empresa">
+                                                <select name="empresa_pauta" class="form-control" type="text" id="pauta-empresa">
                                                     <option>Empresa 1</option>
                                                     <option>Empresa 2</option>
                                                     <option>Empresa 3</option>
@@ -131,105 +201,44 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="clase"> Tipo Clase </label>
-                                                <select class="form-control" type="text" id="pauta-clase">
+                                                <select name="clase_pauta" class="form-control" type="text" id="pauta-clase">
                                                     <option>Clase 1</option>
                                                     <option>Clase 2</option>
                                                     <option>Clase 3</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        <input type="hidden" name=items-list value=>
                                         <!-- Tabla de items -->
                                         <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <table class="table table-light table-bordered table-hover table-striped">
-                                                <thead class="bg-dark text-white">
-                                                    <tr>
-                                                        <th scope="col">Item</th>
-                                                        <th scope="col">Cantidad Subitems</th>
-                                                        <th scope="col">Editar</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Componentes Jigsaw</td>
-                                                        <td>4</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary">
-                                                                <i class="fas fa-edit"></i>
-                                                                Editar
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Cableado</td>
-                                                        <td>2</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary">
-                                                                <i class="fas fa-edit"></i>
-                                                                Editar
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Soportes</td>
-                                                        <td>3</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary">
-                                                                <i class="fas fa-edit"></i>
-                                                                Editar
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary">
-                                                                <i class="fas fa-plus"></i>
-                                                                Agregar
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class=container-fluid>
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 button-edit-pauta">
-                                                        <button type="submit" class="btn btn-primary">
-                                                            <i class="fas fa-save"></i>
-                                                            Guardar Cambios
-                                                        </button>
-                                                    </div>
-                                                    <br>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <button class="btn btn-warning button-warning-collapse"
-                                                            type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#collapse-delete-button"
-                                                            aria-expanded="false"
-                                                            aria-controls="collapse-delete-button">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                            Zona Peligrosa
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <div class="collapse" id="collapse-delete-button">
-                                                            <div class="card card-body">
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <p> Eliminar pauta, al hacer click en el boton
-                                                                            saldra una confirmacion si realmente desea
-                                                                            eliminar una pauta, no hay vuelta atras
-                                                                            despues de eliminada </p>
-                                                                        <button type="button" class="btn btn-danger">
-                                                                            <i class="fas fa-trash"></i>
-                                                                            Eliminar Pauta
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-light table-bordered table-hover table-striped">
+                                                    <thead class="bg-dark text-white">
+                                                        <tr>
+                                                            <th scope="col">Item</th>
+                                                            <th scope="col">Cantidad Subitems</th>
+                                                            <th scope="col">Editar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbody-tabla-items">
+                                                        <tr>
+                                                            <td>
+                                                                <button id=add-item-new-pauta-intable type="button" class="btn btn-primary">
+                                                                    <i class="fas fa-plus"></i>
+                                                                    Agregar Item
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
+                                        </div>
+                                        <!-- Boton submit -->
+                                        <div class="col-12">
+                                            <button type="submit" id="add-pauta-button-popup" class="btn btn-primary">
+                                                <i class="fas fa-plus"></i>
+                                                Crear Pauta
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -239,7 +248,114 @@
                 </div>
             </div>
         </div>
+        <!-- Modal para agregar subitems al item  -->
+        <div class="bg-modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <div id="text-action-title-popup">
+                                Editar Item
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="col-12">
+                        text
+                    </div>
+                </div>
+                <div class="close">+</div>
+            </div>
+        </div>
+        <!-- Modal que es una ventanita para agregar un item-->
+        <div class="bg-modal2">
+            <div class="modal-content2">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <div id="text-action-title-popup">
+                                Agregar item
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Item</span>
+                                    <input id="item-add-modal2" type="text" class="form-control" placeholder="Nombre Item" aria-label="Nombre Item" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button onclick="addItemFun();" type="button" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    Agregar
+                                </button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="close2">+</div>
+            </div>
+        </div>
+        <!-- Script -->
+        <script>
+            function addSubItemFun() {
+                
+            }
+
+            function addItemFun(){
+                console.log()//Obten el valor
+                var itemAdded = document.getElementById("item-add-modal2").value;
+                if(itemAdded != ""){//Si no es vacio
+                    //Si el valor ingresado no es vacio insertalo en el tbody
+                    var tbodyItems = document.getElementById("tbody-tabla-items");
+                    console.log()
+                    var i = tbodyItems.rows.length;
+                    let newItemRowRef = tbodyItems.insertRow(i-1); //Genera una nueva columna
+                    let newItemNameColRef = newItemRowRef.insertCell(-1);//Primera celda es nombre del item
+                    newItemNameColRef.textContent = itemAdded;
+                    let newCantSubColRef = newItemRowRef.insertCell(-1);//Segunda celda es la cantidad de subitems
+                    newCantSubColRef.textContent = 0;
+                    let newEditarColRef = newItemRowRef.insertCell(-1);//Tercera celda boton editar
+                    newEditarColRef.innerHTML = '<button type="button"  id=button-edit-'+i+' onClick="loadEditPopupElement(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i> Editar</button>';
+                    
+                }
+                //En cualquier caso
+                document.getElementById("item-add-modal2").value = "";//Vacia el valor ingresado
+                document.querySelector('.bg-modal2').style.display = "none";//Cerra la ventanita
+            }
+            //Cuando se haga click en el boton agregar item
+            document.getElementById("add-item-new-pauta-intable").addEventListener("click",
+                function () {
+                    document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel modal 2 
+                });
+            document.querySelector(".close2").addEventListener("click",
+                function () {
+                    document.querySelector('.bg-modal2').style.display = "none";
+                    //document.getElementById('name_empresa_input_popup').value = "";
+                    //document.getElementById('cod_empresa_input_popup').value = "";
+                });
+            
+            //Cuando se haga click al boton-i esimo de editar --> Load Popup editar.
+            function loadEditPopupElement(x1){
+                var x2 = x1.split("-")//Split al id
+                //document.getElementById("text-action-title-popup").innerHTML = "Editar Empresa"
+                //document.getElementById("contentButton-addEmpresa-popup").innerHTML = '<i class="far fa-save"></i> Guardar Cambios'
+                //document.getElementById('edit_name_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].nombre_empresa;
+                //document.getElementById('edit_cod_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].codigo_empresa;
+                document.querySelector(".bg-modal").style.display = "flex";//En otras palabras activa el panel
+            }
+            
+            //Al hacer click en close1 se cerrara el modal correspondiente a editar empresa.
+            document.querySelector(".close").addEventListener("click",
+            function () {
+                document.querySelector('.bg-modal').style.display = "none";
+                //document.getElementById('name_empresa_input_popup').value = "";
+                //document.getElementById('cod_empresa_input_popup').value = "";
+            });
+        </script>
     </section>
+    
 </body>
 
 </html>
