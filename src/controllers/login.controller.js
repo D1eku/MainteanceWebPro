@@ -97,7 +97,7 @@ const logging = (req, res) => {
         if (user) {
             pool.query('select * from usuario u inner join administrador a on u.rut = a.rut where u.rut = $1', [user], async function(err, results, fields) {
                 if (results.rows[0] == undefined) {
-                    res.send('El usuario no existe');
+                    console.log('El usuario no es administrador');
                 } else {
                     if (results.rows[0].password == pass) {
                         req.session.nombre = results.rows[0].nombre;
@@ -105,7 +105,42 @@ const logging = (req, res) => {
                         //if (results.rows[0].estado == "blocked") {
                         //res.render('Login', { restipo: "danger", resultado: "El usuario ingresado se encuentra bloqueado actualmente" })
                         //} else {
-                        res.redirect('/administrador');
+                        res.redirect('/adm');
+                    } else {
+                        res.send('Contraseña incorrecta');
+                    }
+                }
+                res.end();
+
+            });
+            pool.query('select * from usuario u inner join planificador p on u.rut = p.rut where u.rut = $1', [user], async function(err, results, fields) {
+                if (results.rows[0] == undefined) {
+                    console.log('El usuario no es planificador');
+                } else {
+                    if (results.rows[0].password == pass) {
+                        req.session.nombre = results.rows[0].nombre;
+                        //if (await bcrypt.compare(password, results.rows[0].contrasena)) {
+                        //if (results.rows[0].estado == "blocked") {
+                        //res.render('Login', { restipo: "danger", resultado: "El usuario ingresado se encuentra bloqueado actualmente" })
+                        //} else {
+                        res.redirect('/pln');
+                    } else {
+                        res.send('Contraseña incorrecta');
+                    }
+                }
+                res.end();
+            });
+            pool.query('select * from usuario u inner join mantenedor m on u.rut = m.rut where u.rut = $1', [user], async function(err, results, fields) {
+                if (results.rows[0] == undefined) {
+                    console.log('El usuario no es mantenedor');
+                } else {
+                    if (results.rows[0].password == pass) {
+                        req.session.nombre = results.rows[0].nombre;
+                        //if (await bcrypt.compare(password, results.rows[0].contrasena)) {
+                        //if (results.rows[0].estado == "blocked") {
+                        //res.render('Login', { restipo: "danger", resultado: "El usuario ingresado se encuentra bloqueado actualmente" })
+                        //} else {
+                        res.redirect('/mtn');
                     } else {
                         res.send('Contraseña incorrecta');
                     }

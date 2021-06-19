@@ -26,6 +26,9 @@ app.use(session({
 //routes
 app.use(require('./routes/login'));
 app.use(require('./routes/admin'));
+app.use(require('./routes/planner'));
+app.use(require('./routes/mantenedor'));
+
 
 
 app.listen(app.get('port'), () => {
