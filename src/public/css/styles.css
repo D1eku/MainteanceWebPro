@@ -137,6 +137,8 @@ body {
     text-align: center;
     padding: 20px;
     position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .modal-content .col-12{
@@ -232,10 +234,19 @@ body {
 
 
 /* ADMIN - USUARIOS MENU  */
+
 .new_user_empresa_select {
     display: none;
 }
 
 .new_user_rol_text{
+    display: none;
+}
+
+.edit_user_empresa_select {
+    display: none;
+}
+
+.edit_user_rol_text{
     display: none;
 }

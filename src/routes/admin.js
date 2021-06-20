@@ -175,6 +175,18 @@ router.post('/add-new-usuario-admin', (req, res) => {
     return res.redirect('/admin-usuarios-menu');
 });
 
+router.post('/edit-usuario-admin', (req, res) => {
+    // Hola mauro o belen soy el dieku
+    // necesito que me hagan una query con los datos de las empresas
+    // Estos datos se tienen que estructurar en un JSON como se ve abajo 
+    // En la variable dataPage
+    // Esta parte de la pagina para cargar la tabla ta "casi lista"
+    // Asi que eso jeje
+    console.log(req.body)
+    return res.redirect('/admin-usuarios-menu');
+});
+
+
 //Administracion de Empresas
 router.get('/admin-empresas-menu', (req, res) => {
     // Hola mauro o belen soy el dieku
@@ -222,13 +234,7 @@ router.post('/add-new-empresa-admin', (req, res) => {
 
 router.post('/editar-empresa-admin', (req, res) => {
     console.log(req.body)
-    var code_edit_empresa = req.body.code_new_empresa;
-    var name_edit_empresa = req.body.name_new_empresa;
-    var activa_edit_empresa = req.body.estado_activacion_new_empresa;
-    var active_edit_empresa = true;
-    if(activa_new_empresa == "1"){
-        var active_new_empresa = false;
-    }
+    
 
     //Generar query correspondiente para editar y saber si se logro o no editar
 

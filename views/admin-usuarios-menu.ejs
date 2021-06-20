@@ -215,7 +215,7 @@
         </div>
     </div>
 
-    <!-- Agregar nuevo usuario Form oculto -->
+    <!-- Editar usuario Form oculto -->
     <div class="bg-modal">
         <div class="modal-content">
             <div class="row">
@@ -227,16 +227,86 @@
                     </h3>
                 </div>
                 <div class="col-12">
-                    <form action="" method="post">
-                        <div class="row">
-                            
-                        <div class="col-12">
-                            <button type="submit" id="edit-usuario-button-popup" class="btn btn-primary">
-                                <i class="fas fa-plus"></i>
-                                Agregar Usuario
-                            </button>
-                        </div>
-                    </form>
+                    <div class="col-12">
+                        <form action="/edit-usuario-admin" method="post">
+                            <div class="row">
+                                <!-- Tipo de nuevo usuario (admin, mantenedor, planificador)-->
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Tipo Usuario</span>
+                                        <input id=edit_tipo_usuario_input_popup name="tipo_editar_usuario" type="text" class="form-control" aria-describedby="addon-wrapping" readonly>
+                                    </div>
+                                </div>
+                                <!-- RUT nuevo usuario -->
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">RUT</span>
+                                        <input id=edit_rut_usuario_input_popup  name="code_editar_usuario" type="text" class="form-control" placeholder="RUT usuario"
+                                            aria-label="rut_usuario_add" aria-describedby="addon-wrapping" readonly>
+                                    </div>
+                                </div>
+                                <!-- Nombre nuevo Usuario -->
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Nombre</span>
+                                        <input id=edit_nombre_usuario_input_popup name="nombre_editar_usuario" type="text" class="form-control" placeholder="Nombre Usuario"
+                                            aria-label="nombre_usuario_add" aria-describedby="addon-wrapping">
+                                    </div>
+                                </div>
+                                <!-- Correo nuevo usuario -->
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Correo</span>
+                                        <input id=edit_correo_usuario_input_popup name="correo_editar_usuario" type="email" class="form-control" placeholder="Correo usuario"
+                                            aria-label="email_usuario_add" aria-describedby="addon-wrapping">
+                                    </div>
+                                </div>
+                                <!-- Contraseña nuevo usuario -->
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Contraseña</span>
+                                        <input id=edit_password_usuario_input_popup name="password_editar_usuario" type="password" class="form-control" placeholder="Contraseña"
+                                            aria-label="Contraseña Usuario" aria-describedby="addon-wrapping">
+                                    </div>
+                                </div>
+                                <!-- Estado nuevo usuario -->
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Estado</span>
+                                        <select name="estado_editar_usuario" id="edit_estado_usuario_input_popup" class="form-select" aria-label="Estado activacion">
+                                            <option >Activado</option>
+                                            <option value="1">Desactivado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Esto solo aparece si es un mantenedor y se tiene que seleccionar la empresa segun el nombre ? o codigo ?
+                                Podemos organizar los datos como se ve abajo y mandar una string -->
+                                <!-- Rol mantenedor -->
+                                <div class="col-12">
+                                    <div class="edit_user_rol_text input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Rol</span>
+                                        <input id=edit_rol_mantenedor_usuario_input_popup name="rol_mantenedor_editar_usuario" type="text" class="form-control" placeholder="Rol Mantenedor"
+                                            aria-label="Rol" aria-describedby="addon-wrapping">
+                                    </div>
+                                </div>
+                                <!-- Empresa mantenedor -->
+                                <div class="col-12">
+                                    <div class="edit_user_empresa_select input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Empresa</span>
+                                        <select name="empresa_mantenedor_editar_usuario" id="edit_empresa_mantenedor_usuario_input_popup" placeholder="Empresa Mantenedor" class="form-select" aria-label="Empresa">
+                                            <!--    Codigo Empresa:Nombre Empresa  -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" id="editar-submit-usuario-button-popup" class="btn btn-primary">
+                                    <i class="far fa-save"></i> 
+                                    Guardar Cambios
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="close">+</div>
@@ -315,7 +385,6 @@
         FillPageWithUsers(usuarios);
 
         function revisarTipoNewUser(){
-            console.log("ON TOGGLE !!!")
             if(document.getElementById('tipo_usuario_input_popup').value == "Mantenedor"){
                 document.querySelector('.new_user_empresa_select').style.display="flex"; 
                 document.querySelector('.new_user_rol_text').style.display="flex"
@@ -325,27 +394,68 @@
             }
         }
 
+
         //AL hacer click en la X desactiva el panel y vacia sus campos
         document.querySelector(".close").addEventListener("click",
         function () {
             document.querySelector('.bg-modal').style.display = "none";//Desactiva el panel y vacia los campos
         });
 
+        function getMantenedorInfo(rut){
+            for( let i = 0; i<mantenedores.length; i++){
+                if(mantenedores[i].rut ==  rut){
+                    return mantenedores[i];
+                }
+            }
+            return none;
+        }
+
+        function getIEmpresa(codigo){
+            for(let i = 0 ; i<empresas.length; i++){
+                if(empresas[i].codigo == codigo){
+                    return i;
+                }
+            }
+            return -1;
+        }
 
         //Cuando se haga click al boton-i esimo de editar --> Load Popup editar.
         function loadEditPopupElement(x1){
             var x2 = x1.split("-")//Split al id
-            //document.getElementById("text-action-title-popup").innerHTML = "Editar Empresa"
-            //document.getElementById("contentButton-addEmpresa-popup").innerHTML = '<i class="far fa-save"></i> Guardar Cambios'
-            //document.getElementById('edit_name_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].nombre;
-            //document.getElementById('edit_cod_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].codigo;
-            //console.log(document.getElementById('edit_activa_empresa_input_popup'))
+            //Carguemos las empresas primero.
+            let selectAddEmpresa = document.getElementById("edit_empresa_mantenedor_usuario_input_popup"); //Agregar select 
+            for(let i = 0; i < empresas.length; i++){
+                const cod_empre = empresas[i].codigo;
+                const name_empre = empresas[i].nombre;
+                let option = document.createElement("option");
+                option.text = cod_empre;
+                selectAddEmpresa.add(option);
+            }
+
+            document.getElementById('edit_tipo_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].tipo;
+            if(usuarios[(parseInt(x2[2]))].tipo == "Mantenedor"){
+                const mantInfo = getMantenedorInfo(usuarios[(parseInt(x2[2]))].rut);//Obten la informacion del mantenedor
+                //Se tiene que mostrar lo siguiente
+                document.querySelector(".edit_user_empresa_select").style.display = "flex";//En otras palabras activa el panel
+                document.querySelector(".edit_user_rol_text").style.display = "flex";//En otras palabras activa el panel
+                //Rellenar los datos de esa zona
+                document.getElementById('edit_rol_mantenedor_usuario_input_popup').value = mantInfo.rol;
+                //Tienes que cargar la empresa del mantenedor, segun el indice 
+                console.log("Mostrando que informacion tiene el EDIT_EMPRESA_MANTENEDOR_USUARIO_INPUT_POPUP")
+                console.log(document.getElementById('edit_empresa_mantenedor_usuario_input_popup'))
+                //document.getElementById('edit_empresa_mantenedor_usuario_input_popup').selectedIndex =  
+                document.getElementById('edit_empresa_mantenedor_usuario_input_popup').selectedIndex = getIEmpresa(mantInfo.empresa);
+            }
             console.log(usuarios[(parseInt(x2[2]))])
-            //if(dataPage[(parseInt(x2[2]))].activa){
-            //    document.getElementById('edit_activa_empresa_input_popup').selectedIndex = 0;
-            //}else{
-            //    document.getElementById('edit_activa_empresa_input_popup').selectedIndex = 1;
-            //}
+            document.getElementById('edit_rut_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].rut;
+            document.getElementById('edit_nombre_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].nombre;
+            document.getElementById('edit_correo_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].email;
+            document.getElementById('edit_password_usuario_input_popup').value = "";//Si el backend recibe un "", no se quiere y no se debe cambiar la contraseña.
+            if(usuarios[(parseInt(x2[2]))].activo == 'si'){
+                document.getElementById('edit_estado_usuario_input_popup').selectedIndex = 0
+            }else{
+                document.getElementById('edit_estado_usuario_input_popup').selectedIndex = 1
+            }
             document.querySelector(".bg-modal").style.display = "flex";//En otras palabras activa el panel
         }
         
