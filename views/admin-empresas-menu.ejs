@@ -80,7 +80,7 @@
                         </button>
                     </div>
                 </div>
-                <!-- Tabla de pautas -->
+                <!-- Tabla de Empresas -->
                 <div class="col-12">
                     <div class="container-fluid">
                         <div class="row white-box-transparent">
@@ -91,21 +91,21 @@
                                             <th scope="row">Editar</th>
                                             <th scope="row">Codigo</th>
                                             <th scope="row">Nombre</th>
-                                            <th scope="row">Eliminar</th>
+                                            <th scope="row">Activa</th>
                                         </thead>
                                         <tbody id="tbody-tabla-empresas">
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-12 pagination-pautas-admin-nav">
-                                <nav aria-label="pautas-nav-pagination">
+                            <div class="col-12 pagination-empresas-admin-nav">
+                                <nav aria-label="empresas-nav-pagination">
                                     <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#"> <-- </a></li>
                                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="#"> --> </a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -115,7 +115,7 @@
             </div>
         </div>
     </section>
-    <!-- ventana oculta (pop up) que nos permite agregar una nueva pauta -->
+    <!-- ventana oculta (pop up) que nos permite agregar una nueva empresa -->
     <div class="bg-modal2">
         <div class="modal-content2">
             <div class="row">
@@ -143,6 +143,15 @@
                                         aria-label="nombre_empre_add" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Activa</span>
+                                    <select id=activa_empresa_input_popup name="estado_activacion_new_empresa" class="form-select" aria-label="Estado Activacion">
+                                        <option value= 0>Si</option>
+                                        <option value="1">No</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <button type="submit" id="add-empresa-button-popup" class="btn btn-primary">
@@ -159,7 +168,7 @@
         </div>
     </div>
 
-    <!-- ventana oculta (pop up) que nos permite editar una pauta -->
+    <!-- ventana oculta (pop up) que nos permite editar una empresa -->
     <div class="bg-modal">
         <div class="modal-content2">
             <div class="row">
@@ -176,15 +185,24 @@
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Codigo Empresa</span>
-                                    <input id="edit_cod_empresa_input_popup" name="code_new_empresa" type="text" class="form-control" placeholder="Codigo Empresa"
+                                    <input id="edit_cod_empresa_input_popup" name="code_edit_empresa" type="text" class="form-control" placeholder="Codigo Empresa"
                                         aria-label="cod_empre_add" aria-describedby="addon-wrapping" readonly>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Nombre Empresa</span>
-                                    <input id="edit_name_empresa_input_popup" name="name_new_empresa" type="text" class="form-control" placeholder="Nombre Empresa"
+                                    <input id="edit_name_empresa_input_popup" name="name_edit_empresa" type="text" class="form-control" placeholder="Nombre Empresa"
                                         aria-label="nombre_empre_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Activa</span>
+                                    <select id=edit_activa_empresa_input_popup name="estado_activacion_edit_empresa" class="form-select" aria-label="Estado Activacion">
+                                        <option value=0 >Si</option>
+                                        <option value=1 >No</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -206,16 +224,29 @@
 
 
     <script>
+        /* 
+            Para esta pagina solo falta agregar las funciones a los botones de 
+            Anterior y siguiente para ir moviendose dentro del 
+        
+        
+        */
+
+
+
+        
+        /* 
+            Ojito al ejecutar o al completar el formulario y se dio a agregar, se enviara el formulario 
+            mediante POST al servidor de express, este retornara la nueva pagina con la nueva cantidad de elementos.
+        */
+
+
         //Al cargar el documento se rellenara la tabla empresas con la siguiente funcion. ? Que debe recibir un json.
         function FillPageTableWithJSON(dataPage ) {
             let tBodyEmpresa = document.getElementById("tbody-tabla-empresas"); //Obten la tabla
             //console.log(dataPage);
             for(let i = 0; i<dataPage.length; i++){
-                const cod_empre = dataPage[i].codigo_empresa;
-                const name_empre = dataPage[i].nombre_empresa;
-                //console.log(cod_empre);
-                //console.log(name_empre);
-
+                const cod_empre = dataPage[i].codigo;
+                const name_empre = dataPage[i].nombre;
                 //Inserta una nueva fila en la tabla 
                 let newEmpresaRowRef = tBodyEmpresa.insertRow(-1); 
 
@@ -225,8 +256,9 @@
                 let newCodEmpresaColRef = newEmpresaRowRef.insertCell(-1); //Crea una columna al final de la fila
                 //En esta columna ira el nombre de la empresa
                 let newNameEmpresaColRef = newEmpresaRowRef.insertCell(-1); //Crea una columna al final de la fila
-                //En esta columna ira el boton eliminar empresa.
-                let newEliminarColRef = newEmpresaRowRef.insertCell(-1); //Crea una columna al final de la fila
+                
+                //En esta columna ira si es que la empresa esta activa o no 
+                let newActivaEmpresaColRef = newEmpresaRowRef.insertCell(-1); //Crea una columna al final de la fila
 
                 //Asigna los valores a cada columna
 
@@ -234,20 +266,19 @@
                 newEditarColRef.innerHTML = '<button type="button"  id=button-edit-'+i+' onClick="loadEditPopupElement(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i> Editar</button>';
                 newCodEmpresaColRef.textContent = cod_empre;
                 newNameEmpresaColRef.textContent = name_empre;
-                newEliminarColRef.innerHTML = '<button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar Empresa</button>';
-
+                if(dataPage[i].activa){
+                    newActivaEmpresaColRef.textContent = "Si"
+                }else{
+                    newActivaEmpresaColRef.textContent = "No"
+                }
             }
         }
 
         //Data Page Si
         var dataPage = <%-JSON.stringify(dataPage)%>
+
         FillPageTableWithJSON(dataPage);
 
-        //Funcion que ejecuta el boton agregar subitem al agregar un subitem a un respectivo item
-        /* 
-            Ojito al ejecutar o al completar el formulario y se dio a agregar, se enviara el formulario 
-            mediante POST al servidor de express, este retornara la nueva pagina con la nueva cantidad de elementos.
-        */
         //Cuando se haga click al boton agregar en nueva empresa
         document.getElementById("add-new-empresa-button").addEventListener('click',
             function () {
@@ -259,6 +290,7 @@
                 document.querySelector('.bg-modal2').style.display = "none";
                 document.getElementById('name_empresa_input_popup').value = "";
                 document.getElementById('cod_empresa_input_popup').value = "";
+                document.getElementById('activa_empresa_input_popup').selectedIndex = 0
             });
 
 
@@ -270,8 +302,14 @@
             var x2 = x1.split("-")//Split al id
             //document.getElementById("text-action-title-popup").innerHTML = "Editar Empresa"
             //document.getElementById("contentButton-addEmpresa-popup").innerHTML = '<i class="far fa-save"></i> Guardar Cambios'
-            document.getElementById('edit_name_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].nombre_empresa;
-            document.getElementById('edit_cod_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].codigo_empresa;
+            document.getElementById('edit_name_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].nombre;
+            document.getElementById('edit_cod_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].codigo;
+            //console.log(document.getElementById('edit_activa_empresa_input_popup'))
+            if(dataPage[(parseInt(x2[2]))].activa){
+                document.getElementById('edit_activa_empresa_input_popup').selectedIndex = 0;
+            }else{
+                document.getElementById('edit_activa_empresa_input_popup').selectedIndex = 1;
+            }
             document.querySelector(".bg-modal").style.display = "flex";//En otras palabras activa el panel
         }
         
@@ -279,8 +317,6 @@
         document.querySelector(".close").addEventListener("click",
         function () {
             document.querySelector('.bg-modal').style.display = "none";
-            //document.getElementById('name_empresa_input_popup').value = "";
-            //document.getElementById('cod_empresa_input_popup').value = "";
         });
     </script>
 </body>

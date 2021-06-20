@@ -27,7 +27,7 @@
     <section id="title">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">MainteanceWebPro - Admin </a>
+                <a class="navbar-brand" href="/administrador">MainteanceWebPro - Admin </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -89,12 +89,23 @@
                                             <th scope="row">Nombre</th>
                                             <th scope="row">Correo</th>
                                             <th scope="row">Area Trabajo</th>
-                                            <th scope="row">Estado</th><!-- El estado representa si el usuario esta activo o no-->
+                                            <th scope="row">Activo</th><!-- El estado representa si el usuario esta activo o no-->
                                         </thead>
                                         <tbody id="tbody-tabla-usuarios">
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                            <div class="col-12 pagination-usuarios-admin-nav">
+                                <nav aria-label="usuarios-nav-pagination">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item"><a class="page-link" href="#"> <-- </a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#"> --> </a></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -103,6 +114,7 @@
         </div>
     </section>
     <!--Menu Options - Section -->
+
     <!-- Agregar nuevo usuario Form oculto -->
     <div class="bg-modal2">
         <div class="modal-content2">
@@ -117,6 +129,17 @@
                 <div class="col-12">
                     <form action="/add-new-usuario-admin" method="post">
                         <div class="row">
+                            <!-- Tipo de nuevo usuario (admin, mantenedor, planificador)-->
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Tipo Usuario</span>
+                                    <select name="tipo_new_usuario" id="tipo_usuario_input_popup" onclick='revisarTipoNewUser();' class="form-select" aria-label="Estado activacion">
+                                        <option >Administrador</option>
+                                        <option >Planificador</option>
+                                        <option >Mantenedor</option>
+                                    </select>
+                                </div>
+                            </div>
                             <!-- RUT nuevo usuario -->
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
@@ -159,27 +182,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- Tipo de nuevo usuario (admin, mantenedor, planificador)-->
-                            <div class="col-12">
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="addon-wrapping">Tipo Usuario</span>
-                                    <select name="tipo_new_usuario" id="tipo_usuario_input_popup" class="form-select" aria-label="Estado activacion">
-                                        <option selected>Mantenedor</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Planificador</option>
-                                    </select>
-                                </div>
-                            </div>
                             <!-- Esto solo aparece si es un mantenedor y se tiene que seleccionar la empresa segun el nombre ? o codigo ?
                             Podemos organizar los datos como se ve abajo y mandar una string -->
+                            <!-- Rol mantenedor -->
+                            <div class="col-12">
+                                <div class="new_user_rol_text input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Rol</span>
+                                    <input id=rol_mantenedor_usuario_input_popup name="rol_mantenedor_new_usuario" type="text" class="form-control" placeholder="Rol Mantenedor"
+                                        aria-label="Rol" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <!-- Empresa mantenedor -->
                             <div class="col-12">
                                 <div class="new_user_empresa_select input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Empresa</span>
-                                    <select id=empresa_mantenedor_usuario_input_popup name="empresa_mantenedor_new_usuario" id="empresa_mantenedor_usuario_input_popup" class="form-select" aria-label="Empresa">
+                                    <select id=empresa_mantenedor_usuario_input_popup name="empresa_mantenedor_new_usuario" id="empresa_mantenedor_usuario_input_popup" placeholder="Empresa Mantenedor" class="form-select" aria-label="Empresa">
                                         <!--    Codigo Empresa:Nombre Empresa  -->
-                                        <option selected>E1:Empresa 1</option>
-                                        <option value="1">E2:Empresa 2</option>
-                                        <option value="2">E3:Empresa 3</option>
                                     </select>
                                 </div>
                             </div>
@@ -197,6 +215,33 @@
         </div>
     </div>
 
+    <!-- Agregar nuevo usuario Form oculto -->
+    <div class="bg-modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        <div id="text-action-title-popup">
+                            Editar Usuario
+                        </div>
+                    </h3>
+                </div>
+                <div class="col-12">
+                    <form action="" method="post">
+                        <div class="row">
+                            
+                        <div class="col-12">
+                            <button type="submit" id="edit-usuario-button-popup" class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Agregar Usuario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="close">+</div>
+        </div>
+    </div>
     <script>
 
         //Los datos que se tienen que entregar a esta pagina son
@@ -204,37 +249,125 @@
         // El usuario que esta trabajando
         // y Una lista completa de las empresas activas
 
-        var dataPage = <%= dataPage %>
-        
-        document.getElementById('tipo_usuario_input_popup').addEventListener('click', 
-            function () {
-                if(document.getElementById("tipo_usuario_input_popup").value == "Mantenedor"){
-                    document.querySelector('.new_user_empresa_select').style.display="flex"; 
-                }else{
-                    document.querySelector('.new_user_empresa_select').style.display="none"; 
-                }
+        const usuarios = <%-JSON.stringify(usuarios)%>;
+        const empresas = <%-JSON.stringify(empresas)%>;
+        const mantenedores = <%-JSON.stringify(mantenedores)%>;
 
-                
-            });
-
+        function FillPageWithUsers( usuarios) {
+            let tBodyUsuarios = document.getElementById("tbody-tabla-usuarios"); //Obten la tabla
             
-        //Al hacer click en el boton agregar nuevo usuario muestra el panel oculto
+            for(let i = 0; i<usuarios.length; i++){
+                //Extraemos las variables
+
+                const rutUserI = usuarios[i].rut;
+                const emailUserI = usuarios[i].email;
+                const nombreUserI = usuarios[i].nombre;
+                const activoUserI = usuarios[i].activo; 
+                const workAreaUserI = usuarios[i].tipo;
+
+                //Inserta una nueva fila en la tabla 
+                let newUserIRowRef = tBodyUsuarios.insertRow(-1);
+                //Crea celdas o columna para la I-esima columna, esto hace referencia a boton editar
+                let newEditarColRef = newUserIRowRef.insertCell(-1);
+
+                //Crea celdas o columna para la I-esima columna, esto hace referencia a
+                let newRutColRef = newUserIRowRef.insertCell(-1);
+
+                //Crea celdas o columna para la I-esima columna, esto hace referencia a
+                let newNombreColRef = newUserIRowRef.insertCell(-1);
+
+                //Crea celdas o columna para la I-esima columna, esto hace referencia a
+                let newCorreoColRef = newUserIRowRef.insertCell(-1);
+
+                //Crea celdas o columna para la I-esima columna, esto hace referencia a
+                let newWorkAreaColRef = newUserIRowRef.insertCell(-1);
+
+                //Crea celdas o columna para la I-esima columna, esto hace referencia a
+                let newActivoColRef = newUserIRowRef.insertCell(-1);
+
+
+                //Asigna los valores a cada columna
+                newEditarColRef.innerHTML = '<button type="button"  id=button-edit-'+i+' onClick="loadEditPopupElement(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i> Editar</button>';
+                newRutColRef.textContent = rutUserI;
+                newNombreColRef.textContent = nombreUserI;
+                newCorreoColRef.textContent = emailUserI;
+                newWorkAreaColRef.textContent = workAreaUserI;
+
+                if(usuarios[i].activo == "si" ){
+                    newActivoColRef.textContent = "Si"
+                }else{
+                    newActivoColRef.textContent = "No"
+                }
+            }
+
+            //Empresas
+            let selectAddEmpresa = document.getElementById("empresa_mantenedor_usuario_input_popup"); //Agregar select 
+            for(let i = 0; i < empresas.length; i++){
+                const cod_empre = empresas[i].codigo;
+                const name_empre = empresas[i].nombre;
+                let option = document.createElement("option");
+                option.text = cod_empre;
+                selectAddEmpresa.add(option);
+            }
+            
+        }
+        
+        FillPageWithUsers(usuarios);
+
+        function revisarTipoNewUser(){
+            console.log("ON TOGGLE !!!")
+            if(document.getElementById('tipo_usuario_input_popup').value == "Mantenedor"){
+                document.querySelector('.new_user_empresa_select').style.display="flex"; 
+                document.querySelector('.new_user_rol_text').style.display="flex"
+            }else{
+                document.querySelector('.new_user_empresa_select').style.display="none"; 
+                document.querySelector('.new_user_rol_text').style.display="none"
+            }
+        }
+
+        //AL hacer click en la X desactiva el panel y vacia sus campos
+        document.querySelector(".close").addEventListener("click",
+        function () {
+            document.querySelector('.bg-modal').style.display = "none";//Desactiva el panel y vacia los campos
+        });
+
+
+        //Cuando se haga click al boton-i esimo de editar --> Load Popup editar.
+        function loadEditPopupElement(x1){
+            var x2 = x1.split("-")//Split al id
+            //document.getElementById("text-action-title-popup").innerHTML = "Editar Empresa"
+            //document.getElementById("contentButton-addEmpresa-popup").innerHTML = '<i class="far fa-save"></i> Guardar Cambios'
+            //document.getElementById('edit_name_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].nombre;
+            //document.getElementById('edit_cod_empresa_input_popup').value = dataPage[(parseInt(x2[2]))].codigo;
+            //console.log(document.getElementById('edit_activa_empresa_input_popup'))
+            console.log(usuarios[(parseInt(x2[2]))])
+            //if(dataPage[(parseInt(x2[2]))].activa){
+            //    document.getElementById('edit_activa_empresa_input_popup').selectedIndex = 0;
+            //}else{
+            //    document.getElementById('edit_activa_empresa_input_popup').selectedIndex = 1;
+            //}
+            document.querySelector(".bg-modal").style.display = "flex";//En otras palabras activa el panel
+        }
+        
+         //Al hacer click en el boton agregar nuevo usuario muestra el panel oculto
         document.getElementById("add-new-usuario-button").addEventListener('click',
             function () {
                 document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel 
+                console.log(document.getElementById('tipo_usuario_input_popup'));
             });
         //AL hacer click en la X desactiva el panel y vacia sus campos
         document.querySelector(".close2").addEventListener("click",
         function () {
             document.querySelector('.bg-modal2').style.display = "none";//Desactiva el panel y vacia los campos
+            document.getElementById("tipo_usuario_input_popup").selectedIndex = 0//Setea como admin 
             document.getElementById("rut_usuario_input_popup").value = ""
             document.getElementById("nombre_usuario_input_popup").value = ""
             document.getElementById("correo_usuario_input_popup").value = ""
             document.getElementById("password_usuario_input_popup").value = ""
-            document.getElementById("estado_usuario_input_popup").value = "Activado"
-            document.getElementById("tipo_usuario_input_popup").value = "Mantenedor"
-            document.querySelector('.new_user_empresa_select').style.display="flex"; 
-            document.getElementById("empresa_mantenedor_usuario_input_popup").value = "E1:Empresa 1"
+            document.getElementById("estado_usuario_input_popup").selectedIndex = 0;//Setea como activo
+            document.querySelector('.new_user_empresa_select').style.display="none"; 
+            document.querySelector('.new_user_rol_text').style.display="none"
+            document.getElementById("empresa_mantenedor_usuario_input_popup").selectedIndex = 0//Setea empresa como 0 
         });
 
 

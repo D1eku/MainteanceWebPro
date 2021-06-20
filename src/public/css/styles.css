@@ -233,5 +233,9 @@ body {
 
 /* ADMIN - USUARIOS MENU  */
 .new_user_empresa_select {
-    display: flex;
+    display: none;
+}
+
+.new_user_rol_text{
+    display: none;
 }

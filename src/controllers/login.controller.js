@@ -96,7 +96,8 @@ const logging = (req, res) => {
         console.log(req.body)
         if (user) {
             pool.query('select * from usuario u inner join administrador a on u.rut = a.rut where u.rut = $1', [user], async function(err, results, fields) {
-                if (results.rows[0] == undefined) {
+            //console.log(results)
+				if (results.rows[0] == undefined) {
                     console.log('El usuario no es administrador');
                 } else {
                     if (results.rows[0].password == pass) {
@@ -105,13 +106,12 @@ const logging = (req, res) => {
                         //if (results.rows[0].estado == "blocked") {
                         //res.render('Login', { restipo: "danger", resultado: "El usuario ingresado se encuentra bloqueado actualmente" })
                         //} else {
-                        res.redirect('/adm');
+                        return res.redirect('/administrador');
                     } else {
                         res.send('Contraseña incorrecta');
                     }
                 }
                 res.end();
-
             });
             pool.query('select * from usuario u inner join planificador p on u.rut = p.rut where u.rut = $1', [user], async function(err, results, fields) {
                 if (results.rows[0] == undefined) {
