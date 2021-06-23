@@ -89,7 +89,8 @@
                                             <th scope="row">Nombre</th>
                                             <th scope="row">Correo</th>
                                             <th scope="row">Area Trabajo</th>
-                                            <th scope="row">Activo</th><!-- El estado representa si el usuario esta activo o no-->
+                                            <th scope="row">Activo</th>
+                                            <!-- El estado representa si el usuario esta activo o no-->
                                         </thead>
                                         <tbody id="tbody-tabla-usuarios">
                                         </tbody>
@@ -99,7 +100,10 @@
                             <div class="col-12 pagination-usuarios-admin-nav">
                                 <nav aria-label="usuarios-nav-pagination">
                                     <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link" href="#"> <-- </a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">
+                                                <-- </a>
+                                        </li>
                                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -144,32 +148,28 @@
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">RUT</span>
-                                    <input id=rut_usuario_input_popup  name="code_new_usuario" type="text" class="form-control" placeholder="RUT usuario"
-                                        aria-label="rut_usuario_add" aria-describedby="addon-wrapping">
+                                    <input id=rut_usuario_input_popup name="code_new_usuario" type="text" class="form-control" placeholder="RUT usuario" aria-label="rut_usuario_add" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                             <!-- Nombre nuevo Usuario -->
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Nombre</span>
-                                    <input id=nombre_usuario_input_popup name="nombre_new_usuario" type="text" class="form-control" placeholder="Nombre Usuario"
-                                        aria-label="nombre_usuario_add" aria-describedby="addon-wrapping">
+                                    <input id=nombre_usuario_input_popup name="nombre_new_usuario" type="text" class="form-control" placeholder="Nombre Usuario" aria-label="nombre_usuario_add" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                             <!-- Correo nuevo usuario -->
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Correo</span>
-                                    <input id=correo_usuario_input_popup name="correo_new_usuario" type="email" class="form-control" placeholder="Correo usuario"
-                                        aria-label="email_usuario_add" aria-describedby="addon-wrapping">
+                                    <input id=correo_usuario_input_popup name="correo_new_usuario" type="email" class="form-control" placeholder="Correo usuario" aria-label="email_usuario_add" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                             <!-- Contraseña nuevo usuario -->
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Contraseña</span>
-                                    <input id=password_usuario_input_popup name="password_new_usuario" type="password" class="form-control" placeholder="Contraseña"
-                                        aria-label="Contraseña Usuario" aria-describedby="addon-wrapping">
+                                    <input id=password_usuario_input_popup name="password_new_usuario" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña Usuario" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                             <!-- Estado nuevo usuario -->
@@ -188,8 +188,7 @@
                             <div class="col-12">
                                 <div class="new_user_rol_text input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Rol</span>
-                                    <input id=rol_mantenedor_usuario_input_popup name="rol_mantenedor_new_usuario" type="text" class="form-control" placeholder="Rol Mantenedor"
-                                        aria-label="Rol" aria-describedby="addon-wrapping">
+                                    <input id=rol_mantenedor_usuario_input_popup name="rol_mantenedor_new_usuario" type="text" class="form-control" placeholder="Rol Mantenedor" aria-label="Rol" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                             <!-- Empresa mantenedor -->
@@ -241,32 +240,28 @@
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">RUT</span>
-                                        <input id=edit_rut_usuario_input_popup  name="code_editar_usuario" type="text" class="form-control" placeholder="RUT usuario"
-                                            aria-label="rut_usuario_add" aria-describedby="addon-wrapping" readonly>
+                                        <input id=edit_rut_usuario_input_popup name="code_editar_usuario" type="text" class="form-control" placeholder="RUT usuario" aria-label="rut_usuario_add" aria-describedby="addon-wrapping" readonly>
                                     </div>
                                 </div>
                                 <!-- Nombre nuevo Usuario -->
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Nombre</span>
-                                        <input id=edit_nombre_usuario_input_popup name="nombre_editar_usuario" type="text" class="form-control" placeholder="Nombre Usuario"
-                                            aria-label="nombre_usuario_add" aria-describedby="addon-wrapping">
+                                        <input id=edit_nombre_usuario_input_popup name="nombre_editar_usuario" type="text" class="form-control" placeholder="Nombre Usuario" aria-label="nombre_usuario_add" aria-describedby="addon-wrapping">
                                     </div>
                                 </div>
                                 <!-- Correo nuevo usuario -->
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Correo</span>
-                                        <input id=edit_correo_usuario_input_popup name="correo_editar_usuario" type="email" class="form-control" placeholder="Correo usuario"
-                                            aria-label="email_usuario_add" aria-describedby="addon-wrapping">
+                                        <input id=edit_correo_usuario_input_popup name="correo_editar_usuario" type="email" class="form-control" placeholder="Correo usuario" aria-label="email_usuario_add" aria-describedby="addon-wrapping">
                                     </div>
                                 </div>
                                 <!-- Contraseña nuevo usuario -->
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Contraseña</span>
-                                        <input id=edit_password_usuario_input_popup name="password_editar_usuario" type="password" class="form-control" placeholder="Contraseña"
-                                            aria-label="Contraseña Usuario" aria-describedby="addon-wrapping">
+                                        <input id=edit_password_usuario_input_popup name="password_editar_usuario" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña Usuario" aria-describedby="addon-wrapping">
                                     </div>
                                 </div>
                                 <!-- Estado nuevo usuario -->
@@ -285,8 +280,7 @@
                                 <div class="col-12">
                                     <div class="edit_user_rol_text input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Rol</span>
-                                        <input id=edit_rol_mantenedor_usuario_input_popup name="rol_mantenedor_editar_usuario" type="text" class="form-control" placeholder="Rol Mantenedor"
-                                            aria-label="Rol" aria-describedby="addon-wrapping">
+                                        <input id=edit_rol_mantenedor_usuario_input_popup name="rol_mantenedor_editar_usuario" type="text" class="form-control" placeholder="Rol Mantenedor" aria-label="Rol" aria-describedby="addon-wrapping">
                                     </div>
                                 </div>
                                 <!-- Empresa mantenedor -->
@@ -313,7 +307,6 @@
         </div>
     </div>
     <script>
-
         //Los datos que se tienen que entregar a esta pagina son
         // Una lista completa de los usuarios que existen
         // El usuario que esta trabajando
@@ -323,16 +316,16 @@
         const empresas = <%-JSON.stringify(empresas)%>;
         const mantenedores = <%-JSON.stringify(mantenedores)%>;
 
-        function FillPageWithUsers( usuarios) {
+        function FillPageWithUsers(usuarios) {
             let tBodyUsuarios = document.getElementById("tbody-tabla-usuarios"); //Obten la tabla
-            
-            for(let i = 0; i<usuarios.length; i++){
+
+            for (let i = 0; i < usuarios.length; i++) {
                 //Extraemos las variables
 
                 const rutUserI = usuarios[i].rut;
                 const emailUserI = usuarios[i].email;
                 const nombreUserI = usuarios[i].nombre;
-                const activoUserI = usuarios[i].activo; 
+                const activoUserI = usuarios[i].activo;
                 const workAreaUserI = usuarios[i].tipo;
 
                 //Inserta una nueva fila en la tabla 
@@ -357,62 +350,62 @@
 
 
                 //Asigna los valores a cada columna
-                newEditarColRef.innerHTML = '<button type="button"  id=button-edit-'+i+' onClick="loadEditPopupElement(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i> Editar</button>';
+                newEditarColRef.innerHTML = '<button type="button"  id=button-edit-' + i + ' onClick="loadEditPopupElement(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i> Editar</button>';
                 newRutColRef.textContent = rutUserI;
                 newNombreColRef.textContent = nombreUserI;
                 newCorreoColRef.textContent = emailUserI;
                 newWorkAreaColRef.textContent = workAreaUserI;
 
-                if(usuarios[i].activo == "si" ){
+                if (usuarios[i].activo == "Activado") {
                     newActivoColRef.textContent = "Si"
-                }else{
+                } else {
                     newActivoColRef.textContent = "No"
                 }
             }
 
             //Empresas
             let selectAddEmpresa = document.getElementById("empresa_mantenedor_usuario_input_popup"); //Agregar select 
-            for(let i = 0; i < empresas.length; i++){
+            for (let i = 0; i < empresas.length; i++) {
                 const cod_empre = empresas[i].codigo;
                 const name_empre = empresas[i].nombre;
                 let option = document.createElement("option");
                 option.text = cod_empre;
                 selectAddEmpresa.add(option);
             }
-            
+
         }
-        
+
         FillPageWithUsers(usuarios);
 
-        function revisarTipoNewUser(){
-            if(document.getElementById('tipo_usuario_input_popup').value == "Mantenedor"){
-                document.querySelector('.new_user_empresa_select').style.display="flex"; 
-                document.querySelector('.new_user_rol_text').style.display="flex"
-            }else{
-                document.querySelector('.new_user_empresa_select').style.display="none"; 
-                document.querySelector('.new_user_rol_text').style.display="none"
+        function revisarTipoNewUser() {
+            if (document.getElementById('tipo_usuario_input_popup').value == "Mantenedor") {
+                document.querySelector('.new_user_empresa_select').style.display = "flex";
+                document.querySelector('.new_user_rol_text').style.display = "flex"
+            } else {
+                document.querySelector('.new_user_empresa_select').style.display = "none";
+                document.querySelector('.new_user_rol_text').style.display = "none"
             }
         }
 
 
         //AL hacer click en la X desactiva el panel y vacia sus campos
         document.querySelector(".close").addEventListener("click",
-        function () {
-            document.querySelector('.bg-modal').style.display = "none";//Desactiva el panel y vacia los campos
-        });
+            function() {
+                document.querySelector('.bg-modal').style.display = "none"; //Desactiva el panel y vacia los campos
+            });
 
-        function getMantenedorInfo(rut){
-            for( let i = 0; i<mantenedores.length; i++){
-                if(mantenedores[i].rut ==  rut){
+        function getMantenedorInfo(rut) {
+            for (let i = 0; i < mantenedores.length; i++) {
+                if (mantenedores[i].rut == rut) {
                     return mantenedores[i];
                 }
             }
             return none;
         }
 
-        function getIEmpresa(codigo){
-            for(let i = 0 ; i<empresas.length; i++){
-                if(empresas[i].codigo == codigo){
+        function getIEmpresa(codigo) {
+            for (let i = 0; i < empresas.length; i++) {
+                if (empresas[i].codigo == codigo) {
                     return i;
                 }
             }
@@ -420,11 +413,11 @@
         }
 
         //Cuando se haga click al boton-i esimo de editar --> Load Popup editar.
-        function loadEditPopupElement(x1){
-            var x2 = x1.split("-")//Split al id
-            //Carguemos las empresas primero.
+        function loadEditPopupElement(x1) {
+            var x2 = x1.split("-") //Split al id
+                //Carguemos las empresas primero.
             let selectAddEmpresa = document.getElementById("edit_empresa_mantenedor_usuario_input_popup"); //Agregar select 
-            for(let i = 0; i < empresas.length; i++){
+            for (let i = 0; i < empresas.length; i++) {
                 const cod_empre = empresas[i].codigo;
                 const name_empre = empresas[i].nombre;
                 let option = document.createElement("option");
@@ -433,54 +426,52 @@
             }
 
             document.getElementById('edit_tipo_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].tipo;
-            if(usuarios[(parseInt(x2[2]))].tipo == "Mantenedor"){
-                const mantInfo = getMantenedorInfo(usuarios[(parseInt(x2[2]))].rut);//Obten la informacion del mantenedor
+            if (usuarios[(parseInt(x2[2]))].tipo == "Mantenedor") {
+                const mantInfo = getMantenedorInfo(usuarios[(parseInt(x2[2]))].rut); //Obten la informacion del mantenedor
                 //Se tiene que mostrar lo siguiente
-                document.querySelector(".edit_user_empresa_select").style.display = "flex";//En otras palabras activa el panel
-                document.querySelector(".edit_user_rol_text").style.display = "flex";//En otras palabras activa el panel
+                document.querySelector(".edit_user_empresa_select").style.display = "flex"; //En otras palabras activa el panel
+                document.querySelector(".edit_user_rol_text").style.display = "flex"; //En otras palabras activa el panel
                 //Rellenar los datos de esa zona
                 document.getElementById('edit_rol_mantenedor_usuario_input_popup').value = mantInfo.rol;
                 //Tienes que cargar la empresa del mantenedor, segun el indice 
                 console.log("Mostrando que informacion tiene el EDIT_EMPRESA_MANTENEDOR_USUARIO_INPUT_POPUP")
                 console.log(document.getElementById('edit_empresa_mantenedor_usuario_input_popup'))
-                //document.getElementById('edit_empresa_mantenedor_usuario_input_popup').selectedIndex =  
+                    //document.getElementById('edit_empresa_mantenedor_usuario_input_popup').selectedIndex =  
                 document.getElementById('edit_empresa_mantenedor_usuario_input_popup').selectedIndex = getIEmpresa(mantInfo.empresa);
             }
             console.log(usuarios[(parseInt(x2[2]))])
             document.getElementById('edit_rut_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].rut;
             document.getElementById('edit_nombre_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].nombre;
             document.getElementById('edit_correo_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].email;
-            document.getElementById('edit_password_usuario_input_popup').value = "";//Si el backend recibe un "", no se quiere y no se debe cambiar la contraseña.
-            if(usuarios[(parseInt(x2[2]))].activo == 'si'){
+            document.getElementById('edit_password_usuario_input_popup').value = ""; //Si el backend recibe un "", no se quiere y no se debe cambiar la contraseña.
+            if (usuarios[(parseInt(x2[2]))].activo == 'si') {
                 document.getElementById('edit_estado_usuario_input_popup').selectedIndex = 0
-            }else{
+            } else {
                 document.getElementById('edit_estado_usuario_input_popup').selectedIndex = 1
             }
-            document.querySelector(".bg-modal").style.display = "flex";//En otras palabras activa el panel
+            document.querySelector(".bg-modal").style.display = "flex"; //En otras palabras activa el panel
         }
-        
-         //Al hacer click en el boton agregar nuevo usuario muestra el panel oculto
+
+        //Al hacer click en el boton agregar nuevo usuario muestra el panel oculto
         document.getElementById("add-new-usuario-button").addEventListener('click',
-            function () {
-                document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel 
+            function() {
+                document.querySelector(".bg-modal2").style.display = "flex"; //En otras palabras activa el panel 
                 console.log(document.getElementById('tipo_usuario_input_popup'));
             });
         //AL hacer click en la X desactiva el panel y vacia sus campos
         document.querySelector(".close2").addEventListener("click",
-        function () {
-            document.querySelector('.bg-modal2').style.display = "none";//Desactiva el panel y vacia los campos
-            document.getElementById("tipo_usuario_input_popup").selectedIndex = 0//Setea como admin 
-            document.getElementById("rut_usuario_input_popup").value = ""
-            document.getElementById("nombre_usuario_input_popup").value = ""
-            document.getElementById("correo_usuario_input_popup").value = ""
-            document.getElementById("password_usuario_input_popup").value = ""
-            document.getElementById("estado_usuario_input_popup").selectedIndex = 0;//Setea como activo
-            document.querySelector('.new_user_empresa_select').style.display="none"; 
-            document.querySelector('.new_user_rol_text').style.display="none"
-            document.getElementById("empresa_mantenedor_usuario_input_popup").selectedIndex = 0//Setea empresa como 0 
-        });
-
-
+            function() {
+                document.querySelector('.bg-modal2').style.display = "none"; //Desactiva el panel y vacia los campos
+                document.getElementById("tipo_usuario_input_popup").selectedIndex = 0 //Setea como admin 
+                document.getElementById("rut_usuario_input_popup").value = ""
+                document.getElementById("nombre_usuario_input_popup").value = ""
+                document.getElementById("correo_usuario_input_popup").value = ""
+                document.getElementById("password_usuario_input_popup").value = ""
+                document.getElementById("estado_usuario_input_popup").selectedIndex = 0; //Setea como activo
+                document.querySelector('.new_user_empresa_select').style.display = "none";
+                document.querySelector('.new_user_rol_text').style.display = "none"
+                document.getElementById("empresa_mantenedor_usuario_input_popup").selectedIndex = 0 //Setea empresa como 0 
+            });
     </script>
 </body>
 

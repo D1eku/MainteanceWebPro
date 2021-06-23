@@ -30,7 +30,6 @@ app.use(require('./routes/planner'));
 app.use(require('./routes/mantenedor'));
 
 
-
 app.listen(app.get('port'), () => {
     console.log(app.get('appName'));
     console.log("Servidor en http://localhost:" + app.get('port'));
