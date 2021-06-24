@@ -17,10 +17,9 @@ app.use(express.static('src/public'));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(session({
-    name: "",
     secret: 'secret',
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
 
 //routes
@@ -28,7 +27,6 @@ app.use(require('./routes/login'));
 app.use(require('./routes/admin'));
 app.use(require('./routes/planner'));
 app.use(require('./routes/mantenedor'));
-
 
 app.listen(app.get('port'), () => {
     console.log(app.get('appName'));

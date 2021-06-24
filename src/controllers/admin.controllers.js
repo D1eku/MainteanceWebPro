@@ -1,4 +1,6 @@
 const { pool } = require('../js/dbconnect');
+const bcrypt = require("bcrypt");
+
 /*
 const addNewPauta = async (req,res) => {
     try{
@@ -8,33 +10,6 @@ const addNewPauta = async (req,res) => {
         console.log(err);
     }
     
-}
-
-const addNewEquipo = async (req,res) => {
-    try{
-        res.redirect('/admin-equipos-menu');
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-const addNewEmpresa = async (req,res) => {
-    try{
-        res.redirect('/admin-empresas-menu');
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-
-const editEmpresa = async (req,res) => {
-    try{
-        res.redirect('/admin-empresas-menu');
-    }
-    catch(err){
-        console.log(err);
-    }
 }
 
 */
@@ -56,7 +31,12 @@ const addNewUsuario = async(req, res) => {
         var emailExiste = await pool.query('SELECT * FROM usuario WHERE email = $1', [email]);
 
         if (rutExiste.rows.length == 0 && emailExiste.rows.length == 0) {
-            addToUsuario = await pool.query('INSERT INTO usuario VALUES($1, $2, $3, $4, $5)', [rut, email, pass, nombre, estado]);
+            hashpass = await bcrypt.hash(pass, 10);
+
+            console.log(req.body);
+            addToUsuario = await pool.query('INSERT INTO usuario VALUES($1, $2, $3, $4, $5)', [rut, email, hashpass, nombre, estado]);
+
+            //addToUsuario = await pool.query('INSERT INTO usuario VALUES($1, $2, $3, $4, $5)', [rut, email, pass, nombre, estado]);
             addToTipo = await pool.query('INSERT INTO tipo_usuario VALUES($1, $2)', [rut, tipo]);
             if (tipo == 'Administrador') {
                 addadm = await pool.query('INSERT INTO administrador VALUES($1)', [rut]);
@@ -97,7 +77,9 @@ const editUsuario = async(req, res) => {
         var rol = req.body.rol_mantenedor_editar_usuario;
         var empresa = req.body.empresa_mantenedor_editar_usuario;
 
-        updateUsuario = await pool.query('UPDATE usuario SET email = $1, password = $2, nombre = $3, activo = $4 where rut = $5', [email, pass, nombre, estado, rut]);
+        hashpass = await bcrypt.hash(pass, 10);
+
+        updateUsuario = await pool.query('UPDATE usuario SET email = $1, password = $2, nombre = $3, activo = $4 where rut = $5', [email, hashpass, nombre, estado, rut]);
 
         if (tipo == 'Mantenedor') {
             updateMtn = await pool.query('UPDATE mantenedor SET rol = $2, empresa = $3 where rut = $1', [rut, rol, empresa]);
@@ -111,6 +93,60 @@ const editUsuario = async(req, res) => {
         console.log(err);
     }
 }
+
+const addNewEmpresa = async(req, res) => {
+    try {
+        let { code_new_empresa, name_new_empresa, estado_activacion_new_empresa } = req.body;
+        console.log(req.body);
+
+        var codExiste = (await pool.query('SELECT * FROM empresa WHERE codigo = $1', [code_new_empresa])).rows.length;
+
+        if (codExiste < 1) {
+            addToEmpresas = await pool.query('INSERT INTO empresa VALUES($1, $2, $3)', [code_new_empresa, name_new_empresa, estado_activacion_new_empresa]);
+            res.redirect('/admin-empresas-menu');
+        } else {
+            console.log("Ya existe una empresa con este código");
+            res.redirect('/admin-empresas-menu');
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const editEmpresa = async(req, res) => {
+    try {
+        let { code_edit_empresa, name_edit_empresa, estado_activacion_edit_empresa } = req.body;
+        console.log(req.body);
+
+        updateEmpresa = await pool.query('UPDATE empresa SET nombre = $2, activa = $3 where codigo = $1', [code_edit_empresa, name_edit_empresa, estado_activacion_edit_empresa]);
+        res.redirect('/admin-empresas-menu');
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const addNewEquipo = async(req, res) => {
+    try {
+        let { code_new_equipo, nombre_new_equipo, clase_new_equipo, desc_new_equipo, ubicacion_new_equipo } = req.body;
+
+        var codExiste = (await pool.query('SELECT * FROM equipo WHERE codigo = $1', [code_new_equipo])).rows.length;
+
+        if (codExiste < 1) {
+            addToEquipo = await pool.query('INSERT INTO equipo VALUES($1, $2, $3, $4, $5)', [code_new_equipo, nombre_new_equipo, clase_new_equipo, desc_new_equipo, ubicacion_new_equipo]);
+            res.redirect('/admin-equipos-menu');
+        } else {
+            console.log("Ya existe un equipo con este código");
+            res.redirect('/admin-equipos-menu');
+        }
+
+        res.redirect('/admin-equipos-menu');
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 
 const addPautasMenu = async(req, res) => {
     try {
@@ -165,6 +201,9 @@ const adminEquipoMenu = async(req, res) => {
 module.exports = {
     addNewUsuario,
     editUsuario,
+    addNewEmpresa,
+    editEmpresa,
+    addNewEquipo,
     addPautasMenu,
     adminEmpresaMenu,
     adminEquipoMenu,
