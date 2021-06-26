@@ -1,32 +1,31 @@
 const { Router } = require("express");
 const router = Router();
 
-//const { getUsers } = require('../controllers/users.controller');
-const { auth } = require('../js/auth');
+const { esAdm } = require('../js/auth');
 const { adminUserMenu, adminEquipoMenu, adminPautasMenu, addPautasMenu, adminEmpresaMenu, addNewUsuario, editUsuario, addNewEmpresa, editEmpresa, addNewEquipo } = require('../controllers/admin.controllers');
 
 //Administrador
-router.get('/administrador', auth, (req, res) => {
+router.get('/administrador', esAdm, (req, res) => {
     res.render('administrador', { nombre: req.session.nombre });
 });
 
 //Administracion de Pautas
-router.get('/admin-pautas-menu', auth, adminPautasMenu);
-router.get('/admin-pautas-menu-agregar-pauta', auth, addPautasMenu);
-//router.post('/add-new-pauta-admin', auth, addnewPauta);
+router.get('/admin-pautas-menu', esAdm, adminPautasMenu);
+router.get('/admin-pautas-menu-agregar-pauta', esAdm, addPautasMenu);
+//router.post('/add-new-pauta-admin', esAdm, addnewPauta);
 
 //Administracion de Empresas
-router.get('/admin-empresas-menu', auth, adminEmpresaMenu);
-router.post('/add-new-empresa-admin', auth, addNewEmpresa);
-router.post('/editar-empresa-admin', auth, editEmpresa);
+router.get('/admin-empresas-menu', esAdm, adminEmpresaMenu);
+router.post('/add-new-empresa-admin', esAdm, addNewEmpresa);
+router.post('/editar-empresa-admin', esAdm, editEmpresa);
 
 //Administracion de Equipos
-router.get('/admin-equipos-menu', auth, adminEquipoMenu);
-router.post('/add-new-equipo-admin', auth, addNewEquipo);
+router.get('/admin-equipos-menu', esAdm, adminEquipoMenu);
+router.post('/add-new-equipo-admin', esAdm, addNewEquipo);
 
 //Administracion de Usuarios 
-router.get('/admin-usuarios-menu', auth, adminUserMenu);
-router.post('/add-new-usuario-admin', auth, addNewUsuario);
-router.post('/edit-usuario-admin', auth, editUsuario);
+router.get('/admin-usuarios-menu', esAdm, adminUserMenu);
+router.post('/add-new-usuario-admin', esAdm, addNewUsuario);
+router.post('/edit-usuario-admin', esAdm, editUsuario);
 
 module.exports = router;

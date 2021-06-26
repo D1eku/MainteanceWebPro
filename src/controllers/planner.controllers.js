@@ -1,10 +1,20 @@
 const { pool } = require('../js/dbconnect');
 /*
-const getUsers = async(req, res) => {
-    const response = await pool.query('SELECT * FROM usuario');
-    console.log(response.rows);
-    res.send('users');
+const addNewPauta = async (req,res) => {
+    try{
+        res.redirect('/admin-pautas-menu');
+    }
+    catch(err){
+        console.log(err);
+    }
+    
 }
+
+modificarFechaPauta
+modificarPeriodicidad
+
+
+
 */
 
 module.exports = {

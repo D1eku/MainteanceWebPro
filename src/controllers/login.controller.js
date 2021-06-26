@@ -12,12 +12,14 @@ const logging = async(req, res) => {
         var user = req.body.rutuser;
         var pass = req.body.passuser;
 
-        admin = await pool.query('select * from usuario u inner join administrador a on u.rut = a.rut where u.rut = $1', [user]);
-        if (admin.rows[0] == undefined) {
+        admin = (await pool.query('select * from usuario u inner join administrador a on u.rut = a.rut where u.rut = $1', [user])).rows[0];
+        if (admin == undefined) {
             console.log('El usuario no es administrador');
         } else {
-            req.session.nombre = admin.rows[0].nombre;
-            bcrypt.compare(pass, admin.rows[0].password, (err, same) => {
+            req.session.rut = admin.rut;
+            req.session.nombre = admin.nombre;
+            req.session.tipo = "adm";
+            bcrypt.compare(pass, admin.password, (err, same) => {
                 if (err) {
                     console.log(err);
                 }
@@ -29,12 +31,14 @@ const logging = async(req, res) => {
                 }
             });
         }
-        plani = await pool.query('select * from usuario u inner join planificador p on u.rut = p.rut where u.rut = $1', [user]);
-        if (plani.rows[0] == undefined) {
+        plani = (await pool.query('select * from usuario u inner join planificador p on u.rut = p.rut where u.rut = $1', [user])).rows[0];
+        if (plani == undefined) {
             console.log('El usuario no es planificador');
         } else {
-            req.session.nombre = plani.rows[0].nombre;
-            bcrypt.compare(pass, plani.rows[0].password, (err, same) => {
+            req.session.rut = plani.rut;
+            req.session.nombre = plani.nombre;
+            req.session.tipo = "pln";
+            bcrypt.compare(pass, plani.password, (err, same) => {
                 if (err) {
                     console.log(err);
                 }
@@ -47,12 +51,14 @@ const logging = async(req, res) => {
             });
         }
 
-        manten = await pool.query('select * from usuario u inner join mantenedor m on u.rut = m.rut where u.rut = $1', [user]);
-        if (manten.rows[0] == undefined) {
+        manten = (await pool.query('select * from usuario u inner join mantenedor m on u.rut = m.rut where u.rut = $1', [user])).rows[0];
+        if (manten == undefined) {
             console.log('El usuario no es mantenedor');
         } else {
-            req.session.nombre = manten.rows[0].nombre;
-            bcrypt.compare(pass, manten.rows[0].password, (err, same) => {
+            req.session.rut = manten.rut;
+            req.session.nombre = manten.nombre;
+            req.session.tipo = "mtn";
+            bcrypt.compare(pass, manten.password, (err, same) => {
                 if (err) {
                     console.log(err);
                 }
