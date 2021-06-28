@@ -101,6 +101,7 @@
                                     </table>
                                 </div>
                             </div>
+                            <!--  -->
                         </div>
                     </div>
                 </div>
@@ -175,13 +176,82 @@
                         <div class="col-12">
                             <button type="submit" id="add-equipo-button-popup" class="btn btn-primary">
                                 <i class="fas fa-plus"></i>
-                                Agregar Empresa
+                                Agregar Equipo
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="close2">+</div>
+        </div>
+    </div>
+
+    <!-- editar equipo Form oculto -->
+    <div class="bg-modal">
+        <div class="modal-content2">
+            <div class="row">
+                <div class="col-12">
+                    <h3>
+                        <div id="text-action-title-popup">
+                            Editar Equipo
+                        </div>
+                    </h3>
+                </div>
+                <div class="col-12">
+                    <form action="/editar-equipo-admin" method="post">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Codigo></span>
+                                    <input id="edit_cod_equipo_input_popup" name="code_edit_equipo" type="text" class="form-control" placeholder="Codigo Equipo" aria-label="cod_equipo_add" aria-describedby="addon-wrapping" readonly>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Nombre Equipo></span>
+                                    <input id="edit_name_equipo_input_popup" name="name_edit_equipo" type="text" class="form-control" placeholder="Nombre Equipo" aria-label="name_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Clase></span>
+                                    <input id="edit_clase_equipo_input_popup" name="clase_edit_equipo" type="text" class="form-control" placeholder="Clase" aria-label="clase_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Descripcion></span>
+                                    <input id="edit_descripcion_equipo_input_popup" name="descripcion_edit_equipo" type="text" class="form-control" placeholder="Descripcion" aria-label="descripcion_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Estado</span>
+                                    <select name="estado_edit_equipo" id="edit_estado_equipo" class="form-select" aria-label="Default select example">
+                                        <option selected>Activado</option>
+                                        <option value="1">Desactivado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">Ubicacion</span>
+                                    <input id="edit_ubicacion_equipo_input_popup" name="ubicacion_edit_equipo" type="text" class="form-control" placeholder="Ubicacion" aria-label="ubicacion_equipo_add" aria-describedby="addon-wrapping">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" id="edit-equipo-button-popup" class="btn btn-primary">
+                                <div id="contentButton-addEquipo-popup">
+                                    <i class="far fa-save"></i>
+                                    Guardar Cambios
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="close">+</div>
         </div>
     </div>
 
