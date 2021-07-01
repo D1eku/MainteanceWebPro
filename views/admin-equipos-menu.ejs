@@ -158,7 +158,7 @@
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Estado</span>
-                                    <select name="estado_new_equipo" id="estado_equipo_add" class="form-select" aria-label="Default select example">
+                                    <select id="estado_new_equipo" name="estado_equipo_add" class="form-select" aria-label="Default select example">
                                         <option selected>Activado</option>
                                         <option value="1">Desactivado</option>
                                     </select>
@@ -227,7 +227,7 @@
                             <div class="col-12">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Estado</span>
-                                    <select name="estado_edit_equipo" id="edit_estado_equipo" class="form-select" aria-label="Default select example">
+                                    <select id="estado_edit_equipo" name="edit_estado_equipo" class="form-select" aria-label="Default select example">
                                         <option selected>Activado</option>
                                         <option value="1">Desactivado</option>
                                     </select>
@@ -256,9 +256,55 @@
     </div>
 
     <script>
+        
+        function FillPageTableWithTeams(dataPage){
+            let tBodyEquipo = document.getElementById("tbody-tabla-equipos");
+            for(let i = 0; i < dataPage.length; i++){
+                //Se extraen los datos desde la tabla
+                const cod_equipo = dataPage[i].codigo;
+                const nom_equipo = dataPage[i].nombre;
+                const clase_equipo = dataPage[i].clase;
+                const ubicacion_equipo = dataPage[i].ubicacion;
+                const descripcion_equipo = dataPage[i].descripcion;
+                const estado_equipo = dataPage[i].estado;
 
-        var dataPage = <%= dataPage %>
+                //Se inserta una nueva fila
+                let newEquipoRowRef = tBodyEquipo.insertRow(-1);
+                let newEditarColRef = newEquipoRowRef.insertCell(-1);
+                //columna para el codigo del equipo
+                let newCodEquipoColRef = newEquipoRowRef.insertCell(-1);
+                //columna para el nombre del equipo
+                let newNomEquipoColRef = newEquipoRowRef.insertCell(-1);
+                //columna para la clase del equipo
+                let newClaseEquipoColRef = newEquipoRowRef.insertCell(-1);
+                //columna para la ubicacion del equipo
+                let newUbicacionEquipoColRef = newEquipoRowRef.insertCell(-1);
+                //columna para la descripcion del equipo
+                let newDescripcionEquipoColRef = newEquipoRowRef.insertCell(-1);
+                //columna para el estado del equipo
+                let newEstadoEquipoColRef = newEquipoRowRef.insertCell(-1);
 
+                //asignar valores
+                newEditarColRef.innerHTML = '<button type="button"  id=button-edit-' + i + ' onClick="loadEditPopupElement(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i> Editar</button>';
+
+                newCodEquipoColRef.textContent = cod_equipo;
+                newNomEquipoColRef.textContent = nom_equipo;
+                newClaseEquipoColRef.textContent = clase_equipo;
+                newUbicacionEquipoColRef.textContent = ubicacion_equipo;
+                newDescripcionEquipoColRef.textContent = descripcion_equipo;
+                newEstadoEquipoColRef.textContent = estado_equipo;
+                if (dataPage[i].activa) {
+                    newEstadoEquipoColRef.textContent = "Si"
+                } else {
+                    newEstadoEquipoColRef.textContent = "No"
+                }
+            }
+        }
+        //JSON.stringify(dataPage)
+        var dataPage = <%-JSON.stringify(dataPage)%>
+        FillPageTableWithTeams(dataPage);
+
+        //boton agregar en nuevo equipo
         document.getElementById("add-new-equipo-button").addEventListener('click',
             function () {
                 document.querySelector(".bg-modal2").style.display = "flex";//En otras palabras activa el panel 
@@ -267,8 +313,35 @@
         document.querySelector(".close2").addEventListener("click",
         function () {
             document.querySelector('.bg-modal2').style.display = "none";
-
+            document.getElementById('codigo_equipo_input_popup').value = "";
+            document.getElementById('nombre_equipo_input_popup').value = "";
+            document.getElementById('clase_equipo_input_popup').value = "";
+            document.getElementById('desc_equipo_input_popup').value = "";
+            document.getElementById('estado_new_equipo').selectedIndex = 0
+            document.getElementById('ubicacion_equipo_input_popup').value = "";
         });
+
+        function loadEditPopupElement(x1){
+            //Se separa el id
+            var x2 = x1.split("-")
+            document.getElementById("edit_cod_equipo_input_popup").value = dataPage[(parseInt(x2[2]))].codigo;
+            document.getElementById("edit_name_equipo_input_popup").value = dataPage[(parseInt(x2[2]))].nombre;
+            document.getElementById("edit_clase_equipo_input_popup").value = dataPage[(parseInt(x2[2]))].clase;
+            document.getElementById("edit_descripcion_equipo_input_popup").value = dataPage[(parseInt(x2[2]))].descripcion;
+            if(dataPage[(parseInt(x2[2]))].activa){
+                document.getElementById("estado_edit_equipo").selectedIndex = 0;
+            }else{
+                document.getElementById("estado_edit_equipo").selectedIndex = 1;
+            }
+            document.getElementById("ubicacion_equipo_input_popup").value = dataPage[(parseInt(x2[2]))].ubicacion;
+             //activacion del panel
+            document.querySelector(".bg-modal").style.display = "flex";
+        }
+        //se cerrará el modal correspondiente a editar empresa.
+        document.querySelector(".close").addEventListener("click",
+            function() {
+                document.querySelector('.bg-modal').style.display = "none";
+            });
 
 
     </script>
