@@ -4,6 +4,26 @@ const bcrypt = require("bcrypt");
 /*
 const addNewPauta = async (req,res) => {
     try{
+        let {nombre_pauta, equipo_pauta, tipo_periodicidad_pauta, cantidad_periodo_pauta, empresa_pauta, clase_pauta} = req.body
+        //codigo (podría generarlo automaticamente??)
+        //version (comienza con 1.0?)
+        //fechacreacion (fecha de hoy, tengo que buscar como se hacía xD)
+        //addpauta = query
+        res.redirect('/admin-pautas-menu');
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+}
+
+const editPauta = async (req,res) => {
+    try{
+        //editar aun no funciona creo??
+        let {nombre_pauta, equipo_pauta, tipo_periodicidad_pauta, cantidad_periodo_pauta, empresa_pauta, clase_pauta} = req.body
+        //codigo (podría generarlo automaticamente??)
+        //version (comienza con 1.0?)
+        //fechacreacion (fecha de hoy, tengo que buscar como se hacía xD)
         res.redirect('/admin-pautas-menu');
     }
     catch(err){
@@ -147,6 +167,18 @@ const addNewEquipo = async(req, res) => {
     }
 }
 
+const editEquipo = async(req, res) => {
+    try {
+        let { code_edit_equipo, name_edit_equipo, clase_edit_equipo, descripcion_edit_equipo, edit_estado_equipo, ubicacion_edit_equipo } = req.body;
+        console.log(req.body);
+
+        updateEquipo = await pool.query('UPDATE equipo SET nombre = $2, clase = $3, descripcion = $4, ubicacion = $5 where codigo = $1', [code_edit_equipo, name_edit_equipo, clase_edit_equipo, descripcion_edit_equipo, ubicacion_edit_equipo]);
+        res.redirect('/admin-equipos-menu');
+
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 const addPautasMenu = async(req, res) => {
     try {
@@ -190,8 +222,8 @@ const adminUserMenu = async(req, res) => {
 
 const adminEquipoMenu = async(req, res) => {
     try {
-        dataPage = (await pool.query('select * from equipo')).rows;
-        res.render('admin-equipos-menu', { nombre: req.session.nombre, dataPage });
+        equipos = (await pool.query('select * from equipo')).rows;
+        res.render('admin-equipos-menu', { nombre: req.session.nombre, equipos });
     } catch (err) {
         console.log(err);
     }
@@ -204,6 +236,7 @@ module.exports = {
     addNewEmpresa,
     editEmpresa,
     addNewEquipo,
+    editEquipo,
     addPautasMenu,
     adminEmpresaMenu,
     adminEquipoMenu,
