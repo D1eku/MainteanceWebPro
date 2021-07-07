@@ -444,7 +444,7 @@
             document.getElementById('edit_nombre_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].nombre;
             document.getElementById('edit_correo_usuario_input_popup').value = usuarios[(parseInt(x2[2]))].email;
             document.getElementById('edit_password_usuario_input_popup').value = ""; //Si el backend recibe un "", no se quiere y no se debe cambiar la contraseña.
-            if (usuarios[(parseInt(x2[2]))].activo == 'si') {
+            if (usuarios[(parseInt(x2[2]))].activo == 'Activado') {
                 document.getElementById('edit_estado_usuario_input_popup').selectedIndex = 0
             } else {
                 document.getElementById('edit_estado_usuario_input_popup').selectedIndex = 1

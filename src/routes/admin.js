@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 
 const { esAdm } = require('../js/auth');
-const { adminUserMenu, adminEquipoMenu, adminPautasMenu, addPautasMenu, adminEmpresaMenu, addNewUsuario, editUsuario, addNewEmpresa, editEmpresa, addNewEquipo, editEquipo } = require('../controllers/admin.controllers');
+const { adminUserMenu, adminEquipoMenu, adminPautasMenu, addPautasMenu, adminEmpresaMenu, addNewUsuario, editUsuario, addNewEmpresa, editEmpresa, addNewEquipo, editEquipo, addNewPauta, editPauta } = require('../controllers/admin.controllers');
 
 //Administrador
 router.get('/administrador', esAdm, (req, res) => {
@@ -12,7 +12,9 @@ router.get('/administrador', esAdm, (req, res) => {
 //Administracion de Pautas
 router.get('/admin-pautas-menu', esAdm, adminPautasMenu);
 router.get('/admin-pautas-menu-agregar-pauta', esAdm, addPautasMenu);
-//router.post('/add-new-pauta-admin', esAdm, addnewPauta);
+router.post('/edit-pauta-admin', esAdm, editPauta);
+router.post('/add-new-pauta-admin', esAdm, addNewPauta);
+
 
 //Administracion de Empresas
 router.get('/admin-empresas-menu', esAdm, adminEmpresaMenu);

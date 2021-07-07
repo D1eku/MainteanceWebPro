@@ -74,12 +74,10 @@
                 <!-- Boton Agregar Nueva Pauta -->
                 <div class="col-lg-6 col-md-6 col-sm-6 text-right">
                     <div class="top-pauta-info">
-                        <button  type="button" class="btn btn-primary">
-                            <a href=/admin-pautas-menu-agregar-pauta>
-                                <i class="fas fa-plus"></i>
-                                Agregar Nueva Pauta
-                            </a>
-                        </button>
+                        <a class="btn btn-primary btn-lg" href="/admin-pautas-menu-agregar-pauta">
+                            <i class="fas fa-plus"></i>
+                            Agregar Nueva Pauta
+                        </a>
                     </div>
                 </div>
                 <!-- Tabla de pautas -->
@@ -99,67 +97,7 @@
                                             <th scope="row">Codigo Equipo</th>
                                             <th scope="row">Version</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary pull-right">
-                                                        <i class="fas fa-edit"></i>
-                                                        Editar
-                                                    </button>
-                                                </td><!-- Editar -->
-                                                <td>0001</td><!-- Codigo -->
-                                                <td>Motocierras</td><!-- Nombre Pauta -->
-                                                <td>Clase</td><!-- Clase -->
-                                                <td>01-01-2020</td><!-- Fecha Creacion -->
-                                                <td>Empresas Valdez LTDA</td><!-- Empresa -->
-                                                <td>UZUMYMW</td><!-- Codigo Equipo -->
-                                                <td>0.5</td><!-- Version -->
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary pull-right">
-                                                        <i class="fas fa-edit"></i>
-                                                        Editar
-                                                    </button>
-                                                </td><!-- Editar -->
-                                                <td>0001</td><!-- Codigo -->
-                                                <td>Motocierras</td><!-- Nombre Pauta -->
-                                                <td>Clase</td><!-- Clase -->
-                                                <td>01-01-2020</td><!-- Fecha Creacion -->
-                                                <td>Empresas Valdez LTDA</td><!-- Empresa -->
-                                                <td>UZUMYMW</td><!-- Codigo Equipo -->
-                                                <td>0.5</td><!-- Version -->
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary pull-right">
-                                                        <i class="fas fa-edit"></i>
-                                                        Editar
-                                                    </button>
-                                                </td><!-- Editar -->
-                                                <td>0001</td><!-- Codigo -->
-                                                <td>Motocierras</td><!-- Nombre Pauta -->
-                                                <td>Clase</td><!-- Clase -->
-                                                <td>01-01-2020</td><!-- Fecha Creacion -->
-                                                <td>Empresas Valdez LTDA</td><!-- Empresa -->
-                                                <td>UZUMYMW</td><!-- Codigo Equipo -->
-                                                <td>0.5</td><!-- Version -->
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary pull-right">
-                                                        <i class="fas fa-edit"></i>
-                                                        Editar
-                                                    </button>
-                                                </td><!-- Editar -->
-                                                <td>0001</td><!-- Codigo -->
-                                                <td>Motocierras</td><!-- Nombre Pauta -->
-                                                <td>Clase</td><!-- Clase -->
-                                                <td>01-01-2020</td><!-- Fecha Creacion -->
-                                                <td>Empresas Valdez LTDA</td><!-- Empresa -->
-                                                <td>UZUMYMW</td><!-- Codigo Equipo -->
-                                                <td>0.5</td><!-- Version -->
-                                            </tr>
+                                        <tbody id="tbody-pautas">
                                         </tbody>
                                     </table>
                                 </div>
@@ -181,7 +119,58 @@
             </div>
         </div>
     </section>
+    <form action='/edit-pauta-admin' id="hiddenform" method="POST">
+        <input type=hidden id='pauta-info-edit' name='codeToEditPauta'>
+    </form>
+    
     <!--Menu Options - Section -->
+    <script>
+        const pautas = <%- JSON.stringify(pautas) %>
+        
+
+        function loadTableWithPautas( pautas ){
+            console.log(pautas)
+            const tbodyRef = document.getElementById('tbody-pautas')
+
+            for(let i = 0;i <pautas.length; i++){
+                //console.log("EN CICLO FOR")
+                const pautaInfoI = pautas[i];
+                //Crear la nueva fila y sus respectivas celdas.
+                let newRow = tbodyRef.insertRow();
+                let newColEditButton = newRow.insertCell(-1);//Boton editar pauta --> redirige a editar pauta 
+                let newColCod = newRow.insertCell(-1);//codigo de la pauta
+                let newColName = newRow.insertCell(-1);//nombre de la pauta
+                let newColClass = newRow.insertCell(-1);//clase de la pauta
+                let newColCreation = newRow.insertCell(-1);//fecha creacion de la pauta
+                let newColBusinessName = newRow.insertCell(-1);//nombre de la empresa
+                let newColEquip = newRow.insertCell(-1);//codigo equipo pauta
+                let newColVersion = newRow.insertCell(-1);//version pauta
+
+                //Insertar datos en celdas
+                console.log("Pautas[i].codigo --> ", pautas[i].codigo)
+                newColEditButton.innerHTML = '<button type="button" id='+pautas[i].codigo+' onclick="editPauta(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i>Editar</button>'
+                newColCod.textContent = pautas[i].codigo
+                newColName.textContent = pautas[i].nombre
+                newColClass.textContent = pautas[i].clase;
+                newColCreation.textContent = pautas[i].fecha_creacion;
+                newColBusinessName.textContent = pautas[i].nom_empresa;
+                newColEquip.textContent = pautas[i].equipo
+                newColVersion.textContent = pautas[i].version;
+
+            }  
+            
+            
+        }   
+
+        function editPauta(id){
+            console.log("ENVIA ESTO --> ", id);
+            document.getElementById('pauta-info-edit').value = id;
+            console.log(document.getElementById('pauta-info-edit').value)
+            document.getElementById('hiddenform').submit();
+        }
+
+        loadTableWithPautas(pautas);
+    </script>
 </body>
 
 </html>
