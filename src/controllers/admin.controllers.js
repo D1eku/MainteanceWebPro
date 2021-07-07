@@ -2,6 +2,21 @@ const { pool } = require('../js/dbconnect');
 const bcrypt = require("bcrypt");
 
 
+//Mauro soy el diego quizas te sirva este comentario.
+//Al momento de cambiar los items y subitems de una pauta existente
+//Te recomiendo eliminar las columnas asociadas a los items e insertar
+//Los nuevos subitems/items 
+
+const editExistPautaAdmin = async (req, res) => {//Metele mano a esta parte mauro OwO SOS EL MEJOR TE KIERO
+    try{
+        console.log(req.body)
+        res.redirect('/admin-pautas-menu');
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 const addNewPauta = async (req,res) => {
     try{
         //Revisa el req.body porque hay mas cosas que insertar, los items uwu 
@@ -29,10 +44,10 @@ const editPauta = async (req,res) => {
         //Revisa el req.body porque hay mas cosas que insertar, los items uwu 
         //Mira la consola 
         //console.log("En Edit Pauta");
-        console.log(req.body);
+        //console.log(req.body);
         let codigoPautaEditar = req.body.codeToEditPauta;
         console.log("POST QUERY")
-        console.log(codigoPautaEditar)
+        //console.log(codigoPautaEditar)
         let pauta = (await 
             pool.query(
                 "select pm.codigo codigo_pauta, pm.nombre nombre_pauta, pm.tipo_periodo tperiodo, pm.cantidad_periodo cperiodo, pm.clase clase_pauta, pm.estado estado_pauta, pm.version version_pauta, pm.fecha_creacion, e.codigo codigo_empresa_pauta, e.nombre nombre_empresa_pauta, e.activa estado_empresa_pauta, eq.codigo codigo_equipo_pauta, eq.nombre nombre_equipo_pauta, eq.activo estado_equipo_pauta from pauta_mantenimiento pm inner join empresa e on pm.empresa = e.codigo inner join equipo eq on pm.equipo = eq.codigo where pm.codigo =$1",
@@ -41,7 +56,34 @@ const editPauta = async (req,res) => {
         pauta = pauta[0];
         const empresas = (await pool.query('select codigo, nombre from empresa')).rows;//Empresas en general
         const equipos = (await pool.query('select * from equipo')).rows;//Equipos en general
-        const itemSubitems = (await pool.query('select * from item i inner join subitem si on i.codigo = si.codigo_item where i.codigo_pauta =$1',[parseInt(codigoPautaEditar)])).rows;//Subitems de la pauta
+        //const itemSubitems = (await pool.query('select * from item i where i.codigo_pauta =$1',[parseInt(codigoPautaEditar)])).rows;//Subitems de la pauta
+        const items = (await pool.query('select * from item i where i.codigo_pauta =$1',[parseInt(codigoPautaEditar)])).rows;
+        const subitems = (await pool.query('select i.codigo codigo_item, si.codigo codigo_subitem, si.nombre subitem from item i inner join subitem si on i.codigo = si.codigo_item where i.codigo_pauta =$1',[parseInt(codigoPautaEditar)])).rows;
+        console.log("items:",items)
+        console.log("subitem:",subitems)
+
+        let dataPautaItems = []
+        console.log("Data Pauta Items antes de agregar los items \n", dataPautaItems)
+        for(let i = 0; i<items.length; i++){//Por cada item.
+            dataPautaItems[i] = {
+                'item': items[i].nombre,
+                'cantSubItem': 0,
+                'subitems': []
+            }
+            for(let j = 0; j<subitems.length; j++){//Por cada subitem.
+                //console.log("================================================ \n")
+                //console.log("items[i] = \n", items[i])
+                //console.log("subitems[j] = \n", subitems[j])
+                //console.log("items[i].codigo == subitems[j].codigo_item --> ", items[i].codigo == subitems[j].codigo_item)
+                //console.log("================================================ \n")
+                if(items[i].codigo == subitems[j].codigo_item){
+                    console.log(j)
+                    dataPautaItems[i].subitems[dataPautaItems[i].cantSubItem] = subitems[j].subitem;
+                    dataPautaItems[i].cantSubItem += 1;
+                }
+            }
+        }
+        //console.log("Data Pauta Items despues de agregado los items \n", dataPautaItems)
         
         //console.log("PAUTA")
         //console.log(pauta)
@@ -58,7 +100,7 @@ const editPauta = async (req,res) => {
         //fechacreacion --> no es necesario modificar esto jeje se mantiene la fecha de creacion de la vez que se creo 
         //Si tienes dudas sobre como guardamos las pautas mejor nos juntamos y hablamos no mas owo 
 
-        res.render('admin-pautas-menu-edit-pauta',{pauta , itemSubitems, empresas, equipos});
+        res.render('admin-pautas-menu-edit-pauta',{pauta , dataPautaItems, items, subitems, empresas, equipos});
     }
     catch(err){
         console.log(err);
@@ -275,6 +317,7 @@ module.exports = {
     editEquipo,
     addNewPauta,
     editPauta,
+    editExistPautaAdmin,
     addPautasMenu,
     adminEmpresaMenu,
     adminEquipoMenu,
