@@ -14,7 +14,7 @@ router.get('/admin-pautas-menu', esAdm, adminPautasMenu);
 router.get('/admin-pautas-menu-agregar-pauta', esAdm, addPautasMenu);
 router.post('/edit-pauta-admin', esAdm, editPauta);
 router.post('/add-new-pauta-admin', esAdm, addNewPauta);
-router.post('/edit-exist-pauta-admin', esAdm, editExistPautaAdmin)
+router.post('/edit-exist-pauta-admin', esAdm, editExistPautaAdmin);
 
 
 //Administracion de Empresas
