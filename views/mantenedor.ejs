@@ -42,18 +42,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Gestionar
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Pautas</a></li>
-                                <li><a class="dropdown-item" href="#">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="#">Equipos</a></li>
-                                <li><a class="dropdown-item" href="#">Empresas</a></li>
-                            </ul>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/">Cerrar Sesion</a>
                         </li>
@@ -67,16 +55,95 @@
         <div class="container-fluid">
             <div class="row white-box-transparent">
                 <div class="col-12">
-                    <!-- Nombre Administrador -->
+                    <!-- Nombre Mantenedor -->
                     <div class="row name-viewer-home">
-                        <div class="col-6">
-                            <h1>Mantenedor</h1>
+                        <div id=mantInfo class="col-6">
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="tabla-pautas" class="table table-light table-bordered table-hover table-striped">
+                            <thead class="bg-dark text-white">
+                                <th scope="row">Rellenar</th>
+                                <th scope="row">Nombre Pauta</th>
+                                <th scope="row">Fecha Realizar</th>
+                                <th scope="row">Ubicacion</th>
+                                <th scope="row">Estado</th>
+                                <th scope="row">Codigo Pauta</th>
+                            </thead>
+                            <tbody id="tbody-pautasMant">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <nav aria-label="usuarios-nav-pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <-- </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#"> --> </a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
+        <form action='/start-ficha' id="hiddenform" method="POST">
+            <input type=hidden id='pauta-hidden' name='pauta-codigo'>
+        </form>
     </section>
+    <script>
+        const mantInfo = <%- JSON.stringify(mantData) %>;
+        document.getElementById('mantInfo').innerHTML = "<h3> Nombre Usuario: "+mantInfo.nombre_usuario+"</h3>"+"<h3> Empresa: "+mantInfo.nombre_empresa+"</h3>";
+        
+        
+        const pautas = <%- JSON.stringify(pautas_mant) %>;
+        console.log(pautas)
+
+        function fillPautasTable(pautas){
+            const tbodyPautas = document.getElementById('tbody-pautasMant')
+            console.log(pautas)
+            console.log(pautas.length)
+            for(let i = 0; i<pautas.length; i++){
+                console.log("Esto paso ?")
+
+                const rowRef = tbodyPautas.insertRow(-1);
+                
+                const fillRef = rowRef.insertCell(-1);
+                const nameRef = rowRef.insertCell(-1);
+                const dateRef = rowRef.insertCell(-1);
+                const ubiRef = rowRef.insertCell(-1);
+                const estRef = rowRef.insertCell(-1);
+                const codRef = rowRef.insertCell(-1);
+
+                fillRef.innerHTML = '<button type="button" onclick=startFichaAtencion(this.id) id='+i+'-'+pautas[i].cod_pauta+' class="btn btn-primary pull-right"><i class="fas fa-arrow-circle-right"></i></button>'
+                nameRef.textContent = pautas[i].nombre_pauta
+                dateRef.textContent = pautas[i].fecha_realizar
+                ubiRef.textContent = pautas[i].ubicacion
+                estRef.textContent = pautas[i].estado
+                codRef.textContent =  pautas[i].codigo_pauta
+                
+
+            }
+        }
+
+        fillPautasTable(pautas)
+
+        function startFichaAtencion(id){
+            console.log("ENVIA ESTO --> ", id);
+            document.getElementById('pauta-hidden').value = id;
+            document.getElementById('hiddenform').submit();
+        }
+
+        
+
+    </script>
 </body>
 
 </html>
+
