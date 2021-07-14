@@ -28,6 +28,7 @@ const logging = async(req, res) => {
                     return res.redirect('/administrador');
                 } else {
                     console.log('Contraseña incorrecta');
+                    res.redirect('/');
                 }
             });
         }
@@ -47,6 +48,7 @@ const logging = async(req, res) => {
                     return res.redirect('/pln');
                 } else {
                     console.log('Contraseña incorrecta');
+                    res.redirect('/');
                 }
             });
         }
@@ -67,14 +69,13 @@ const logging = async(req, res) => {
                     return res.redirect('/mtn');
                 } else {
                     console.log('Contraseña incorrecta');
+                    res.redirect('/');
                 }
             });
         }
     } catch (err) {
         console.log(err);
     }
-
-
 }
 
 module.exports = {
