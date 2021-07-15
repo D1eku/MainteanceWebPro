@@ -66,16 +66,16 @@
                                 <!-- Mantencion (literal) -->
                                 <!-- Codigo Mantencion-->
                                 <div class="input-group mb-4">
-                                    <span class="input-group-text" id="basic-addon1">Mantencion</span>
-                                    <input type="text" class="form-control" placeholder="00001" value="00001" disabled>
+                                    <span class="input-group-text" >Mantencion</span>
+                                    <input type="text" id=mant-code-pauta class="form-control" placeholder="00001" value="00001" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <!-- Nombre Pauta (literal) -->
                                 <!-- NOMBRE PAUTA -->
                                 <div class="input-group mb-4">
-                                    <span class="input-group-text" id="basic-addon1">Nombre Pauta</span>
-                                    <input type="text" class="form-control" placeholder="Mantencion Motocierras" value="Mantencion Motocierras" disabled>
+                                    <span class="input-group-text" >Nombre Pauta</span>
+                                    <input type="text" id=name-pauta name=nombrePauta class="form-control" placeholder="Nombre Pauta" value="Mantencion Motocierras" disabled>
                                 </div>
                             </div>
                             
@@ -85,22 +85,31 @@
                             <!-- ==================================== -->
                             <div class="col-lg-4 col-md-6 col-sm-12" ><!-- Nombre Tecnico -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Nombre Tecnico</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text" >Nombre Tecnico</span>
+                                    <input type="text" id=tec-name-pauta name=nombreTecnicoPauta class="form-control" placeholder="Nombre Tecnico" disabled>
                                 </div>    
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12" ><!-- Turno -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Turno</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                                </div>    
+                                    <span class="input-group-text" >Turno</span>
+                                    <select class="form-select" name='turnoPauta'>
+                                        <option> TA: 8:00 - 20:00 </option>
+                                        <option> TB: 20:00 - 8:00 </option>
+                                    </select>
+                                </div> 
                             </div>
                             <div class="col-lg-4 col-md-12 col-sm-12"><!-- Tipo Actividad -->
                                 <div class=row>
                                     <div class=col-sm-12>
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">Tipo Actividad</span>
-                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                            <span class="input-group-text" >Tipo Actividad</span>
+                                            <select class="form-select" name='tipoActividadPauta'>
+                                                <option> Mantenimiento Planificado </option>
+                                                <option> Mantenimiento Correctivo </option>
+                                                <option> Instalacion </option>
+                                                <option> Desinstalacion </option>
+                                                <option> Inspeccion </option>
+                                            </select>
                                         </div> 
                                     </div>
                                 </div>
@@ -110,29 +119,29 @@
                              <!-- ==================================== -->
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Nombre Equipo -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Nombre Equipo</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text" >Nombre Equipo</span>
+                                    <input id=name-equipo-pauta type="text" class="form-control" placeholder="Nombre Equipo" name=nombreEquipoPauta disabled>
                                 </div>    
                             </div>
     
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Codigo Equipo -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Codigo Equipo</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text">Codigo Equipo</span>
+                                    <input id=code-equipo-pauta type="text" class="form-control" placeholder="Codigo Equipo" name=codigoEquipoPauta disabled>
                                 </div>    
                             </div>
                             <!-- ==================================== -->
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Fecha calendarizada -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Fecha Calendarizada</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text" >Fecha Calendarizada</span>
+                                    <input id=date-cal-pauta type="text" class="form-control" placeholder="01-01-1999" name=fechaCalendarizadaPauta disabled>
                                 </div>    
                             </div>
                             
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Fecha de hoy -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Fecha Realizada</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text" >Fecha Realizada</span>
+                                    <input id=date-rea-pauta type="text" class="form-control" placeholder="01-01-1999" name=fechaRealizadaPauta disabled>
                                 </div>    
                             </div>
                             <!-- ==================================== -->
@@ -140,8 +149,8 @@
                             <!-- ==================================== -->
                             <div class="col-12" ><!-- Diagnostico Inicial -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Diagnostico Inicial</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text" >Diagnostico Inicial</span>
+                                    <input type="text" class="form-control" placeholder="Diagnostico Inicial" name=diagnosticoPauta>
                                 </div>    
                             </div>
                             <!-- ==================================== -->
@@ -149,14 +158,14 @@
                             <!-- ==================================== -->
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Supervisor Empresa -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Supervisor Empresa</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text" >Supervisor Empresa</span>
+                                    <input type="text" class="form-control" placeholder="Supervisor Empresa" name=supervisorEmpresaPauta>
                                 </div>    
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Supervisor Mandante -->
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">Supervisor Mandante</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <span class="input-group-text" >Supervisor Mandante</span>
+                                    <input type="text" class="form-control" placeholder="Supervisor Mandante" name=supervisorMandantePauta>
                                 </div>    
                             </div>
                             <!-- ==================================== -->
@@ -186,7 +195,7 @@
                                         <td>Subitem 1</td>
                                         <td>
                                             <div class="input-group mb-3">
-                                                <select class="form-select" aria-label="Default select example">
+                                                <select class="form-select" >
                                                     <option> Funcional </option>
                                                     <option> No Funcional </option>
                                                     <option> Roto </option>
@@ -196,7 +205,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group mb-3">
-                                                <select class="form-select" aria-label="Default select example">
+                                                <select class="form-select" >
                                                     <option> Funcional </option>
                                                     <option> No Funcional </option>
                                                     <option> Roto </option>
@@ -206,7 +215,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group mb-3">
-                                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                <input id= type="text" class="form-control" placeholder="Observacion" name=observacionIPauta>
                                             </div>
                                         </td>
                                     </tr>
@@ -292,10 +301,24 @@
 
         function fillPage(data){
             console.log(data)
+            document.getElementById('mant-code-pauta').value = data.codigoPautaMantencion
+            document.getElementById('name-pauta').value = data.nombrePauta
+            document.getElementById('tec-name-pauta').value = data.nombreTecnicoPauta
+            document.getElementById('name-equipo-pauta').value = data.nombreEquipoPauta
+            document.getElementById('code-equipo-pauta').value = data.codigoEquipoPauta
+            document.getElementById('date-cal-pauta').value = data.fechaCalendarizadaPauta
+            document.getElementById('date-rea-pauta').value = new Date(Date.now()).toLocaleDateString()
+            
         }
 
-        fillPage();
+        fillPage(pautaInfo);
         
+        
+
+
+
+
+
 
 
     </script>

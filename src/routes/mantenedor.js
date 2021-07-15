@@ -10,10 +10,12 @@ router.get('/mtn', esMtn, mantenedorMenu);
 
 router.post('/start-ficha', esMtn, (req, res) => {
     const pautaInfo = {
-        'info1': 'text',
-        'info2': 'text',
-        'info3': 'text',
-        'info4': 'text'
+        'codigoPautaMantencion': 'text',
+        'nombrePauta': 'text',
+        'nombreTecnicoPauta': 'text',
+        'nombreEquipoPauta': 'text',
+        'codigoEquipoPauta': 'text',
+        'fechaCalendarizadaPauta': 'text'
     }
     res.render('man-ficha', { pautaInfo })
 });
