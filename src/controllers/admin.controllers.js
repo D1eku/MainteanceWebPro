@@ -17,21 +17,47 @@ const editExistPautaAdmin = async(req, res) => { //Metele mano a esta parte maur
             cantidad_periodo_pauta,
             empresa_pauta,
             clase_pauta,
-            //faltaVersion,
+            version_pauta,
             itemsInfo
         } = req.body
-        let version_pauta = "1.0";
+        let new_ver = (parseFloat(version_pauta) + 0.1).toString();
+
         var fecha = new Date();
         var mes = fecha.getMonth();
-        mes = parseInt(mes) + 1
+        mes = parseInt(mes) + 1;
         if (mes < 10) {
             mes = '0' + mes;
         }
         var fecha_pauta = fecha.getFullYear() + '-' + mes + '-' + fecha.getDate();
-
         console.log(codigo_pauta + "; " + version_pauta + "; " + fecha_pauta);
-        console.log(req.body)
+
+        /*
+        let dropItemsSubItems = (await pool.query('DELETE FROM subitem s inner join item i on s.codigo_item = i.codigo WHERE i.codigo_pauta = $1; DELETE FROM item WHERE codigo_pauta = $1', [codigoPautaEditada]));
+        let cantSubItems = (await pool.query('SELECT * from subitem')).rows.length;
+        let cantItems = (await pool.query('SELECT * from item')).rows.length;
+
+
+        updatePauta = await pool.query('UPDATE pauta_mantenimiento SET nombre = $2, version = $3, cantidad_periodo = $4, tipo_periodo = $5, clase = $6, equipo = $7, empresa = $8)', [codigoPautaEditada, nombre_pauta, version_pauta, cantidad_periodo_pauta, tipo_periodicidad_pauta, clase_pauta,
+             equipo_pauta, empresa_pauta
+        ]);
+
+        var itemsJSON = eval(itemsInfo);
+        for (var i = 0; i < itemsJSON.length; i++) {
+            var obj = itemsJSON[i];
+            codItem = ++cantItems;
+            addItem = await pool.query("INSERT INTO item values($1, $2, $3)", [codItem, obj.item, codigo_pauta]);
+            //console.log(obj);
+            console.log(codItem);
+            for (var j = 0; j < obj.cantSubItem; j++) {
+                codSubItem = ++cantSubItems;
+                console.log(codSubItem);
+                addSubItem = await pool.query("INSERT INTO subitem values($1, $2, $3)", [codSubItem, obj.subitems[j], codItem]);
+                //console.log(obj.subitems[j]);
+            }
+        }
+        console.log("Pauta Editada");
         res.redirect('/admin-pautas-menu');
+        */
     } catch (err) {
         console.log(err);
     }
@@ -343,7 +369,6 @@ const adminEmpresaMenu = async(req, res) => {
         console.log(err);
     }
 }
-
 
 const adminUserMenu = async(req, res) => {
     try {
