@@ -56,7 +56,7 @@
             <div class="fichaAtencion text-white">
                 <h2>Ficha Atencion</h2>
             </div>
-            <form>
+            <form id=formMainteance method=POST action='/send-data-of-mainteance'>
                 <div class="row white-box-transparent">
                     <!-- Informacion de la Pauta -->
                     <div class='col-12'>
@@ -67,7 +67,7 @@
                                 <!-- Codigo Mantencion-->
                                 <div class="input-group mb-4">
                                     <span class="input-group-text" >Mantencion</span>
-                                    <input type="text" id=mant-code-pauta class="form-control" placeholder="00001" value="00001" disabled>
+                                    <input type="text" id=mant-code-pauta class="form-control" placeholder="00001" value="00001" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -75,7 +75,7 @@
                                 <!-- NOMBRE PAUTA -->
                                 <div class="input-group mb-4">
                                     <span class="input-group-text" >Nombre Pauta</span>
-                                    <input type="text" id=name-pauta name=nombrePauta class="form-control" placeholder="Nombre Pauta" value="Mantencion Motocierras" disabled>
+                                    <input type="text" id=name-pauta name=nombrePauta class="form-control" placeholder="Nombre Pauta" value="Mantencion Motocierras" readonly>
                                 </div>
                             </div>
                             
@@ -86,7 +86,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-12" ><!-- Nombre Tecnico -->
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" >Nombre Tecnico</span>
-                                    <input type="text" id=tec-name-pauta name=nombreTecnicoPauta class="form-control" placeholder="Nombre Tecnico" disabled>
+                                    <input type="text" id=tec-name-pauta name=nombreTecnicoPauta class="form-control" placeholder="Nombre Tecnico" readonly>
                                 </div>    
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12" ><!-- Turno -->
@@ -120,28 +120,28 @@
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Nombre Equipo -->
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" >Nombre Equipo</span>
-                                    <input id=name-equipo-pauta type="text" class="form-control" placeholder="Nombre Equipo" name=nombreEquipoPauta disabled>
+                                    <input id=name-equipo-pauta type="text" class="form-control" placeholder="Nombre Equipo" name=nombreEquipoPauta readonly>
                                 </div>    
                             </div>
     
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Codigo Equipo -->
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Codigo Equipo</span>
-                                    <input id=code-equipo-pauta type="text" class="form-control" placeholder="Codigo Equipo" name=codigoEquipoPauta disabled>
+                                    <input id=code-equipo-pauta type="text" class="form-control" placeholder="Codigo Equipo" name=codigoEquipoPauta readonly>
                                 </div>    
                             </div>
                             <!-- ==================================== -->
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Fecha calendarizada -->
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" >Fecha Calendarizada</span>
-                                    <input id=date-cal-pauta type="text" class="form-control" placeholder="01-01-1999" name=fechaCalendarizadaPauta disabled>
+                                    <input id=date-cal-pauta type="text" class="form-control" placeholder="01-01-1999" name=fechaCalendarizadaPauta readonly>
                                 </div>    
                             </div>
                             
                             <div class="col-lg-6 col-md-6 col-sm-12" ><!-- Fecha de hoy -->
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" >Fecha Realizada</span>
-                                    <input id=date-rea-pauta type="text" class="form-control" placeholder="01-01-1999" name=fechaRealizadaPauta disabled>
+                                    <input id=date-rea-pauta type="text" class="form-control" placeholder="01-01-1999" name=fechaRealizadaPauta readonly>
                                 </div>    
                             </div>
                             <!-- ==================================== -->
@@ -189,14 +189,12 @@
                         </div>
                     </div>
                     <div class="col-6 ">
-                        <button type="button" class="btn btn-lg btn-primary">
+                        <button type="button" onclick="sendData();" class="btn btn-lg btn-primary">
                             Enviar
                         </button>
                     </div>
                     <div class="col-6 ">
-                        <button type="button" class="btn btn-lg btn-warning">
-                            Cancelar
-                        </button>
+                        <a href="/mtn" class="btn btn-warning btn-lg">Cancelar</a>
                     </div>
                 </div>
             </form>
@@ -209,33 +207,52 @@
 
         const tbodyItems = document.getElementById('tbody-items')
 
-        function inserItemRow(item){
-            const rowRef = tbodyItems.inserRow(-1)
+        function insertItemRow(item){
+            const rowRef = tbodyItems.insertRow(-1)
             const itemCell = rowRef.insertCell(-1)//Columna 0 es el item info
-            itemCell.textContent = item;
+            itemCell.textContent = item.item;
             for(let i = 0; i<4; i++){//Columna 1 - 4 vacio
                 const emptyCell = rowRef.insertCell(-1)
                 emptyCell.textContent = "";
                 
             }
         }
+        /* Esta funcion no, kaka ta mala 
 
-        function insertSubitemRow(subitem){
-            const rowRef = tbodyItems.inserRow(-1)
+        function insertSubitemRow(item, i){
+            const rowRef = tbodyItems.insertRow(-1)
             const emptyCell = rowRef.insertCell(-1)//La primera columna de la fila es vacia.
             emptyCell.textContent = "";
             const subitemCell = rowRef.insertCell(-1)//La segunda columna de la fila es el subitem
-            subitemCell.textContent = subitem;
+            subitemCell.textContent = item.subitem;
 
             //La tercera columna de la fila es estado recibido
             const estRecCell = rowRef.insertCell(-1)
-            estRecCell.innerHTML = '<div class="input-group mb-3"><select name="estado-subitem-"+subitem.codigo_subitem class="form-select" ><option> Funcional </option><option> No Funcional </option><option> Roto </option><option> NA </option></select></div>'
+            estRecCell.innerHTML = '<input name="codigo_subitem_'+i+'" value='+item.codigo_subitem+' type=hidden ><div class="input-group mb-3"><select name="estadoRecibidoSubitem_'+i+'" class="form-select" ><option> Funcional </option><option> No Funcional </option><option> Roto </option><option> NA </option></select></div>'
             //La cuarta columna de la fila es estado entrega
             const estEntCell = rowRef.insertCell(-1)
-            estEntCell.innerHTML = 
+            estEntCell.innerHTML = '<div class="input-group mb-3"> <select name="estadoEntregadoSubitem_'+i+'" class="form-select" > <option> Funcional </option> <option> No Funcional </option><option> Roto </option> <option> NA </option> </select> </div>'
             //la quinta columna de la fila es observacion detalles 
             const obsCell = rowRef.insertCell(-1)
-            obsCell.innerHTML = 
+            obsCell.innerHTML = '<div class="input-group mb-3"><input name="observacionIPauta_'+i+'" type="text" class="form-control" placeholder="Observacion" ></div>'
+        }   */
+
+        function insertSubitemRow(item, i){
+            const rowRef = tbodyItems.insertRow(-1)
+            const emptyCell = rowRef.insertCell(-1)//La primera columna de la fila es vacia.
+            emptyCell.textContent = "";
+            const subitemCell = rowRef.insertCell(-1)//La segunda columna de la fila es el subitem
+            subitemCell.textContent = item.subitem;
+
+            //La tercera columna de la fila es estado recibido
+            const estRecCell = rowRef.insertCell(-1)
+            estRecCell.innerHTML = '<input name="codigo_subitem" value='+item.codigo_subitem+' type=hidden ><div class="input-group mb-3"><select name="estadoRecibidoSubitem" class="form-select" ><option> Funcional </option><option> No Funcional </option><option> Roto </option><option> NA </option></select></div>'
+            //La cuarta columna de la fila es estado entrega
+            const estEntCell = rowRef.insertCell(-1)
+            estEntCell.innerHTML = '<div class="input-group mb-3"> <select name="estadoEntregadoSubitem" class="form-select" > <option> Funcional </option> <option> No Funcional </option><option> Roto </option> <option> NA </option> </select> </div>'
+            //la quinta columna de la fila es observacion detalles 
+            const obsCell = rowRef.insertCell(-1)
+            obsCell.innerHTML = '<div class="input-group mb-3"><input name="observacionIPauta" type="text" class="form-control" placeholder="Observacion" ></div>'
         }   
 
         function fillPage(data){
@@ -254,14 +271,29 @@
         function fillItems(items){
             //Items ahora
             console.log(items)
+            let beforeItem = null;
             for(let i = 0 ; i<items.length; i++){
-
+                if(i == 0){
+                    insertItemRow(items[i])
+                    beforeItem = items[i]
+                }else{
+                    if(beforeItem.codigo_item == items[i].codigo_item){//Si el codigo del item anterior es igual, se inserta un subitem
+                        insertSubitemRow(items[i], i)
+                    }else{//Si no se debe insertar un item
+                        insertItemRow(items[i])
+                    }
+                    beforeItem = items[i]//Se actualiza el item ese
+                }
             }
         }
 
         fillPage(pautaInfo[0]);
         fillItems(itemsInfo);
         
+
+        function sendData(){
+            document.getElementById('formMainteance').submit()
+        }
 
 
 
