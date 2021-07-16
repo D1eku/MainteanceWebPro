@@ -21,7 +21,7 @@ const editExistPautaAdmin = async(req, res) => { //Metele mano a esta parte maur
             itemsInfo
         } = req.body
         let new_ver = (parseFloat(version_pauta) + 0.1).toString();
-
+        let new_codigo = parseInt((codigoPautaEditada + new_ver).toString().replace('.', ''));
         var fecha = new Date();
         var mes = fecha.getMonth();
         mes = parseInt(mes) + 1;
@@ -29,23 +29,22 @@ const editExistPautaAdmin = async(req, res) => { //Metele mano a esta parte maur
             mes = '0' + mes;
         }
         var fecha_pauta = fecha.getFullYear() + '-' + mes + '-' + fecha.getDate();
-        console.log(codigo_pauta + "; " + version_pauta + "; " + fecha_pauta);
+        console.log("codViejo: " + codigoPautaEditada + "; \n versionVieja:" + version_pauta + "; \n fechaNueva:" + fecha_pauta + "; codNuevo: " + new_codigo + ";\n");
 
-        /*
-        let dropItemsSubItems = (await pool.query('DELETE FROM subitem s inner join item i on s.codigo_item = i.codigo WHERE i.codigo_pauta = $1; DELETE FROM item WHERE codigo_pauta = $1', [codigoPautaEditada]));
+
         let cantSubItems = (await pool.query('SELECT * from subitem')).rows.length;
         let cantItems = (await pool.query('SELECT * from item')).rows.length;
 
-
-        updatePauta = await pool.query('UPDATE pauta_mantenimiento SET nombre = $2, version = $3, cantidad_periodo = $4, tipo_periodo = $5, clase = $6, equipo = $7, empresa = $8)', [codigoPautaEditada, nombre_pauta, version_pauta, cantidad_periodo_pauta, tipo_periodicidad_pauta, clase_pauta,
-             equipo_pauta, empresa_pauta
+        updatePauta = await pool.query('UPDATE pauta_mantenimiento SET estado = $2 where codigo = $1', [codigoPautaEditada, "Inactiva"]);
+        addToPauta = await pool.query('INSERT INTO pauta_mantenimiento VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', [new_codigo, nombre_pauta, new_ver, cantidad_periodo_pauta, tipo_periodicidad_pauta, "Activa", clase_pauta,
+            fecha_pauta, equipo_pauta, empresa_pauta
         ]);
 
         var itemsJSON = eval(itemsInfo);
         for (var i = 0; i < itemsJSON.length; i++) {
             var obj = itemsJSON[i];
             codItem = ++cantItems;
-            addItem = await pool.query("INSERT INTO item values($1, $2, $3)", [codItem, obj.item, codigo_pauta]);
+            addItem = await pool.query("INSERT INTO item values($1, $2, $3)", [codItem, obj.item, new_codigo]);
             //console.log(obj);
             console.log(codItem);
             for (var j = 0; j < obj.cantSubItem; j++) {
@@ -55,9 +54,10 @@ const editExistPautaAdmin = async(req, res) => { //Metele mano a esta parte maur
                 //console.log(obj.subitems[j]);
             }
         }
+
         console.log("Pauta Editada");
         res.redirect('/admin-pautas-menu');
-        */
+
     } catch (err) {
         console.log(err);
     }
@@ -76,7 +76,6 @@ const addNewPauta = async(req, res) => {
             clase_pauta,
             itemsInfo
         } = req.body
-            //codigo (podría generarlo automaticamente??) --> Si, generalo automatico.
         let codigo_pauta = Math.floor(Math.random() * 100000);
         let version_pauta = "1.0";
         var fecha = new Date();
@@ -127,17 +126,8 @@ const addNewPauta = async(req, res) => {
 
 const editPauta = async(req, res) => {
     try {
-        //Cambiar en el boton editar de POST A GET 
-
-        "select * from pauta_mantenimiento pm inner join empresa e on pm.empresa = e.codigo inner join item i on i.codigo_pauta = pm.codigo inner join subitem si  on si.codigo_item = i.codigo where pm.codigo = 1"
-        //editar aun no funciona creo??, Si aun no funciona XD
-        //Revisa el req.body porque hay mas cosas que insertar, los items uwu 
-        //Mira la consola 
-        //console.log("En Edit Pauta");
-        //console.log(req.body);
         let codigoPautaEditar = req.body.codeToEditPauta;
         console.log("POST QUERY")
-            //console.log(codigoPautaEditar)
         let pauta = (await pool.query(
             "select pm.codigo codigo_pauta, pm.nombre nombre_pauta, pm.tipo_periodo tperiodo, pm.cantidad_periodo cperiodo, pm.clase clase_pauta, pm.estado estado_pauta, pm.version version_pauta, pm.fecha_creacion, e.codigo codigo_empresa_pauta, e.nombre nombre_empresa_pauta, e.activa estado_empresa_pauta, eq.codigo codigo_equipo_pauta, eq.nombre nombre_equipo_pauta, eq.activo estado_equipo_pauta from pauta_mantenimiento pm inner join empresa e on pm.empresa = e.codigo inner join equipo eq on pm.equipo = eq.codigo where pm.codigo =$1", [parseInt(codigoPautaEditar)]
         )).rows;
@@ -171,23 +161,6 @@ const editPauta = async(req, res) => {
                 }
             }
         }
-        //console.log("Data Pauta Items despues de agregado los items \n", dataPautaItems)
-
-        //console.log("PAUTA")
-        //console.log(pauta)
-        //console.log("itemSubitems")
-        //console.log(itemSubitems)
-        //console.log("empresas")
-        //console.log(empresas)
-        //console.log("equipos")
-        //console.log(equipos)
-
-        //let {nombre_pauta, equipo_pauta, tipo_periodicidad_pauta, cantidad_periodo_pauta, empresa_pauta, clase_pauta} = req.body
-        //codigo (podría generarlo automaticamente??), el codigo no se edita, Se mantiene en el tiempo.
-        //version (comienza con 1.0?) --> Si editas una pauta, aumenta en 1, entonces 1.0 --> 1.1
-        //fechacreacion --> no es necesario modificar esto jeje se mantiene la fecha de creacion de la vez que se creo 
-        //Si tienes dudas sobre como guardamos las pautas mejor nos juntamos y hablamos no mas owo 
-
         res.render('admin-pautas-menu-edit-pauta', { pauta, dataPautaItems, items, subitems, empresas, equipos });
     } catch (err) {
         console.log(err);
@@ -354,7 +327,7 @@ const addPautasMenu = async(req, res) => {
 
 const adminPautasMenu = async(req, res) => {
     try {
-        const pautas = (await pool.query("select pm.codigo, pm.nombre, pm.clase, pm.fecha_creacion, e.nombre nom_empresa, e.codigo cod_empresa, pm.equipo, pm.version from pauta_mantenimiento pm inner join empresa e on pm.empresa = e.codigo")).rows;
+        const pautas = (await pool.query("select pm.codigo, pm.nombre, pm.clase, pm.fecha_creacion, e.nombre nom_empresa, e.codigo cod_empresa, pm.equipo, pm.version, pm.estado from pauta_mantenimiento pm inner join empresa e on pm.empresa = e.codigo")).rows;
         res.render('admin-pautas-menu', { nombre: req.session.nombre, pautas });
     } catch (err) {
         console.log(err);

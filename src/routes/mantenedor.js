@@ -1,9 +1,7 @@
 const { Router } = require("express");
-
 const router = Router();
 
 const { esMtn } = require('../js/auth');
-
 const { mantenedorMenu, getFichaFill } = require('../controllers/mantenedor.controllers');
 
 router.get('/mtn', esMtn, mantenedorMenu);

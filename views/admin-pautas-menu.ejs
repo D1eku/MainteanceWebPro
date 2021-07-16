@@ -6,18 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <!--Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
-        integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
-        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous">
     </script>
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/d82979872c.js" crossorigin="anonymous"></script>
@@ -75,8 +71,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 text-right">
                     <div class="top-pauta-info">
                         <a class="btn btn-primary btn-lg" href="/admin-pautas-menu-agregar-pauta">
-                            <i class="fas fa-plus"></i>
-                            Agregar Nueva Pauta
+                            <i class="fas fa-plus"></i> Agregar Nueva Pauta
                         </a>
                     </div>
                 </div>
@@ -122,33 +117,37 @@
     <form action='/edit-pauta-admin' id="hiddenform" method="POST">
         <input type=hidden id='pauta-info-edit' name='codeToEditPauta'>
     </form>
-    
+
     <!--Menu Options - Section -->
     <script>
         const pautas = <%- JSON.stringify(pautas) %>
-        
 
-        function loadTableWithPautas( pautas ){
+
+        function loadTableWithPautas(pautas) {
             console.log(pautas)
             const tbodyRef = document.getElementById('tbody-pautas')
 
-            for(let i = 0;i <pautas.length; i++){
+            for (let i = 0; i < pautas.length; i++) {
                 //console.log("EN CICLO FOR")
                 const pautaInfoI = pautas[i];
                 //Crear la nueva fila y sus respectivas celdas.
                 let newRow = tbodyRef.insertRow();
-                let newColEditButton = newRow.insertCell(-1);//Boton editar pauta --> redirige a editar pauta 
-                let newColCod = newRow.insertCell(-1);//codigo de la pauta
-                let newColName = newRow.insertCell(-1);//nombre de la pauta
-                let newColClass = newRow.insertCell(-1);//clase de la pauta
-                let newColCreation = newRow.insertCell(-1);//fecha creacion de la pauta
-                let newColBusinessName = newRow.insertCell(-1);//nombre de la empresa
-                let newColEquip = newRow.insertCell(-1);//codigo equipo pauta
-                let newColVersion = newRow.insertCell(-1);//version pauta
+                let newColEditButton = newRow.insertCell(-1); //Boton editar pauta --> redirige a editar pauta 
+                let newColCod = newRow.insertCell(-1); //codigo de la pauta
+                let newColName = newRow.insertCell(-1); //nombre de la pauta
+                let newColClass = newRow.insertCell(-1); //clase de la pauta
+                let newColCreation = newRow.insertCell(-1); //fecha creacion de la pauta
+                let newColBusinessName = newRow.insertCell(-1); //nombre de la empresa
+                let newColEquip = newRow.insertCell(-1); //codigo equipo pauta
+                let newColVersion = newRow.insertCell(-1); //version pauta
 
                 //Insertar datos en celdas
-                console.log("Pautas[i].codigo --> ", pautas[i].codigo)
-                newColEditButton.innerHTML = '<button type="button" id='+pautas[i].codigo+' onclick="editPauta(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i>Editar</button>'
+                console.log("Pautas[i].codigo --> ", pautas[i].estado)
+                if (pautas[i].estado == "Inactiva") {
+                    newColEditButton.innerHTML = '<button type="button" id=' + pautas[i].codigo + ' onclick="editPauta(this.id);" class="btn btn-primary pull-right"disabled><i class="fas fa-edit"></i>Editar</button>'
+                } else {
+                    newColEditButton.innerHTML = '<button type="button" id=' + pautas[i].codigo + ' onclick="editPauta(this.id);" class="btn btn-primary pull-right"><i class="fas fa-edit"></i>Editar</button>'
+                }
                 newColCod.textContent = pautas[i].codigo
                 newColName.textContent = pautas[i].nombre
                 newColClass.textContent = pautas[i].clase;
@@ -157,12 +156,12 @@
                 newColEquip.textContent = pautas[i].equipo
                 newColVersion.textContent = pautas[i].version;
 
-            }  
-            
-            
-        }   
+            }
 
-        function editPauta(id){
+
+        }
+
+        function editPauta(id) {
             console.log("ENVIA ESTO --> ", id);
             document.getElementById('pauta-info-edit').value = id;
             console.log(document.getElementById('pauta-info-edit').value)
