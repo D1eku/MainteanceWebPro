@@ -31,7 +31,7 @@
     <section id="title">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Mantenedor</a>
+                <a class="navbar-brand" href="/mtn">Mantenedor</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/mtn">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/">Cerrar Sesion</a>
@@ -183,100 +183,7 @@
                                     <th style ="width: 150px;" scope="row">Observacion Detalles</th>
                                 </thead>
                                 <tbody id="tbody-items">
-                                    <tr>
-                                        <td>Item 1</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Subitem 1</td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <select class="form-select" >
-                                                    <option> Funcional </option>
-                                                    <option> No Funcional </option>
-                                                    <option> Roto </option>
-                                                    <option> NA </option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <select class="form-select" >
-                                                    <option> Funcional </option>
-                                                    <option> No Funcional </option>
-                                                    <option> Roto </option>
-                                                    <option> NA </option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <input id= type="text" class="form-control" placeholder="Observacion" name=observacionIPauta>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Subitem 2</td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option> Funcional </option>
-                                                    <option> No Funcional </option>
-                                                    <option> Roto </option>
-                                                    <option> NA </option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option> Funcional </option>
-                                                    <option> No Funcional </option>
-                                                    <option> Roto </option>
-                                                    <option> NA </option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Subitem 3 </td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option> Funcional </option>
-                                                    <option> No Funcional </option>
-                                                    <option> Roto </option>
-                                                    <option> NA </option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option> Funcional </option>
-                                                    <option> No Funcional </option>
-                                                    <option> Roto </option>
-                                                    <option> NA </option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group mb-3">
-                                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -297,22 +204,63 @@
     </section>
     <script>
         
-        const pautaInfo = <%- JSON.stringify(pautaInfo) %>
+        const pautaInfo = <%- JSON.stringify(pautaInfo) %>;
+        const itemsInfo = <%- JSON.stringify(itemsPauta) %>;
 
-        function fillPage(data){
-            console.log(data)
-            document.getElementById('mant-code-pauta').value = data.codigoPautaMantencion
-            document.getElementById('name-pauta').value = data.nombrePauta
-            document.getElementById('tec-name-pauta').value = data.nombreTecnicoPauta
-            document.getElementById('name-equipo-pauta').value = data.nombreEquipoPauta
-            document.getElementById('code-equipo-pauta').value = data.codigoEquipoPauta
-            document.getElementById('date-cal-pauta').value = data.fechaCalendarizadaPauta
-            document.getElementById('date-rea-pauta').value = new Date(Date.now()).toLocaleDateString()
-            
+        const tbodyItems = document.getElementById('tbody-items')
+
+        function inserItemRow(item){
+            const rowRef = tbodyItems.inserRow(-1)
+            const itemCell = rowRef.insertCell(-1)//Columna 0 es el item info
+            itemCell.textContent = item;
+            for(let i = 0; i<4; i++){//Columna 1 - 4 vacio
+                const emptyCell = rowRef.insertCell(-1)
+                emptyCell.textContent = "";
+                
+            }
         }
 
-        fillPage(pautaInfo);
-        
+        function insertSubitemRow(subitem){
+            const rowRef = tbodyItems.inserRow(-1)
+            const emptyCell = rowRef.insertCell(-1)//La primera columna de la fila es vacia.
+            emptyCell.textContent = "";
+            const subitemCell = rowRef.insertCell(-1)//La segunda columna de la fila es el subitem
+            subitemCell.textContent = subitem;
+
+            //La tercera columna de la fila es estado recibido
+            const estRecCell = rowRef.insertCell(-1)
+            estRecCell.innerHTML = '<div class="input-group mb-3"><select name="estado-subitem-"+subitem.codigo_subitem class="form-select" ><option> Funcional </option><option> No Funcional </option><option> Roto </option><option> NA </option></select></div>'
+            //La cuarta columna de la fila es estado entrega
+            const estEntCell = rowRef.insertCell(-1)
+            estEntCell.innerHTML = 
+            //la quinta columna de la fila es observacion detalles 
+            const obsCell = rowRef.insertCell(-1)
+            obsCell.innerHTML = 
+        }   
+
+        function fillPage(data){
+            //Pauta info 
+            //console.log(data)
+            document.getElementById('mant-code-pauta').value = data.codigo_mantencion
+            document.getElementById('name-pauta').value = data.nombre_pauta
+            document.getElementById('tec-name-pauta').value = data.nombre_tecnico
+            document.getElementById('name-equipo-pauta').value = data.nombre_equipo
+            document.getElementById('code-equipo-pauta').value = data.codigo_equipo
+            document.getElementById('date-cal-pauta').value = new Date(data.fecha_calendarizada).toLocaleDateString()
+            document.getElementById('date-rea-pauta').value = new Date(Date.now()).toLocaleDateString()
+    
+        }
+
+        function fillItems(items){
+            //Items ahora
+            console.log(items)
+            for(let i = 0 ; i<items.length; i++){
+
+            }
+        }
+
+        fillPage(pautaInfo[0]);
+        fillItems(itemsInfo);
         
 
 

@@ -27,14 +27,14 @@
     <section id="title">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Mantenedor</a>
+                <a class="navbar-brand" href="/mtn">Mantenedor</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/mtn">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/">Cerrar Sesion</a>
@@ -111,7 +111,7 @@
                 const ubiRef = rowRef.insertCell(-1);
                 const estRef = rowRef.insertCell(-1);
                 const codRef = rowRef.insertCell(-1);
-                fillRef.innerHTML = '<button type="button" onclick=startFichaAtencion(this.id) id=' + i + '-' + pautas[i].codigo_pauta + ' class="btn btn-primary pull-right"><i class="fas fa-arrow-circle-right"></i></button>'
+                fillRef.innerHTML = '<button type="button" onclick=startFichaAtencion(this.id) id=' + pautas[i].codigo_calendario + '-' + pautas[i].codigo_pauta + ' class="btn btn-primary pull-right"><i class="fas fa-arrow-circle-right"></i></button>'
                 nameRef.textContent = pautas[i].nombre_pauta
                 const dateReal = new Date(pautas[i].fecha_realizar).toLocaleDateString()
                 const dateToday = new Date(Date.now()).toLocaleDateString()

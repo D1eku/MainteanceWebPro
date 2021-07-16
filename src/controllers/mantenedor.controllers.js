@@ -47,9 +47,13 @@ const mantenedorMenu = async(req, res) => {
 const getFichaFill = async(req, res) => {
     console.log(req.body)
     const codigoPautaBuscar = req.body.pautaCodigo.split("-")[1]
-    const pautaInfo = (await pool.query("select * from pauta_mantenimiento p inner join item i on i.codigo_pauta = p.codigo inner join subitem si on si.codigo_item = i.codigo where p.codigo = $1 ",[codigoPautaBuscar])).rows;
+    const codigoCalendarioBuscar = req.body.pautaCodigo.split('-')[0]
+    console.log("Funciona esto ? ")
+    const pautaInfo = (await pool.query("select  p.codigo codigo_mantencion, p.nombre nombre_pauta, c.rut_mantenedor rut_tecnico, u.nombre nombre_tecnico, e.codigo codigo_equipo, e.nombre nombre_equipo, c.fecha_estimada fecha_calendarizada from pauta_mantenimiento p  inner join equipo e on p.equipo = e.codigo inner join empresa em  on p.empresa = em.codigo inner join calendario c on p.codigo = c.codigo_pauta inner join mantenedor mant on c.rut_mantenedor = mant.rut inner join usuario u on u.rut = mant.rut where p.codigo = $1 and c.codigo = $2",[codigoPautaBuscar, codigoCalendarioBuscar])).rows;
+    console.log("Query 1 ejecutada :D ")
+    const itemsPauta = (await pool.query("select i.codigo codigo_item, i.nombre item, si.codigo codigo_subitem, si.nombre subitem, i.codigo_pauta codigo_pauta from item i inner join subitem si on i.codigo = si.codigo_item = $1 ",[codigoPautaBuscar])).rows
     console.log(pautaInfo)
-    res.render('man-ficha', { pautaInfo })
+    res.render('man-ficha', { pautaInfo, itemsPauta})
 }
 
 module.exports = {
