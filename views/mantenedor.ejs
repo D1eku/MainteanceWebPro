@@ -88,7 +88,7 @@
             </div>
         </div>
         <form action='/start-ficha' id="hiddenform" method="POST">
-            <input type=hidden id='pauta-hidden' name='pauta-codigo'>
+            <input type=hidden id='pauta-hidden' name='pautaCodigo'>
         </form>
     </section>
     <script>
@@ -96,16 +96,13 @@
         document.getElementById('mantInfo').innerHTML = "<h3> Nombre Usuario: " + mantInfo.nombre_usuario + "</h3>" + "<h3> Empresa: " + mantInfo.nombre_empresa + "</h3>";
 
 
-        const pautas = <%- JSON.stringify(pautas_mant) %>;
-        console.log(pautas)
+        const pautas = <%- JSON.stringify(calendarioMant) %>;
 
         function fillPautasTable(pautas) {
             const tbodyPautas = document.getElementById('tbody-pautasMant')
             console.log(pautas)
             console.log(pautas.length)
             for (let i = 0; i < pautas.length; i++) {
-                console.log("Esto paso ?")
-
                 const rowRef = tbodyPautas.insertRow(-1);
 
                 const fillRef = rowRef.insertCell(-1);
@@ -114,14 +111,21 @@
                 const ubiRef = rowRef.insertCell(-1);
                 const estRef = rowRef.insertCell(-1);
                 const codRef = rowRef.insertCell(-1);
-
-                fillRef.innerHTML = '<button type="button" onclick=startFichaAtencion(this.id) id=' + i + '-' + pautas[i].cod_pauta + ' class="btn btn-primary pull-right"><i class="fas fa-arrow-circle-right"></i></button>'
+                fillRef.innerHTML = '<button type="button" onclick=startFichaAtencion(this.id) id=' + i + '-' + pautas[i].codigo_pauta + ' class="btn btn-primary pull-right"><i class="fas fa-arrow-circle-right"></i></button>'
                 nameRef.textContent = pautas[i].nombre_pauta
-                dateRef.textContent = pautas[i].fecha_realizar
+                const dateReal = new Date(pautas[i].fecha_realizar).toLocaleDateString()
+                const dateToday = new Date(Date.now()).toLocaleDateString()
+                console.log("fecha realizacion", dateReal)
+                console.log("fecha de hoy ", dateToday)
+                console.log("dateReal > dateToday = ", dateToday > dateReal  )
+                dateRef.textContent = dateReal
                 ubiRef.textContent = pautas[i].ubicacion
-                estRef.textContent = pautas[i].estado
+                if(dateToday > dateReal){
+                    estRef.textContent = 'Atrasada'
+                }else {
+                    estRef.textContent = 'Por Realizar'
+                }
                 codRef.textContent = pautas[i].codigo_pauta
-
 
             }
         }
