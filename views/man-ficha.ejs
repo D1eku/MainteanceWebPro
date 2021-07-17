@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>LogIn Page</title>
+    <title>Rellenar Ficha Matencion</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
@@ -67,7 +67,7 @@
                                 <!-- Codigo Mantencion-->
                                 <div class="input-group mb-4">
                                     <span class="input-group-text" >Mantencion</span>
-                                    <input type="text" id=mant-code-pauta class="form-control" placeholder="00001" value="00001" readonly>
+                                    <input type="text" name=codigoPauta id=mant-code-pauta class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -87,6 +87,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" >Nombre Tecnico</span>
                                     <input type="text" id=tec-name-pauta name=nombreTecnicoPauta class="form-control" placeholder="Nombre Tecnico" readonly>
+                                    <input type='hidden' id=rutMantenedor name=rutTecnicoPauta>
                                 </div>    
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12" ><!-- Turno -->
@@ -265,6 +266,7 @@
             document.getElementById('code-equipo-pauta').value = data.codigo_equipo
             document.getElementById('date-cal-pauta').value = new Date(data.fecha_calendarizada).toLocaleDateString()
             document.getElementById('date-rea-pauta').value = new Date(Date.now()).toLocaleDateString()
+            document.getElementById('rutMantenedor').value = data.rut_tecnico
     
         }
 
