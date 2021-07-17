@@ -67,7 +67,8 @@ const uploadData = async(req, res) => {
         var codigoExiste = await pool.query('SELECT * FROM ficha_atencion WHERE codigo = $1', [codigo_ficha]);
 
         if (codigoExiste.rows.length == 0) {
-            res.redirect('/mtn')
+            res.redirect('/mtn');
+            //addToEmpresas = await pool.query('INSERT INTO ficha_atencion VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', [codigo_ficha, nombrePauta, "Atencion", diagnosticoPauta, turnoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, nombreTecnicoPauta, supervisorEmpresaPauta, tipoActividadPauta, observacionIPauta, supervisorMandantePauta, //codigopauta]);
         } else {
             console.log("codigo ya existe");
             res.redirect('/mtn')
