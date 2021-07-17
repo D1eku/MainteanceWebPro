@@ -47,28 +47,40 @@ const mantenedorMenu = async(req, res) => {
 }
 
 const getFichaFill = async(req, res) => {
-    console.log(req.body)
-    const codigoPautaBuscar = req.body.pautaCodigo.split("-")[1]
-    const codigoCalendarioBuscar = req.body.pautaCodigo.split('-')[0]
-    console.log("Funciona esto ? ")
-    const pautaInfo = (await pool.query("select  p.codigo codigo_mantencion, p.nombre nombre_pauta, c.rut_mantenedor rut_tecnico, u.nombre nombre_tecnico, e.codigo codigo_equipo, e.nombre nombre_equipo, c.fecha_estimada fecha_calendarizada from pauta_mantenimiento p  inner join equipo e on p.equipo = e.codigo inner join empresa em  on p.empresa = em.codigo inner join calendario c on p.codigo = c.codigo_pauta inner join mantenedor mant on c.rut_mantenedor = mant.rut inner join usuario u on u.rut = mant.rut where p.codigo = $1 and c.codigo = $2", [codigoPautaBuscar, codigoCalendarioBuscar])).rows;
-    console.log("Query 1 ejecutada :D ")
-    const itemsPauta = (await pool.query("select i.codigo codigo_item, i.nombre item, si.codigo codigo_subitem, si.nombre subitem, i.codigo_pauta codigo_pauta from item i inner join subitem si on i.codigo = si.codigo_item  where i.codigo_pauta = $1 ", [codigoPautaBuscar])).rows
-    console.log(pautaInfo)
-    res.render('man-ficha', { pautaInfo, itemsPauta })
+    try {
+        console.log(req.body)
+        const codigoPautaBuscar = req.body.pautaCodigo.split("-")[1]
+        const codigoCalendarioBuscar = req.body.pautaCodigo.split('-')[0]
+        console.log("Funciona esto ? ")
+        const pautaInfo = (await pool.query("select  p.codigo codigo_mantencion, p.nombre nombre_pauta, c.rut_mantenedor rut_tecnico, u.nombre nombre_tecnico, e.codigo codigo_equipo, e.nombre nombre_equipo, c.fecha_estimada fecha_calendarizada from pauta_mantenimiento p  inner join equipo e on p.equipo = e.codigo inner join empresa em  on p.empresa = em.codigo inner join calendario c on p.codigo = c.codigo_pauta inner join mantenedor mant on c.rut_mantenedor = mant.rut inner join usuario u on u.rut = mant.rut where p.codigo = $1 and c.codigo = $2", [codigoPautaBuscar, codigoCalendarioBuscar])).rows;
+        console.log("Query 1 ejecutada :D ")
+        const itemsPauta = (await pool.query("select i.codigo codigo_item, i.nombre item, si.codigo codigo_subitem, si.nombre subitem, i.codigo_pauta codigo_pauta from item i inner join subitem si on i.codigo = si.codigo_item  where i.codigo_pauta = $1 ", [codigoPautaBuscar])).rows
+        console.log(pautaInfo)
+        res.render('man-ficha', { pautaInfo, itemsPauta });
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 const uploadData = async(req, res) => {
     try {
         console.log(req.body)
-        let { nombrePauta, nombreTecnicoPauta, turnoPauta, tipoActividadPauta, nombreEquipoPauta, codigoEquipoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, diagnosticoPauta, supervisorEmpresaPauta, supervisorMandantePauta, codigo_subitem, estadoRecibidoSubitem, estadoEntregadoSubitem, observacionIPauta } = req.body;
+        let { codigoPauta, nombrePauta, nombreTecnicoPauta, turnoPauta, tipoActividadPauta, nombreEquipoPauta, codigoEquipoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, diagnosticoPauta, supervisorEmpresaPauta, supervisorMandantePauta, codigo_subitem, estadoRecibidoSubitem, estadoEntregadoSubitem, observacionIPauta } = req.body;
         let codigo_ficha = Math.floor(Math.random() * 100000);
 
         var codigoExiste = await pool.query('SELECT * FROM ficha_atencion WHERE codigo = $1', [codigo_ficha]);
 
         if (codigoExiste.rows.length == 0) {
             res.redirect('/mtn');
-            //addToEmpresas = await pool.query('INSERT INTO ficha_atencion VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', [codigo_ficha, nombrePauta, "Atencion", diagnosticoPauta, turnoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, nombreTecnicoPauta, supervisorEmpresaPauta, tipoActividadPauta, observacionIPauta, supervisorMandantePauta, //codigopauta]);
+            /*
+            addAtencion = await pool.query('INSERT INTO ficha_atencion VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [codigo_ficha, nombrePauta, diagnosticoPauta, turnoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, nombreTecnicoPauta, supervisorEmpresaPauta, tipoActividadPauta, //observaciongeneral, supervisorMandantePauta, codigoPauta]);
+            for (var i = 0; i < codigo_subitem.length; i++) {
+                codigoItem = await pool.query('SELECT codigo_item FROM subitem where codigo = $1', [codigo_subitem[i]]);
+                let codResp = Math.floor(Math.random() * 10000);
+                addRespItem = await pool.query('INSERT INTO respuesta_item VALUES($1, $2, $3, $4, $5, $6, $7)', [codResp, codigoItem, codigo_subitem[i], codigo_ficha, observacionIPauta[i], estadoRecibidoSubitem[i], estadoEntregadoSubitem[i]]);
+            }
+            */
+
         } else {
             console.log("codigo ya existe");
             res.redirect('/mtn')
