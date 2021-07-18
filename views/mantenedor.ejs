@@ -117,12 +117,12 @@
                 const dateToday = new Date(Date.now()).toLocaleDateString()
                 console.log("fecha realizacion", dateReal)
                 console.log("fecha de hoy ", dateToday)
-                console.log("dateReal > dateToday = ", dateToday > dateReal  )
+                console.log("dateReal > dateToday = ", dateToday > dateReal)
                 dateRef.textContent = dateReal
                 ubiRef.textContent = pautas[i].ubicacion
-                if(dateToday > dateReal){
+                if (dateToday > dateReal) {
                     estRef.textContent = 'Atrasada'
-                }else {
+                } else {
                     estRef.textContent = 'Por Realizar'
                 }
                 codRef.textContent = pautas[i].codigo_pauta

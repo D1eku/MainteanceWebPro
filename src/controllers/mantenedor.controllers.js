@@ -1,5 +1,3 @@
-const { Cookie } = require('express-session');
-const { as } = require('pg-promise');
 const { pool } = require('../js/dbconnect');
 
 /*
@@ -65,22 +63,27 @@ const getFichaFill = async(req, res) => {
 const uploadData = async(req, res) => {
     try {
         console.log(req.body)
-        let { codigoPauta, nombrePauta, nombreTecnicoPauta, turnoPauta, tipoActividadPauta, nombreEquipoPauta, codigoEquipoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, diagnosticoPauta, supervisorEmpresaPauta, supervisorMandantePauta, codigo_subitem, estadoRecibidoSubitem, estadoEntregadoSubitem, observacionIPauta } = req.body;
+        let { codigoPauta, nombrePauta, nombreTecnicoPauta, turnoPauta, tipoActividadPauta, nombreEquipoPauta, codigoEquipoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, diagnosticoPauta, supervisorEmpresaPauta, supervisorMandantePauta, codigo_subitem, estadoRecibidoSubitem, estadoEntregadoSubitem, observacionIPauta, obsGeneralPauta } = req.body;
         let codigo_ficha = Math.floor(Math.random() * 100000);
+
+        var strFechaCal = fechaCalendarizadaPauta.split('/');
+        var strfechaRea = fechaRealizadaPauta.split('/');
+        var fEstimada = new Date(strFechaCal[2], strFechaCal[1] - 1, strFechaCal[0]);
+        var fRealizada = new Date(strfechaRea[2], strfechaRea[1] - 1, strfechaRea[0]);
 
         var codigoExiste = await pool.query('SELECT * FROM ficha_atencion WHERE codigo = $1', [codigo_ficha]);
 
         if (codigoExiste.rows.length == 0) {
-            res.redirect('/mtn');
-            /*
-            addAtencion = await pool.query('INSERT INTO ficha_atencion VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [codigo_ficha, nombrePauta, diagnosticoPauta, turnoPauta, fechaCalendarizadaPauta, fechaRealizadaPauta, nombreTecnicoPauta, supervisorEmpresaPauta, tipoActividadPauta, //observaciongeneral, supervisorMandantePauta, codigoPauta]);
-            for (var i = 0; i < codigo_subitem.length; i++) {
-                codigoItem = await pool.query('SELECT codigo_item FROM subitem where codigo = $1', [codigo_subitem[i]]);
-                let codResp = Math.floor(Math.random() * 10000);
-                addRespItem = await pool.query('INSERT INTO respuesta_item VALUES($1, $2, $3, $4, $5, $6, $7)', [codResp, codigoItem, codigo_subitem[i], codigo_ficha, observacionIPauta[i], estadoRecibidoSubitem[i], estadoEntregadoSubitem[i]]);
-            }
-            */
 
+            addAtencion = await pool.query('INSERT INTO ficha_atencion VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [codigo_ficha, nombrePauta, diagnosticoPauta, turnoPauta, fEstimada, fRealizada, nombreTecnicoPauta, supervisorEmpresaPauta, tipoActividadPauta, obsGeneralPauta, supervisorMandantePauta, codigoPauta]);
+            for (var i = 0; i < codigo_subitem.length; i++) {
+
+                itemactual = (await pool.query('SELECT codigo_item FROM subitem where codigo = $1', [codigo_subitem[i]])).rows[0].codigo_item;
+                let codResp = Math.floor(Math.random() * 10000);
+                //console.log("CodSubItem: " + codigo_subitem[i] + "; codItem: " + itemactual + "; Observ: " + observacionIPauta[i] + "; EstRecib: " + estadoRecibidoSubitem[i] + "; EstEntreg: " + estadoEntregadoSubitem[i] + "\n");
+                addRespItem = await pool.query('INSERT INTO respuesta_item VALUES($1, $2, $3, $4, $5, $6, $7)', [codResp, itemactual, codigo_subitem[i], codigo_ficha, observacionIPauta[i], estadoRecibidoSubitem[i], estadoEntregadoSubitem[i]]);
+            }
+            res.redirect('/mtn')
         } else {
             console.log("codigo ya existe");
             res.redirect('/mtn')
