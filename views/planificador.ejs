@@ -76,11 +76,12 @@
                     <div class = "table-responsive">
                         <table id="tabla-pautas" class= "table table-light table-bordered table-hover table-striped">
                             <thead class = "bg-dark text-white">
-                                <th scope="row">Codigo Pauta</th>
+                                <th scope="row">Código Pauta</th>
                                 <th scope="row">Fecha Estimada</th>
-                                <th scope="row">Codigo Equipo</th>
+                                <th scope="row">Código Equipo</th>
                                 <th scope="row">RUT Mantenedor</th>
                             </thead>
+                            <tbody id="tBody-pautasCalendarizar"></tbody>
                         </table>
                     </div> 
                 </div>
@@ -112,11 +113,57 @@
                             <div id="text-action-title-popup">Calendarizar Mantenimiento</div>
                         </h3>
                     </div>
+                    <div class="col-12">
+                        <form action="/calendarizar-pauta-plan" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Seleccionar Pauta</span>
+                                        <select name="selecciona_numero_pauta" id="codigo_pauta">
+                                            <option value="1">Pauta 1</option>
+                                            <option value="2">Pauta 2</option>
+                                            <option value="3">Pauta 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Código Pauta</span>
+                                        <input id="cod_pauta_input_popup" name="code_pauta" type="text" class="form-control" placeholder="Codigo Pauta" aria-label="cod_pauta" aria-describedby="addon-wrapping" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Fecha Estimada</span>
+                                        <input type="date" name="fecha_estimada_pauta">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" id="edit-pauta-button-popup" class="btn btn-primary">
+                                        <div id="contentButton-editPauta-popup">
+                                            <i class="far fa-save"></i>
+                                            Asignar
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                <div class="close">+</div>
             </div>
         </div>
     </section>
     <script>
+        //El planificador puede ver un listado de pautas: codigo pauta, fecha estimada, codigo equipo, rut mantenedor
+        // para recalendarizar 
+
+        
+        //necesito el nombre del planificador, para que me lo muestre en la pantalla
+
+        //de las pautas necesito la pauta y el codigo, y le agregare la fecha estimada, 
+        //tambien necesito la fecha de creacion para que la fecha estimada no sea menor a la de la creacion
+      
         
        
 
