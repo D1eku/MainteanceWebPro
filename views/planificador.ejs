@@ -57,6 +57,7 @@
                 <div class="col-12">
                     <!-- Nombre Planificador -->
                     <div class="row name-viewer-home">
+                        
                         <div id= planInfo class="col-6">
                             <h1>Planificador</h1>
                         </div>
@@ -65,10 +66,7 @@
                 <!-- Boton calendarizar mantencion -->
                 <div class="col-lg-6 col-md-6 col-sm-6 text-right">
                     <div class="top-pauta-info">
-                        <button id=calendarizar-mant-button type="button" class="btn btn-primary"> 
-                            <i class="fas fa-plus"></i>
-                            Calendarizar Mantención
-                        </button>
+                        <button id=calendarizar-mant-button type="button" class="btn btn-primary">Calendarizar Mantención</button>
                     </div>
                 </div>
                 <!-- Esto sera lo que puede ver un planificador, el calendariza las mantenciones-->
@@ -119,7 +117,7 @@
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Seleccionar Pauta</span>
-                                        <select name="selecciona_numero_pauta" id="codigo_pauta">
+                                        <select name="selecciona_numero_pauta" id="nombre_pauta_select_popup">
                                             <option value="1">Pauta 1</option>
                                             <option value="2">Pauta 2</option>
                                             <option value="3">Pauta 3</option>
@@ -135,7 +133,7 @@
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Fecha Estimada</span>
-                                        <input type="date" name="fecha_estimada_pauta">
+                                        <input id="fecha_estimada_pauta_input_popup" type="date" name="fecha_estimada_pauta">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -163,10 +161,22 @@
 
         //de las pautas necesito la pauta y el codigo, y le agregare la fecha estimada, 
         //tambien necesito la fecha de creacion para que la fecha estimada no sea menor a la de la creacion
-      
-        
-       
 
+        //como hacer que me muestre las n pautas
+        //Cuando se haga click al boton calendarizar mantención
+        document.getElementById("calendarizar-mant-button").addEventListener('click',
+            function() {
+                document.querySelector(".bg-modal2").style.display = "flex"; //se activa el panel 
+            });
+        
+        //Al hacer click en close se cerrara el modal2 y se vaciaran los campos que contiene este.
+        document.querySelector(".close").addEventListener("click",
+            function() {
+                document.querySelector('.bg-modal2').style.display = "none";
+                document.getElementById('nombre_pauta_select_popup').value = "";
+                document.getElementById('cod_pauta_input_popup').value = "";
+                document.getElementById('fecha_estimada_pauta_input_popup').value = "";
+            });
 
     </script>
    
