@@ -116,10 +116,8 @@
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Seleccionar Pauta</span>
-                                        <select name="selecciona_numero_pauta" id="nombre_pauta_select_popup">
-                                            <option value="1">test - pauta</option>
-                                            <option value="2">PCs Biblioteca</option>
-                                            <option value="3">PCs Biblioteca</option>
+                                        <select onclick="fillCodePauta();" name="selecciona_numero_pauta" id="nombre_pauta_select_popup">
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -164,13 +162,22 @@
         //como hacer que me muestre las n pautas
         //Cuando se haga click al boton calendarizar mantención
         const pautas = <%- JSON.stringify(pautas) %>;
+        const calendario = <%- JSON.stringify(calendarios) %>;
+        
 
         function fillPautasTable(pautas) {
             const tbodyPautas = document.getElementById('tBody-pautasCalendarizar')
             console.log(pautas)
             console.log(pautas.length)
+            const selectPautas = document.getElementById("nombre_pauta_select_popup")
             for (let i = 0; i < pautas.length; i++) {
-                const rowRef = tbodyPautas.insertRow(-1);
+
+
+                let opcion = document.createElement("option")
+                opcion.text = pautas[i].nombre
+                opcion.id = "opcion-"+i
+                selectPautas.add(opcion)
+                /*const rowRef = tbodyPautas.insertRow(-1);
 
                 const codPauRef = rowRef.insertCell(-1);
                 const dateEstRef = rowRef.insertCell(-1);
@@ -186,12 +193,21 @@
                     //console.log("dateReal > dateToday = ", dateToday > dateReal)
                 dateEstRef.textContent = "Sin Fecha Est"
                 codEqRef.textContent = pautas[i].equipo
-                rutMntRef.textContent = "Sin Rut"
+                rutMntRef.textContent = "Sin Rut"*/
 
             }
         }
+        function fillCodePauta(pautas){
+            console.log(document.getElementById("nombre_pauta_select_popup"))
+
+        }
 
         fillPautasTable(pautas)
+       
+        
+
+
+
 
 
         document.getElementById("calendarizar-mant-button").addEventListener('click',
