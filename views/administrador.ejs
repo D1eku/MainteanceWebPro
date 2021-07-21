@@ -63,18 +63,14 @@
                 <div class="col-12">
                     <!-- Nombre Administrador -->
                     <div class="row name-viewer-home">
-                        <div class="col-6">
-                            <h3>Bienvenido:</h3>
-                        </div>
-                        <div class="col-6 text-left">
-                            <h4>
-                                <div class="nombre-usuario" id="nombreuser">
-                                </div>
-                                <script>
-                                    document.getElementById("nombreuser").innerHTML = "<%=nombre%>";
-                                </script>
-                            </h4>
-                        </div>
+                        <h4>
+                            <div id=nombreuser class="col-12">
+                            </div>
+                            <script>
+                                document.getElementById("nombreuser").innerHTML = "<h3> Bienvenido(a): <%=nombre%> </h3>";
+                            </script>
+                        </h4>
+
                         <div class="col-12">
                             <h3>Menu de Gestion</h2>
                         </div>
