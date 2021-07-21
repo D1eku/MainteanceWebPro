@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>LogIn Page</title>
+    <title>Planificador</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Sytlesheets -->
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
-                                        <span class="input-group-text" id="addon-wrapping">Código Pauta</span>
+                                        <span class="input-group-text" id="addon-wrapping">Nombre Pauta</span>
                                         <input id="cod_pauta_input_popup" name="code_pauta" type="text" class="form-control" placeholder="Codigo Pauta" aria-label="cod_pauta" aria-describedby="addon-wrapping" readonly>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
 
 
                 let opcion = document.createElement("option")
-                opcion.text = pautas[i].nombre
+                opcion.text = pautas[i].codigo
                 opcion.id = "opcion-"+i
                 selectPautas.add(opcion)
                 /*const rowRef = tbodyPautas.insertRow(-1);
@@ -197,8 +197,20 @@
 
             }
         }
-        function fillCodePauta(pautas){
-            console.log(document.getElementById("nombre_pauta_select_popup"))
+        function fillCodePauta(){
+            let pCode = document.getElementById("nombre_pauta_select_popup").value
+            let pName = ""
+            for(let i = 0; i <pautas.length; i++){
+                if(pCode = pautas[i].codigo){
+                    pName = pautas[i].nombre
+                }
+            }
+
+            if(pName == ""){
+                document.getElementById('cod_pauta_input_popup').value = ""
+            }else{
+                document.getElementById('cod_pauta_input_popup').value = pName
+            }
 
         }
 

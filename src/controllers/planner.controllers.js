@@ -27,6 +27,18 @@ const planifMenu = async(req, res) => {
 
 }
 
+const sendAssignDatePauta = async(req, res) => {
+    try {
+        //select fa.codigo_pauta, fa.fecha_estimada, pm.codigo_equipo, pm.rutMantenedor from equipo
+        console.log(req.body)
+        res.render('planificador', { nombre: req.session.nombre, pautas, calendarios });
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+
 module.exports = {
-    planifMenu
+    planifMenu,
+    sendAssignDatePauta
 }
