@@ -31,7 +31,7 @@ const sendAssignDatePauta = async(req, res) => {
     try {
         //select fa.codigo_pauta, fa.fecha_estimada, pm.codigo_equipo, pm.rutMantenedor from equipo
         console.log(req.body)
-        res.render('planificador', { nombre: req.session.nombre, pautas, calendarios });
+        res.redirect("/pln")
     } catch (err) {
         console.log(err);
     }

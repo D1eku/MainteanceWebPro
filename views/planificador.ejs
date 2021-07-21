@@ -207,14 +207,14 @@
                 //codPauRef.innerHTML = '<button type="button" onclick=startFichaAtencion(this.id) id=' + calendarios[i].codigo +' class="btn btn-primary pull-right"><i class="fas fa-arrow-circle-right"></i></button>'
                 codPauRef.textContent = calendario[i].codigo_pauta
 
-                dateEstRef.textContent = calendario[i].fecha_estimada
+                dateEstRef.textContent = new Date(calendario[i].fecha_estimada).toLocaleDateString()
                 codEqRef.textContent = calendario[i].codigo_equipo
                 rutMntRef.textContent = calendario[i].rut_mantenedor
                 console.log("se ejecuto")
             }
+        }    
 
 
-        }
         function fillCodePauta(){
             let pCode = document.getElementById("nombre_pauta_select_popup").value
             let pName = ""
