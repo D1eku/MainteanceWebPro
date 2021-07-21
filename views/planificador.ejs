@@ -194,8 +194,26 @@
                 dateEstRef.textContent = "Sin Fecha Est"
                 codEqRef.textContent = pautas[i].equipo
                 rutMntRef.textContent = "Sin Rut"*/
-
             }
+            console.log(calendario)
+            console.log(calendario.length)
+            for(let i = 0; i <calendario.length; i++){
+                const rowRef = tbodyPautas.insertRow(-1);
+
+                const codPauRef = rowRef.insertCell(-1);
+                const dateEstRef = rowRef.insertCell(-1);
+                const codEqRef = rowRef.insertCell(-1);
+                const rutMntRef = rowRef.insertCell(-1);
+                //codPauRef.innerHTML = '<button type="button" onclick=startFichaAtencion(this.id) id=' + calendarios[i].codigo +' class="btn btn-primary pull-right"><i class="fas fa-arrow-circle-right"></i></button>'
+                codPauRef.textContent = calendario[i].codigo_pauta
+
+                dateEstRef.textContent = calendario[i].fecha_estimada
+                codEqRef.textContent = calendario[i].codigo_equipo
+                rutMntRef.textContent = calendario[i].rut_mantenedor
+                console.log("se ejecuto")
+            }
+
+
         }
         function fillCodePauta(){
             let pCode = document.getElementById("nombre_pauta_select_popup").value
