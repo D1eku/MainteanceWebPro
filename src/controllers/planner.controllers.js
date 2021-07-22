@@ -30,8 +30,32 @@ const planifMenu = async(req, res) => {
 const sendAssignDatePauta = async(req, res) => {
     try {
         //select fa.codigo_pauta, fa.fecha_estimada, pm.codigo_equipo, pm.rutMantenedor from equipo
-        console.log(req.body)
-        res.redirect("/pln")
+        let {
+            codigo_pauta,
+            name_pauta, //rutMantenedorXD,
+            fecha_estimada_pauta
+        } = req.body;
+
+        let codigo_calendario = Math.floor(Math.random() * 100000);
+        var codExiste = (await pool.query('SELECT * FROM calendario WHERE codigo = $1', [codigo_calendario])).rows.length;
+        var strfechaEst = fecha_estimada_pauta.split('-');
+        var fEstimada = new Date(strfechaEst[0], strfechaEst[1] - 1, strfechaEst[2]);
+
+        console.log("Tipo fecha: " + fEstimada + "; Tipo String: " + fecha_estimada_pauta + "\n")
+
+
+        if (codExiste < 1) {
+            const pautaActual = (await pool.query("select * from pauta_mantenimiento where codigo = $1", [codigo_pauta])).rows[0];
+            //const insertCalendario = await pool.query('insert into calendario values($1, $2, $3, $4, $5, $6', [codigo_calendario, pautaActual.equipo, "RutMantenedor", fEstimada, codigo_pauta, req.session.rut]);
+            res.redirect("/pln")
+        } else {
+            console.log("Ya existe un calendario con este código");
+            res.redirect("/pln")
+        }
+
+
+
+
     } catch (err) {
         console.log(err);
     }

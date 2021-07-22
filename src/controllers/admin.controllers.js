@@ -363,7 +363,6 @@ const adminEquipoMenu = async(req, res) => {
     }
 }
 
-
 module.exports = {
     addNewUsuario,
     editUsuario,
