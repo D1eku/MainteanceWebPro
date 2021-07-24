@@ -113,6 +113,7 @@
                     <div class="col-12">
                         <form action="/calendarizar-pauta-plan" method="post">
                             <div class="row">
+                                <!-- Pauta -->
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Seleccionar Pauta</span>
@@ -124,9 +125,20 @@
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Nombre Pauta</span>
-                                        <input id="cod_pauta_input_popup" name="name_pauta" type="text" class="form-control" placeholder="Codigo Pauta" aria-label="cod_pauta" aria-describedby="addon-wrapping" readonly>
+                                        <input id="cod_pauta_input_popup" name="name_pauta" type="text" class="form-control" placeholder="Codigo Pauta" readonly>
                                     </div>
                                 </div>
+                                <!-- Mantenedor -->
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Seleccionar Mantenedor</span>
+                                        <select  name="rut_mantenedor" id="nombre_mantenedor_select_popup">
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Fecha para Fijar -->
                                 <div class="col-12">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Fecha Estimada</span>
@@ -171,8 +183,6 @@
             console.log(pautas.length)
             const selectPautas = document.getElementById("nombre_pauta_select_popup")
             for (let i = 0; i < pautas.length; i++) {
-
-
                 let opcion = document.createElement("option")
                 opcion.text = pautas[i].codigo
                 opcion.id = "opcion-"+i
@@ -234,10 +244,29 @@
 
         fillPautasTable(pautas)
        
-        
+        const mantenedores = <%- JSON.stringify(mantenedores) %>;
 
+        function fillMantsTable(mantenedores){
+            const selectMant = document.getElementById('nombre_mantenedor_select_popup')
+            for(let i = 0; i<mantenedores.length ; i++){
+                let opcion = document.createElement("option")
+                opcion.text = mantenedores[i].rut
+                //opcion.id = "opcion-"+i
+                selectMant.add(opcion)
+            }
+        }
+        fillMantsTable(mantenedores)
+        /*
+        fillCodeMantenedor(){
+            <div class="col-6">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Nombre Mantenedor</span>
+                                        <input id="cod_mantenedor_input_popup" name="name_mantenedor" type="text" class="form-control" placeholder="Nombre Mantenedor" readonly>
+                                    </div>
+                                </div>
+        }
 
-
+        */
 
 
         document.getElementById("calendarizar-mant-button").addEventListener('click',
